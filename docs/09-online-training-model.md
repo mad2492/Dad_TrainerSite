@@ -19,37 +19,48 @@ Target idea to explore:
 
 ## What Online Training Could Include
 
-### Diet-First Coaching
+### Confirmed Core Offer
 
-- Custom diet plan
-- Periodic diet updates
-- Reminders
-- Check-ins
-- Client questions
+- Workout program
+- Nutrition guidance based on personal goals
+- Weekly check-in
+- Questions answered within 24 hours
+- Different packages based on what the client wants
 
-### Workout Programming
+### Weekly Client Deliverables
 
-- Workout plan
-- Exercise notes
-- Session alternatives
-- Progression guidance
-- Optional video links later
+- Workout program
+- Nutrition guidance
+- Check-in review
+- Answers to reasonable client questions
 
-### Hybrid Coaching
+### Check-In Inputs
 
-- In-person training for local clients
-- Online support between sessions
-- Online-only coaching for people who cannot train in person
+- Weight
+- New injuries acquired while training
+- Progress picture, if the client is comfortable
+
+### Messaging Boundary
+
+- One text message per day.
+- Response target: likely within 24 hours. Confirm this because the note said "2r hours."
+
+### Positioning
+
+Online training should be presented as close as possible to one-on-one training, while still being manageable remotely.
+
+The message should be: this is personalized coaching, not a cookie-cutter program.
 
 ## Questions To Answer Next
 
-- What does an online client actually receive each week?
-- How often does Dad update a diet plan?
-- How often should clients check in?
-- What information should clients send during check-ins?
-- How many messages per client per week is reasonable?
-- Should online clients get workouts, diets, or both?
-- Should there be different levels of online coaching?
+- What are the package levels?
+- What is included in the smallest online package?
+- What is included in the highest-touch online package?
+- What does "one text per day" mean if a client sends multiple messages?
+- Confirm whether the response window is 24 hours.
+- How are weekly check-ins submitted?
+- Should progress pictures be optional on every check-in or only sometimes?
+- Should Mom be part of the same brand, a separate site, or a combined program where clients choose who they work with?
 - What would make an online client too much work?
 - What should happen when a client does not follow the plan?
 - What does success look like after 30 days?
@@ -65,13 +76,21 @@ These are placeholders for discussion, not final offers.
 - Simple check-ins
 - Message access with boundaries
 
-### Full Online Coaching
+### Workout With Nutrition Guidance
 
 - Diet plan
 - Workout plan
 - Weekly check-ins
+- One daily text message answered within the agreed response window
+
+### Higher-Touch Online Coaching
+
+- Workout program
+- Nutrition guidance
+- Weekly check-ins
 - Progress tracking
-- Messaging when needed
+- More detailed review or adjustments
+- Clear communication boundaries
 
 ### Hybrid Client Support
 
@@ -85,9 +104,11 @@ These are placeholders for discussion, not final offers.
 The platform should prioritize:
 
 - Diet plan creation and updates
+- Workout program delivery
 - Reminder management
 - Client check-ins
 - Communication requests
+- Message boundaries and response expectations
 - Dashboard for who needs attention
 - Reusable structure without generic, cookie-cutter plans
 
@@ -99,3 +120,13 @@ Avoid early:
 - Unlimited messaging expectations
 - Features that require lots of typing from an iPhone
 
+## Branding Decision Needed
+
+Before designing a polished website mockup, decide whether the brand is:
+
+- Pete only
+- Pete and Mom together
+- Separate Pete and Mom sites
+- One combined program where clients choose who they work with
+
+This decision affects the name, photos, colors, copy, services, and page structure.

@@ -15,6 +15,7 @@ Use these docs to capture what Dad says, what clients actually need, and what we
 7. [Infrastructure Options](07-infrastructure-options.md)
 8. [Privacy and Trust](08-privacy-and-trust.md)
 9. [Online Training Model](09-online-training-model.md)
+10. [Branding Questions](10-branding-questions.md)
 
 ## Ground Rules
 
