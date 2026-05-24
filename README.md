@@ -6,6 +6,8 @@ The page is intentionally non-technical and meant to be shared from GitHub Pages
 
 Planning notes for the real project live in [`docs/`](docs/).
 
+Repo-specific agent workflow notes live in [`AGENTS.md`](AGENTS.md).
+
 ## GitHub Pages
 
 Serve this repo from the root of the default branch. The dad-facing page is:
