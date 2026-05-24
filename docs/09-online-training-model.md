@@ -33,6 +33,32 @@ Target idea to explore:
 - Nutrition guidance
 - Check-in review
 - Answers to reasonable client questions
+- Exercise demo links when a movement is unfamiliar or needs explanation
+- Pete/Lisa notes with simple cues, common mistakes, and modifications
+
+### Exercise Guidance
+
+Sometimes clients do not understand what an exercise is, what it means, or how it should work. Pete currently solves this by finding a video and sending a link.
+
+This should become part of the workout workflow:
+
+- Each exercise can include a demo video link.
+- Each exercise can include short Pete/Lisa coaching notes.
+- Notes should explain what to focus on, common mistakes, and what to do if something hurts.
+- Start with trusted public or unlisted video links.
+- Later, Pete and Lisa can record their own short phone videos for common exercises.
+
+Example:
+
+```text
+Goblet Squat
+3 sets of 10
+
+Watch demo
+Pete/Lisa notes:
+Keep your chest up, sit between your knees, and do not let your heels come up.
+If your knees hurt, message before doing this one.
+```
 
 ### Check-In Inputs
 
@@ -80,6 +106,8 @@ These are placeholders for discussion, not final offers.
 
 - Diet plan
 - Workout plan
+- Exercise demo links
+- Pete/Lisa coaching notes for exercises
 - Weekly check-ins
 - One daily text message answered within the agreed response window
 
@@ -105,6 +133,8 @@ The platform should prioritize:
 
 - Diet plan creation and updates
 - Workout program delivery
+- Exercise demo links attached to workout movements
+- Coach notes attached to exercises
 - Reminder management
 - Client check-ins
 - Communication requests
@@ -116,6 +146,8 @@ Avoid early:
 
 - Complicated payments
 - Overbuilt exercise libraries
+- Custom video upload/hosting infrastructure
+- AI form correction
 - Too many notification types
 - Unlimited messaging expectations
 - Features that require lots of typing from an iPhone

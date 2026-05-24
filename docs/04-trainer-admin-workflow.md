@@ -24,6 +24,7 @@ Purpose: design around what Dad can comfortably do from an iPhone.
 ### Client Profile
 
 - Current diet plan
+- Current workout program
 - Current reminders
 - Session recaps
 - Private notes
@@ -54,6 +55,14 @@ Purpose: design around what Dad can comfortably do from an iPhone.
 - What they worked on
 - What to do next
 
+### Build Workout Program
+
+- Add exercise name
+- Add sets/reps or instructions
+- Attach demo video link
+- Add Pete/Lisa coaching notes
+- Add substitution or modification note if needed
+
 ### Check-In Notes
 
 - Weight
@@ -70,6 +79,8 @@ Purpose: design around what Dad can comfortably do from an iPhone.
 - Should anything be private to him only?
 - What would make 20 to 30 online clients manageable from home?
 - How quickly does he want or need to respond to online client messages?
+- Does he already have favorite YouTube channels or video sources he trusts for exercise demos?
+- Which common exercises would be worth recording himself or with Lisa first?
 
 ## Workflow Sketches
 

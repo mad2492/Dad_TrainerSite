@@ -16,6 +16,7 @@ Use these docs to capture what Dad says, what clients actually need, and what we
 8. [Privacy and Trust](08-privacy-and-trust.md)
 9. [Online Training Model](09-online-training-model.md)
 10. [Branding Questions](10-branding-questions.md)
+11. [Exercise Guidance](11-exercise-guidance.md)
 
 ## Ground Rules
 

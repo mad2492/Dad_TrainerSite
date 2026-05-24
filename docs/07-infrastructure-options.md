@@ -54,6 +54,8 @@ Best for:
 - Trainer login
 - Client login
 - Diet plans
+- Workout programs
+- Exercise demo links
 - Session notes
 - Private data
 
@@ -72,6 +74,8 @@ Best for:
 - Payments
 - File uploads
 - Progress photos
+- Client-uploaded form videos
+- Hosted exercise demo videos
 - Automated reminders
 - Client messaging
 
@@ -109,6 +113,8 @@ Useful if the project becomes a React/Next.js app with a client portal.
 - Does Dad need to log in?
 - Do clients need to log in?
 - Are clients uploading photos or measurements?
+- Are clients uploading form videos?
+- Are Pete and Lisa only linking exercise videos, or hosting their own videos?
 - Are payments involved?
 - How much maintenance are we willing to own?
 
@@ -117,4 +123,3 @@ Useful if the project becomes a React/Next.js app with a client portal.
 | Date | Decision | Why |
 | --- | --- | --- |
 | 2026-05-24 | Use GitHub Pages for the proposal page. | Static HTML is enough for sharing the pitch. |
-

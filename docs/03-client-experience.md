@@ -35,6 +35,9 @@ Purpose: define what clients see and do, without designing too much too early.
 
 - View diet plan
 - View reminders
+- View workout program
+- Watch exercise demo links
+- Read Pete/Lisa notes for exercise cues and modifications
 - View trainer notes
 - View session recaps
 - View check-in history
@@ -64,3 +67,4 @@ Purpose: define what clients see and do, without designing too much too early.
 - Would reminders help?
 - Would you upload progress info, or would you rather text it?
 - Would you use a simple portal for online coaching if you could still message when needed?
+- Would exercise demo links and short coach notes help you understand workouts better?
