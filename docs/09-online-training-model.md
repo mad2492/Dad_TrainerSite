@@ -93,7 +93,15 @@ The message should be: this is personalized coaching, not a cookie-cutter progra
 
 ## Possible Online Packages
 
-These are placeholders for discussion, not final offers.
+Packages should be based on client need. Current examples:
+
+- Weight Loss
+- Weight Gain
+- Bodybuilding
+- Over 50 Fitness
+- Female Fitness
+
+Details still need to be defined for launch.
 
 ### Basic Diet Guidance
 
@@ -156,10 +164,18 @@ Avoid early:
 
 Pete and Lisa Fonseca should be presented together. They are always together, and the website should treat them as the coaching team, not as two disconnected businesses.
 
+Current decisions:
+
+- Brand name: Fonseca Fitness
+- The Fonseca name should be part of the brand.
+- The program will recommend the right fit rather than forcing clients to choose Pete or Lisa up front.
+- The site should feel old-school, clean professional, no-nonsense, warm/supportive, and accessible to everyone.
+
 Before designing a polished website mockup, decide:
 
-- Business/program name
-- Whether the offer is one joint program or has Pete/Lisa coaching paths inside it
+- Logo direction
+- Colors and theme
+- Whether the offer is one joint program or has Pete/Lisa coaching paths behind the scenes
 - How clients choose or are matched with the right coach
 - Photos and story for both of them
-- Colors, tone, and style
+- Final launch packages

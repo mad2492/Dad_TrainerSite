@@ -86,3 +86,26 @@ Purpose: guide the first conversation without making it feel like a software int
   - Ask for business/name options.
   - Ask for preferred style: old-school bodybuilding, clinical/professional, modern fitness, family-owned/local, or another direction.
   - Confirm the 24-hour response expectation.
+
+## Branding Follow-Up Notes
+
+- Date: 2026-05-24
+- Decisions:
+  - Program/brand name: Fonseca Fitness.
+  - The Fonseca name should be part of the brand.
+  - The program will recommend the right fit instead of asking clients to choose Pete or Lisa up front.
+  - The site should feel old-school bodybuilding, clean professional, no-nonsense, warm/supportive, and broadly accessible.
+  - The site should not be positioned only as local.
+  - Logo will be created.
+  - Package names should be based on client need.
+- Package examples:
+  - Weight Loss
+  - Weight Gain
+  - Bodybuilding
+  - Over 50 Fitness
+  - Female Fitness
+- Next follow-up:
+  - Clarify launch packages.
+  - Decide whether "weight gain" means muscle gain.
+  - Decide logo direction, colors, photos, and visual style.
+  - Confirm whether "female fitness" is the intended package name.

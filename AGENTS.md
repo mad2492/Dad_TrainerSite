@@ -39,6 +39,7 @@ Use these installed skills when they are available in the session:
 ## Current Business Understanding
 
 - Pete and Lisa Fonseca are the shared coaching brand.
+- The working brand name is Fonseca Fitness.
 - Pete has about 35 years of experience.
 - Lisa has about 25 years of experience.
 - The offer should feel as close as possible to one-on-one training.
@@ -65,4 +66,3 @@ Use these installed skills when they are available in the session:
 ```text
 https://mad2492.github.io/Dad_TrainerSite/index.html?v=<commit>
 ```
-

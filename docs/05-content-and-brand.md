@@ -4,6 +4,12 @@ Purpose: collect the words, proof, and assets needed for a credible local traini
 
 ## Positioning
 
+### Brand Name
+
+- Fonseca Fitness
+- The Fonseca name should be part of the brand.
+- The site should be accessible to everyone, not only local prospects.
+
 ### What He Is Known For
 
 - Customized training programs based on each individual's needs.
@@ -41,6 +47,7 @@ Purpose: collect the words, proof, and assets needed for a credible local traini
 - Diet or meal plan writing
 - Bodybuilding coaching
 - General strength and fitness
+- Goal-based programs such as weight loss, weight gain, bodybuilding, over 50 fitness, and female fitness
 - Other:
 
 ## Testimonials and Results
@@ -70,10 +77,14 @@ The site should sound:
 - Experienced
 - Direct
 - Practical
-- Local
 - Trustworthy
 - Not flashy
 - Personalized
+- Old-school bodybuilding where appropriate
+- Clean and professional
+- No-nonsense
+- Warm and supportive
+- Accessible beyond the local area
 
 Avoid:
 

@@ -30,14 +30,14 @@ Definition of done:
 
 Goal: test whether the portal idea feels useful for both current clients and future online clients before building it.
 
-Brand structure decision: Pete and Lisa Fonseca together.
+Brand structure decision: Pete and Lisa Fonseca together as Fonseca Fitness.
 
 Before designing the polished mockup, decide:
 
-- Business/program name
-- Whether clients choose Pete or Lisa, or whether the program recommends the right coach
-- Visual direction and tone
-- Package names
+- Logo direction
+- Colors and theme
+- Final launch package names
+- Whether the program has Pete/Lisa coaching paths behind the scenes
 
 Possible scope:
 
