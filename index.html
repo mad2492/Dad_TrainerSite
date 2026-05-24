@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple, practical proposal for a mobile-friendly training website and client portal.">
+  <title>A Simple Online Platform for Your Training Business</title>
+  <style>
+    :root {
+      --ink: #202124;
+      --text: #3f4348;
+      --muted: #6d747c;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --line: #e4e0d8;
+      --navy: #26364a;
+      --red: #a33a32;
+      --gold: #c0933f;
+      --green: #2f6e4f;
+      --blue-soft: #e8eef5;
+      --red-soft: #f5e8e6;
+      --gold-soft: #f7efd9;
+      --green-soft: #e2f0e8;
+      --shadow: 0 18px 45px rgba(32, 33, 36, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(232, 238, 245, 0.75), rgba(251, 250, 247, 0) 260px),
+        var(--paper);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.58;
+      letter-spacing: 0;
+    }
+
+    .page {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: 0 18px 44px;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 34px 0 28px;
+    }
+
+    .message {
+      align-self: flex-start;
+      width: min(100%, 620px);
+      margin-bottom: 26px;
+      padding: 16px 17px;
+      border-radius: 8px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      color: var(--text);
+      font-size: 0.98rem;
+    }
+
+    .message strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-panel {
+      display: grid;
+      gap: 24px;
+      padding: 28px 0 10px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--red);
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 680px;
+      margin-bottom: 16px;
+      color: var(--ink);
+      font-size: clamp(2.15rem, 8vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 630px;
+      margin-bottom: 0;
+      color: var(--text);
+      font-size: clamp(1.08rem, 4vw, 1.32rem);
+      line-height: 1.48;
+    }
+
+    .quick-read {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .quick-item {
+      padding: 14px 15px;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--gold);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--text);
+      font-size: 0.95rem;
+      box-shadow: 0 8px 22px rgba(32, 33, 36, 0.05);
+    }
+
+    .quick-item strong {
+      color: var(--ink);
+    }
+
+    section {
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      margin-bottom: 13px;
+      color: var(--ink);
+      font-size: clamp(1.48rem, 5vw, 2.15rem);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 7px;
+      color: var(--ink);
+      font-size: 1.03rem;
+      line-height: 1.25;
+    }
+
+    p {
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .note {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 10px 30px rgba(32, 33, 36, 0.06);
+    }
+
+    .note p {
+      margin-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .tile {
+      min-height: 118px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 8px 24px rgba(32, 33, 36, 0.05);
+    }
+
+    .tile .label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      margin-bottom: 12px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: var(--navy);
+      background: var(--blue-soft);
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tile p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.48;
+    }
+
+    .trainer-list {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .trainer-list li {
+      position: relative;
+      min-height: 48px;
+      padding: 12px 14px 12px 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--text);
+      font-size: 0.98rem;
+    }
+
+    .trainer-list li::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 18px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 5px var(--green-soft);
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step:last-child {
+      border-bottom: 0;
+    }
+
+    .number {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background: var(--navy);
+      color: white;
+      font-weight: 800;
+    }
+
+    .step:first-child .number {
+      background: var(--red);
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      color: #765722;
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .payment {
+      border-left: 5px solid var(--green);
+      background: linear-gradient(90deg, var(--green-soft), var(--panel));
+    }
+
+    .questions {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0;
+      counter-reset: question;
+      list-style: none;
+    }
+
+    .questions li {
+      counter-increment: question;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    .questions li::before {
+      content: counter(question);
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--red-soft);
+      color: var(--red);
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .final {
+      margin-top: 20px;
+      padding: 22px 18px;
+      border-radius: 8px;
+      background: var(--navy);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .final h2,
+    .final p,
+    .final .eyebrow {
+      color: white;
+    }
+
+    .final .eyebrow {
+      color: #f1c46c;
+    }
+
+    footer {
+      padding: 24px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (min-width: 640px) {
+      .page {
+        padding-inline: 28px;
+      }
+
+      .grid,
+      .quick-read {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid .tile:first-child,
+      .quick-read .quick-item:first-child {
+        grid-column: span 2;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="message">
+        <strong>Text to send first</strong>
+        Dad, I put together a simple idea for your training business. Nothing complicated, and nothing that changes the way you coach. I just want to show you how we could make your online presence look more professional and give clients one easy place to see their plans.
+      </div>
+
+      <div class="hero-panel">
+        <div>
+          <p class="eyebrow">A practical proposal</p>
+          <h1>A Simple Online Platform for Your Training Business</h1>
+          <p class="lead">You already know how to train people. This idea is about making the business side feel more organized, more professional, and easier to handle from your phone.</p>
+        </div>
+
+        <div class="quick-read" aria-label="Key points">
+          <div class="quick-item"><strong>Start small:</strong> first, a clean website people can find and trust.</div>
+          <div class="quick-item"><strong>Phone first:</strong> built so you can use it comfortably from your iPhone.</div>
+          <div class="quick-item"><strong>No pressure on payments:</strong> Zelle, Venmo, Cash App, or cash can stay exactly as-is.</div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <p class="eyebrow">The idea</p>
+      <h2>What This Is, and What It Is Not</h2>
+      <div class="note">
+        <p>This is not about replacing your experience, your coaching style, or the way you work with people. You have been doing this a long time, and that is the whole point: the website should support what already makes you good.</p>
+        <p>The simple version is this: a professional website for new people who want to learn about you, plus a private client area where current clients can see their diet plans, notes, and progress.</p>
+        <p>Instead of everything living in texts, scratch pads, and memory, the important pieces would have one clean place to live.</p>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">For clients</p>
+      <h2>What Clients Would See</h2>
+      <p>Clients would not need anything fancy. They would open a link on their phone and see the parts of your coaching that matter to them.</p>
+
+      <div class="grid">
+        <article class="tile">
+          <span class="label">Website</span>
+          <h3>A clear first impression</h3>
+          <p>Who you are, what you offer, what kind of trainer you are, and how someone can contact you.</p>
+        </article>
+        <article class="tile">
+          <span class="label">Plans</span>
+          <h3>Their diet plan</h3>
+          <p>A simple place to check what they should be following without asking you to resend it.</p>
+        </article>
+        <article class="tile">
+          <span class="label">Sessions</span>
+          <h3>Workout recaps</h3>
+          <p>Quick notes after sessions: what they did, what improved, and what to focus on next.</p>
+        </article>
+        <article class="tile">
+          <span class="label">Progress</span>
+          <h3>Check-ins and results</h3>
+          <p>Weight, measurements, photos, goals, and progress notes if that becomes useful later.</p>
+        </article>
+        <article class="tile">
+          <span class="label">Trust</span>
+          <h3>Testimonials</h3>
+          <p>Real client stories and results so new people understand the value of your experience.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">For you</p>
+      <h2>What You Could Do From Your iPhone</h2>
+      <p>The trainer side should be simple: big enough to tap, easy to read, and focused on the things you actually use.</p>
+
+      <ul class="trainer-list">
+        <li>Open your client list quickly.</li>
+        <li>Tap a client and see their diet plan, notes, and recent updates.</li>
+        <li>Update a plan after a check-in or conversation.</li>
+        <li>Add a quick workout recap after a session.</li>
+        <li>Leave private notes for yourself.</li>
+        <li>See who needs a follow-up.</li>
+        <li>Keep the important details in one place instead of scattered across texts and paper.</li>
+      </ul>
+    </section>
+
+    <section>
+      <p class="eyebrow">The rollout</p>
+      <h2>We Would Start Small</h2>
+      <p>There is no reason to build a big system right away. We would only add more if it actually helps you and your clients.</p>
+
+      <div class="steps">
+        <article class="step">
+          <div class="number">1</div>
+          <div>
+            <h3>Online footprint</h3>
+            <p>A clean mobile-friendly website with your story, services, results, testimonials, and a consultation request form.</p>
+            <span class="tag">Start here</span>
+          </div>
+        </article>
+        <article class="step">
+          <div class="number">2</div>
+          <div>
+            <h3>Simple client portal</h3>
+            <p>Clients can log in to view diet plans and notes. You can manage the basics from your phone.</p>
+            <span class="tag">Only after the website</span>
+          </div>
+        </article>
+        <article class="step">
+          <div class="number">3</div>
+          <div>
+            <h3>Progress and check-ins</h3>
+            <p>Add measurements, photos, progress history, and check-in notes if clients would actually use it.</p>
+            <span class="tag">Later</span>
+          </div>
+        </article>
+        <article class="step">
+          <div class="number">4</div>
+          <div>
+            <h3>Optional payments</h3>
+            <p>Add simple payment links or payment status only if it saves you time and the fees are worth it.</p>
+            <span class="tag">Optional</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Payments</p>
+      <h2>Payments Can Stay the Way They Are</h2>
+      <div class="note payment">
+        <p>If Zelle, Venmo, Cash App, checks, or cash are working for you, there is no need to change that at the beginning.</p>
+        <p>The website and client portal do not need online card payments to be useful. If payments ever become part of it, we would look at the fees first and keep it simple.</p>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Questions</p>
+      <h2>What I Would Want Your Opinion On</h2>
+      <p>Before building anything real, I would want your honest take on questions like these:</p>
+
+      <ol class="questions">
+        <li>How do new clients usually find you right now?</li>
+        <li>What do you currently send clients most often: diets, workouts, notes, reminders, or something else?</li>
+        <li>What gets annoying to resend or rewrite?</li>
+        <li>Would it help to have one place for each client's plan and notes?</li>
+        <li>Would your clients actually log in to see their information, or would they rather keep texting?</li>
+        <li>What would make this useful for you instead of just another thing to manage?</li>
+        <li>What should absolutely stay the same about how you run your business?</li>
+        <li>What would you want people to understand about you when they first find you online?</li>
+      </ol>
+    </section>
+
+    <section class="final">
+      <p class="eyebrow">First step</p>
+      <h2>A Clickable Demo, Not a Full Build</h2>
+      <p>The first step would not be a big project. I would make a simple clickable demo that you can open on your phone.</p>
+      <p>You could tap around, see what the website and client area might feel like, and tell me what is useful, what is annoying, and what is missing.</p>
+      <p>If it fits how you work, we keep going. If it does not, we change it or drop it. The point is to help your business, not force you into software you do not want.</p>
+    </section>
+
+    <footer>
+      Made by your kid. Your feedback shapes the whole thing.
+    </footer>
+  </main>
+</body>
+</html>
