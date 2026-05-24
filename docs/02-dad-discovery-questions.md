@@ -53,7 +53,7 @@ Purpose: guide the first conversation without making it feel like a software int
   - The online side is the part he does not know how to build.
   - He wants people to understand that this is not a cookie-cutter training program.
   - Programs should be based on each individual's needs.
-  - His experience is a major trust point: Dad has about 35 years in the field, and Mom has about 25 years.
+  - Their experience is a major trust point: Pete has about 35 years in the field, and Lisa has about 25 years.
 - Things he liked:
   - One place for client plans and notes.
   - A login/access area for clients.
@@ -64,7 +64,7 @@ Purpose: guide the first conversation without making it feel like a software int
 - Next follow-up:
   - Define what "online training" means in his business: diet-only, workout programming, check-ins, messaging, video calls, or a combination.
   - Ask what would make 20 to 30 online clients manageable instead of overwhelming.
-  - Ask whether Mom should be included in the brand/story from the start.
+  - Decide how Pete and Lisa Fonseca should be presented together in the brand/story.
 
 ## Online Training Follow-Up Notes
 
@@ -78,10 +78,11 @@ Purpose: guide the first conversation without making it feel like a software int
   - Check-ins should include weight, any injuries acquired while training, and a picture if the client is comfortable.
   - Messaging boundary: one text message per day, likely answered within 24 hours. Confirm because the note said "2r hours."
   - Simplicity is what would make 20 to 30 online clients manageable.
-  - Pete is open to either separate sites or a combined program where clients choose who they work with.
+  - Brand structure is now decided: Pete and Lisa Fonseca together.
   - The site should explain that online training is as close as possible to one-on-one training.
 - Next follow-up:
-  - Decide brand structure: Pete only, Pete and Mom together, separate sites, or one combined program.
+  - Decide the business/program name for Pete and Lisa together.
+  - Decide whether clients choose Pete or Lisa, or whether the program recommends the right coach.
   - Ask for business/name options.
   - Ask for preferred style: old-school bodybuilding, clinical/professional, modern fitness, family-owned/local, or another direction.
   - Confirm the 24-hour response expectation.

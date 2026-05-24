@@ -2,30 +2,28 @@
 
 Purpose: decide the public identity before making a polished website mockup.
 
-We now know enough about the online training offer to start asking brand questions. The first branding question is not colors. It is who the brand represents.
+We now know enough about the online training offer to start asking brand questions.
 
 ## Brand Structure
 
-Which direction feels right?
+Decision: Pete and Lisa Fonseca together.
 
-1. Pete only
-2. Pete and Mom together
-3. Separate Pete and Mom sites
-4. One combined program where clients choose who they work with
+They should be presented as a shared coaching brand because they are always together and both bring real experience.
 
 Questions:
 
-- Should the website lead with Pete, or with both Pete and Mom?
+- Should the website lead with both Pete and Lisa equally?
 - If both are included, do they offer the same services or different specialties?
-- Should clients choose a coach, or should Pete/Mom recommend who fits best?
-- Would separate sites make the offer clearer or more confusing?
+- Should clients choose a coach, or should Pete/Lisa recommend who fits best?
+- Should the online program feel like one joint program or a program with two coach paths?
 
 ## Name
 
 Questions:
 
 - Is there an existing business name?
-- Does Pete want his personal name in the brand?
+- Should the Fonseca name be in the brand?
+- Should the brand use Pete and Lisa's names directly?
 - Should the name sound local, personal, old-school, modern, or performance-focused?
 - Should the name include "training," "fitness," "coaching," "nutrition," or something else?
 - Should the online program have a separate name from the in-person business?
@@ -66,11 +64,10 @@ Questions:
 ## Content Needed For Mockup
 
 - Final business/program name
-- Whether Mom is included
+- Final decision on how Pete and Lisa Fonseca are introduced together
 - 2-3 services or package names
 - Short bio for Pete
-- Short bio for Mom, if included
+- Short bio for Lisa
 - Photos we can use
 - Testimonials or results, if available
 - Preferred contact method
-

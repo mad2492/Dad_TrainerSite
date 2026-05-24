@@ -24,3 +24,4 @@ Use these docs to capture what Dad says, what clients actually need, and what we
 - Keep payments optional.
 - Keep every early screen comfortable on an iPhone.
 - Prefer a simple website first, then add private/client features later.
+- Treat Pete and Lisa Fonseca as the shared coaching brand.

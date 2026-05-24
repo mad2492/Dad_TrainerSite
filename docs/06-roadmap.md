@@ -30,12 +30,14 @@ Definition of done:
 
 Goal: test whether the portal idea feels useful for both current clients and future online clients before building it.
 
-Before designing the polished mockup, decide the brand structure:
+Brand structure decision: Pete and Lisa Fonseca together.
 
-- Pete only
-- Pete and Mom together
-- Separate sites
-- One combined program where clients choose who they work with
+Before designing the polished mockup, decide:
+
+- Business/program name
+- Whether clients choose Pete or Lisa, or whether the program recommends the right coach
+- Visual direction and tone
+- Package names
 
 Possible scope:
 

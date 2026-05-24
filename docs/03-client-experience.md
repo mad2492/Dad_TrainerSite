@@ -27,7 +27,7 @@ Purpose: define what clients see and do, without designing too much too early.
 - Should the site emphasize in-person training, online training, diets, bodybuilding experience, general fitness, or all of the above?
 - What kind of client is he trying to attract locally?
 - What should the primary call to action be?
-- Should Mom's experience be part of the story from the beginning?
+- How should Pete and Lisa Fonseca's combined experience be introduced on the first screen?
 
 ## Logged-In Client
 

@@ -60,7 +60,7 @@ The message should be: this is personalized coaching, not a cookie-cutter progra
 - Confirm whether the response window is 24 hours.
 - How are weekly check-ins submitted?
 - Should progress pictures be optional on every check-in or only sometimes?
-- Should Mom be part of the same brand, a separate site, or a combined program where clients choose who they work with?
+- Since Pete and Lisa Fonseca are together as the brand, how should clients know who they are working with?
 - What would make an online client too much work?
 - What should happen when a client does not follow the plan?
 - What does success look like after 30 days?
@@ -120,13 +120,14 @@ Avoid early:
 - Unlimited messaging expectations
 - Features that require lots of typing from an iPhone
 
-## Branding Decision Needed
+## Branding Decision
 
-Before designing a polished website mockup, decide whether the brand is:
+Pete and Lisa Fonseca should be presented together. They are always together, and the website should treat them as the coaching team, not as two disconnected businesses.
 
-- Pete only
-- Pete and Mom together
-- Separate Pete and Mom sites
-- One combined program where clients choose who they work with
+Before designing a polished website mockup, decide:
 
-This decision affects the name, photos, colors, copy, services, and page structure.
+- Business/program name
+- Whether the offer is one joint program or has Pete/Lisa coaching paths inside it
+- How clients choose or are matched with the right coach
+- Photos and story for both of them
+- Colors, tone, and style
