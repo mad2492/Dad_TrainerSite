@@ -41,9 +41,27 @@ Purpose: guide the first conversation without making it feel like a software int
 
 ## Notes From Conversation
 
-- Date:
+- Date: 2026-05-24
 - Big takeaways:
+  - New clients mostly come through word of mouth from current clients.
+  - He most often sends diets and reminders.
+  - Diets are the most annoying thing to resend or rewrite.
+  - He likes the idea of one place for each client's plan and notes.
+  - He thinks clients could log in, but still wants them to have access to communicate with him when needed.
+  - The biggest business opportunity is online training. In-person training is limited by daily hours, while 20 or 30 online clients could increase income without requiring the same in-person time.
+  - The one-on-one face-to-face training should remain the same.
+  - The online side is the part he does not know how to build.
+  - He wants people to understand that this is not a cookie-cutter training program.
+  - Programs should be based on each individual's needs.
+  - His experience is a major trust point: Dad has about 35 years in the field, and Mom has about 25 years.
 - Things he liked:
+  - One place for client plans and notes.
+  - A login/access area for clients.
+  - A way to communicate with him when needed.
+  - Building an online training lane.
 - Things he disliked:
+  - No explicit dislikes yet.
 - Next follow-up:
-
+  - Define what "online training" means in his business: diet-only, workout programming, check-ins, messaging, video calls, or a combination.
+  - Ask what would make 20 to 30 online clients manageable instead of overwhelming.
+  - Ask whether Mom should be included in the brand/story from the start.

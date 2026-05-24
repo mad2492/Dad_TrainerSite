@@ -6,26 +6,36 @@ Purpose: collect the words, proof, and assets needed for a credible local traini
 
 ### What He Is Known For
 
-- 
+- Customized training programs based on each individual's needs.
+- Long-term, real-world experience.
+- Not a cookie-cutter training program.
 
 ### Who He Helps Best
 
-- 
+- Clients who want individual attention instead of generic plans.
+- In-person clients who value one-on-one coaching.
+- Online clients who want experienced guidance from home.
 
 ### Coaching Style
 
-- 
+- Personal and individualized.
+- Practical.
+- Experience-based.
+- Built around the client's specific needs.
 
 ### Experience
 
 - Personal trainer
 - Retired bodybuilder
 - Long-time local fitness professional
+- Dad has about 35 years of experience.
+- Mom has about 25 years of experience.
 - Other credentials or story details:
 
 ## Services
 
 - In-person personal training
+- Online training
 - Diet or meal plan writing
 - Bodybuilding coaching
 - General strength and fitness
@@ -59,6 +69,7 @@ The site should sound:
 - Local
 - Trustworthy
 - Not flashy
+- Personalized
 
 Avoid:
 
@@ -66,4 +77,4 @@ Avoid:
 - Complicated fitness buzzwords
 - Overpromising results
 - Making him sound like a beginner influencer
-
+- Making the program sound generic or cookie-cutter

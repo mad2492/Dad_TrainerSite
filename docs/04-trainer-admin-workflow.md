@@ -10,6 +10,7 @@ Purpose: design around what Dad can comfortably do from an iPhone.
 - No clutter.
 - No complicated settings.
 - Show only what he needs for the current client.
+- Make online clients manageable in batches, not one tiny task at a time all day.
 
 ## Core Admin Screens
 
@@ -23,10 +24,12 @@ Purpose: design around what Dad can comfortably do from an iPhone.
 ### Client Profile
 
 - Current diet plan
+- Current reminders
 - Session recaps
 - Private notes
 - Progress summary
 - Contact information
+- Communication history or message requests
 
 ### Edit Diet Plan
 
@@ -34,6 +37,15 @@ Purpose: design around what Dad can comfortably do from an iPhone.
 - Save draft
 - Publish/update for client
 - Optional template reuse later
+- Reuse prior diets without making the program feel generic
+
+### Online Client Dashboard
+
+- Clients needing diet updates
+- Clients needing check-ins
+- New messages or questions
+- Clients who have not checked in
+- Simple status filters
 
 ### Add Session Recap
 
@@ -56,6 +68,8 @@ Purpose: design around what Dad can comfortably do from an iPhone.
 - What is too annoying to type?
 - Would dictation from the iPhone be useful?
 - Should anything be private to him only?
+- What would make 20 to 30 online clients manageable from home?
+- How quickly does he want or need to respond to online client messages?
 
 ## Workflow Sketches
 
@@ -74,3 +88,10 @@ Purpose: design around what Dad can comfortably do from an iPhone.
 4. Add private note if needed.
 5. Save/update plan.
 
+### Managing Online Clients From Home
+
+1. Open online client dashboard.
+2. Review clients needing attention.
+3. Update diets or reminders in batches.
+4. Respond to message requests.
+5. Mark follow-ups complete.

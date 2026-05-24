@@ -14,6 +14,7 @@ Use these docs to capture what Dad says, what clients actually need, and what we
 6. [Roadmap](06-roadmap.md)
 7. [Infrastructure Options](07-infrastructure-options.md)
 8. [Privacy and Trust](08-privacy-and-trust.md)
+9. [Online Training Model](09-online-training-model.md)
 
 ## Ground Rules
 
@@ -22,4 +23,3 @@ Use these docs to capture what Dad says, what clients actually need, and what we
 - Keep payments optional.
 - Keep every early screen comfortable on an iPhone.
 - Prefer a simple website first, then add private/client features later.
-
