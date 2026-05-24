@@ -4,9 +4,10 @@ A simple, mobile-friendly proposal page for a personal training website and clie
 
 The page is intentionally non-technical and meant to be shared from GitHub Pages on an iPhone.
 
+Planning notes for the real project live in [`docs/`](docs/).
+
 ## GitHub Pages
 
 Serve this repo from the root of the default branch. The dad-facing page is:
 
 - `index.html`
-
