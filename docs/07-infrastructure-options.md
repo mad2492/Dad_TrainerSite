@@ -56,6 +56,7 @@ Best for:
 - Diet plans
 - Workout programs
 - Exercise demo links
+- Health intake/readiness screening
 - Session notes
 - Private data
 
@@ -113,6 +114,7 @@ Useful if the project becomes a React/Next.js app with a client portal.
 - Does Dad need to log in?
 - Do clients need to log in?
 - Are clients uploading photos or measurements?
+- Are clients submitting health or medical condition information?
 - Are clients uploading form videos?
 - Are Pete and Lisa only linking exercise videos, or hosting their own videos?
 - Are payments involved?

@@ -45,6 +45,7 @@ Use these installed skills when they are available in the session:
 - The offer should feel as close as possible to one-on-one training.
 - The positioning should emphasize personalized coaching, not a cookie-cutter program.
 - Online training includes workout programming, nutrition guidance, and weekly check-ins.
+- Clients should complete health/readiness intake before training, including blood pressure, cardiac issues, arthritis, injuries, and other relevant medical conditions.
 - Check-ins include weight, training injuries, and optional progress photos.
 - Messaging should have boundaries, currently one message per day with an agreed response window.
 - Simplicity is the key to making 20 to 30 online clients manageable.

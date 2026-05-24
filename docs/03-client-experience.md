@@ -33,6 +33,7 @@ Purpose: define what clients see and do, without designing too much too early.
 
 ### Possible MVP Features
 
+- Complete a health/readiness intake before receiving a plan
 - View diet plan
 - View reminders
 - View workout program
@@ -68,3 +69,4 @@ Purpose: define what clients see and do, without designing too much too early.
 - Would you upload progress info, or would you rather text it?
 - Would you use a simple portal for online coaching if you could still message when needed?
 - Would exercise demo links and short coach notes help you understand workouts better?
+- Would you be comfortable completing a brief health/readiness questionnaire before starting?

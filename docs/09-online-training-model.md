@@ -36,6 +36,27 @@ Target idea to explore:
 - Exercise demo links when a movement is unfamiliar or needs explanation
 - Pete/Lisa notes with simple cues, common mistakes, and modifications
 
+### Health Intake Before Training Starts
+
+Before a client receives a workout or nutrition plan, Fonseca Fitness should collect basic health and readiness information.
+
+This should include:
+
+- Blood pressure concerns
+- Cardiac/heart issues
+- Arthritis
+- Injuries or pain
+- Any medical condition that could affect exercise or nutrition planning
+- Medications or doctor restrictions, if relevant
+- Whether the client has been cleared by a physician if needed
+
+The goal is not for Pete and Lisa to diagnose or give medical advice. The goal is to understand risk, personalize the plan, and know when a client should check with a medical professional before starting or increasing exercise.
+
+Industry pattern to reference:
+
+- PAR-Q+ is a common pre-participation screening questionnaire used to determine whether someone may need follow-up questions or medical consultation before physical activity.
+- ACSM preparticipation screening focuses on identifying cardiovascular, metabolic, renal, and symptom-related risks before exercise participation.
+
 ### Exercise Guidance
 
 Sometimes clients do not understand what an exercise is, what it means, or how it should work. Pete currently solves this by finding a video and sending a link.
@@ -64,6 +85,7 @@ If your knees hurt, message before doing this one.
 
 - Weight
 - New injuries acquired while training
+- Changes in medical status, pain, blood pressure, cardiac symptoms, arthritis flare-ups, or doctor restrictions
 - Progress picture, if the client is comfortable
 
 ### Messaging Boundary
@@ -139,6 +161,7 @@ Details still need to be defined for launch.
 
 The platform should prioritize:
 
+- Health intake/readiness screening before plan creation
 - Diet plan creation and updates
 - Workout program delivery
 - Exercise demo links attached to workout movements
@@ -156,6 +179,7 @@ Avoid early:
 - Overbuilt exercise libraries
 - Custom video upload/hosting infrastructure
 - AI form correction
+- Trying to diagnose medical conditions or replace physician guidance
 - Too many notification types
 - Unlimited messaging expectations
 - Features that require lots of typing from an iPhone

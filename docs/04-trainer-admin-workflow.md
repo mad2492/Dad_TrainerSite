@@ -23,6 +23,7 @@ Purpose: design around what Dad can comfortably do from an iPhone.
 
 ### Client Profile
 
+- Health intake / readiness status
 - Current diet plan
 - Current workout program
 - Current reminders
@@ -67,8 +68,19 @@ Purpose: design around what Dad can comfortably do from an iPhone.
 
 - Weight
 - Measurements
+- New injuries, pain, blood pressure concerns, cardiac symptoms, arthritis flare-ups, or medical restrictions
 - Energy/compliance notes
 - Follow-up needed
+
+### Review Health Intake
+
+- Blood pressure concerns
+- Cardiac/heart issues
+- Arthritis
+- Injuries or chronic pain
+- Other medical conditions that affect training
+- Doctor restrictions or clearance status
+- Notes for exercise modifications
 
 ## Admin Questions
 
@@ -81,6 +93,9 @@ Purpose: design around what Dad can comfortably do from an iPhone.
 - How quickly does he want or need to respond to online client messages?
 - Does he already have favorite YouTube channels or video sources he trusts for exercise demos?
 - Which common exercises would be worth recording himself or with Lisa first?
+- What conditions should require medical clearance before starting?
+- What health information does Pete currently ask every client?
+- What information should be required versus optional?
 
 ## Workflow Sketches
 

@@ -11,6 +11,7 @@ Potentially sensitive information:
 - Measurements
 - Progress photos
 - Health limitations or injuries
+- Medical conditions such as blood pressure concerns, cardiac issues, arthritis, diabetes, medications, or doctor restrictions
 - Payment status
 - Private trainer notes
 
@@ -42,6 +43,8 @@ Avoid publishing:
 - What can clients edit?
 - What should be private to Dad only?
 - How are photos stored?
+- How are medical/health intake details stored?
+- Who can see health intake details?
 - How would data be deleted if a client asks?
 - What happens if Dad loses or replaces his phone?
 
@@ -51,4 +54,4 @@ Avoid publishing:
 - Use real permissions for testimonials and photos.
 - Keep the portal simple enough that mistakes are unlikely.
 - Avoid storing anything we do not need.
-
+- Treat medical/health intake data as sensitive and collect only what is needed for safe coaching.

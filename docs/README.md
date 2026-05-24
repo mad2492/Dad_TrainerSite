@@ -17,6 +17,7 @@ Use these docs to capture what Dad says, what clients actually need, and what we
 9. [Online Training Model](09-online-training-model.md)
 10. [Branding Questions](10-branding-questions.md)
 11. [Exercise Guidance](11-exercise-guidance.md)
+12. [Health Intake](12-health-intake.md)
 
 ## Ground Rules
 
