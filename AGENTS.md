@@ -40,6 +40,7 @@ Use these installed skills when they are available in the session:
 
 - Pete and Lisa Fonseca are the shared coaching brand.
 - The working brand name is Fonseca Fitness.
+- Current brand colors are Primary Navy `#0F2740`, Primary Red `#B3262D`, and Off-White `#F5F3EE`.
 - Pete has about 35 years of experience.
 - Lisa has about 25 years of experience.
 - The offer should feel as close as possible to one-on-one training.

@@ -10,6 +10,17 @@ Purpose: collect the words, proof, and assets needed for a credible local traini
 - The Fonseca name should be part of the brand.
 - The site should be accessible to everyone, not only local prospects.
 
+### Brand Colors
+
+- Primary Navy: `#0F2740`
+- Primary Red: `#B3262D`
+- Off-White: `#F5F3EE`
+
+### Font Direction
+
+- Primary wordmark: bold athletic slab-serif or varsity-inspired block font.
+- Supporting text/tagline: clean sans-serif such as Montserrat, Gotham, Inter, or Avenir Next.
+
 ### What He Is Known For
 
 - Customized training programs based on each individual's needs.
