@@ -39,6 +39,32 @@ Supporting text/tagline:
 
 The GPT output has produced good visual direction, but not production files yet.
 
+## First Export Package Review
+
+Received `fonseca-fitness-logo-assets.zip` on May 24, 2026.
+
+Verdict: useful as a direction check, not ready to use on the site.
+
+What was good:
+
+- The file names match the asset set we asked for.
+- The colors and general silhouette direction are consistent with the approved concept.
+- The package included a simple brand spec.
+
+What failed:
+
+- Several PNGs are effectively blank or white-only.
+- The `horizontal-header` and `favicon` files have the wrong proportions for their intended use.
+- The primary logo images still contain cropped pieces from other logo layouts, so they are not clean standalone exports.
+- No true SVG/vector artwork was included.
+- The brand spec file has a text encoding issue in the title.
+
+Decision:
+
+- Do not place this asset package on the public proposal page as the official logo.
+- Keep asking for export cleanup, not new design concepts.
+- Use the current brand colors and direction while waiting for clean files.
+
 Needed:
 
 - Primary full logo with tagline
@@ -75,4 +101,3 @@ Ask GPT for separated logo files, not a new design.
 Key instruction:
 
 > Do not redesign. Export each approved version as a separate centered image with transparent background, clean padding, and no captions or labels.
-
