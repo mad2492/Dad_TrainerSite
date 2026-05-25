@@ -3,25 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A practical proposal for Fonseca Fitness, an online training and nutrition coaching platform.">
-  <title>Fonseca Fitness Online Training</title>
+  <meta name="description" content="Fonseca Fitness online coaching website draft and proposal notes.">
+  <title>Fonseca Fitness</title>
   <style>
     :root {
-      --ink: #202124;
-      --text: #3f4348;
-      --muted: #6d747c;
-      --paper: #F5F3EE;
-      --panel: #ffffff;
-      --line: #e4e0d8;
-      --navy: #0F2740;
-      --red: #B3262D;
-      --gold: #c0933f;
+      --navy: #0f2740;
+      --red: #b3262d;
+      --paper: #f5f3ee;
+      --white: #ffffff;
+      --ink: #1d242c;
+      --muted: #5d6670;
+      --line: #ded8cc;
+      --gold: #bd8a3d;
       --green: #2f6e4f;
-      --blue-soft: #e8eef5;
-      --red-soft: #f5e8e6;
-      --gold-soft: #f7efd9;
-      --green-soft: #e2f0e8;
-      --shadow: 0 18px 45px rgba(32, 33, 36, 0.08);
+      --shadow: 0 18px 50px rgba(15, 39, 64, 0.13);
+      --radius: 8px;
+      --max: 1120px;
     }
 
     * {
@@ -34,662 +31,1229 @@
 
     body {
       margin: 0;
-      background:
-        linear-gradient(180deg, rgba(232, 238, 245, 0.75), rgba(251, 250, 247, 0) 260px),
-        var(--paper);
+      background: var(--paper);
       color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.58;
-      letter-spacing: 0;
+      font-family: Inter, Avenir Next, Segoe UI, Arial, sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
     }
 
-    .page {
-      width: min(100%, 760px);
+    img,
+    svg {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-shell {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 243, 238, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      width: 100%;
+      max-width: var(--max);
       margin: 0 auto;
-      padding: 0 18px 44px;
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      border: 2px solid var(--navy);
+      border-right-color: var(--red);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--navy);
+      background: var(--white);
+      font-weight: 900;
+      font-family: Georgia, Times New Roman, serif;
+      font-size: 1rem;
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: Georgia, Times New Roman, serif;
+      font-size: 1.02rem;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
+
+    .tab-switcher {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      box-shadow: 0 4px 16px rgba(15, 39, 64, 0.08);
+    }
+
+    .tab-button {
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      padding: 9px 11px;
+      min-height: 38px;
+      font: inherit;
+      font-weight: 800;
+      font-size: 0.78rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .tab-button[aria-selected="true"] {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.is-active {
+      display: block;
+    }
+
+    section {
+      padding: 42px 16px;
+    }
+
+    .section-inner {
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
     }
 
     .hero {
-      min-height: 88vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 34px 0 28px;
+      background:
+        linear-gradient(135deg, rgba(15, 39, 64, 0.96), rgba(15, 39, 64, 0.88)),
+        radial-gradient(circle at 25% 15%, rgba(179, 38, 45, 0.34), transparent 32%);
+      color: var(--white);
+      padding: 28px 16px 34px;
     }
 
-    .hero-panel {
+    .hero-grid {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
       display: grid;
-      gap: 24px;
-      padding: 28px 0 10px;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-grid > *,
+    .split > * {
+      min-width: 0;
     }
 
     .eyebrow {
       margin: 0 0 10px;
       color: var(--red);
-      font-size: 0.78rem;
-      font-weight: 750;
-      letter-spacing: 0.13em;
+      font-size: 0.76rem;
+      font-weight: 900;
       text-transform: uppercase;
+    }
+
+    .hero .eyebrow {
+      color: #f0c8c7;
     }
 
     h1,
     h2,
-    h3,
-    p {
-      margin-top: 0;
+    h3 {
+      overflow-wrap: anywhere;
     }
 
     h1 {
-      max-width: 680px;
-      margin-bottom: 16px;
-      color: var(--ink);
-      font-size: clamp(2.15rem, 8vw, 4.8rem);
+      margin: 0;
+      font-family: Georgia, Times New Roman, serif;
+      font-size: clamp(2rem, 7vw, 4.2rem);
       line-height: 0.98;
-      letter-spacing: 0;
-    }
-
-    .lead {
-      max-width: 630px;
-      margin-bottom: 0;
-      color: var(--text);
-      font-size: clamp(1.08rem, 4vw, 1.32rem);
-      line-height: 1.48;
-    }
-
-    .quick-read {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .quick-item {
-      padding: 14px 15px;
-      border: 1px solid var(--line);
-      border-left: 5px solid var(--gold);
-      border-radius: 8px;
-      background: var(--panel);
-      color: var(--text);
-      font-size: 0.95rem;
-      box-shadow: 0 8px 22px rgba(32, 33, 36, 0.05);
-    }
-
-    .quick-item strong {
-      color: var(--ink);
-    }
-
-    section {
-      padding: 34px 0;
-      border-top: 1px solid var(--line);
+      text-transform: uppercase;
     }
 
     h2 {
-      margin-bottom: 13px;
-      color: var(--ink);
-      font-size: clamp(1.48rem, 5vw, 2.15rem);
-      line-height: 1.12;
-      letter-spacing: 0;
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-family: Georgia, Times New Roman, serif;
+      font-size: clamp(1.7rem, 6vw, 3.2rem);
+      line-height: 1.04;
     }
 
     h3 {
-      margin-bottom: 7px;
-      color: var(--ink);
-      font-size: 1.03rem;
-      line-height: 1.25;
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 1.02rem;
+      line-height: 1.2;
     }
 
-    p {
-      color: var(--text);
-      font-size: 1rem;
+    .hero h2 {
+      color: var(--white);
     }
 
-    p:last-child {
-      margin-bottom: 0;
+    .hero h1 {
+      max-width: 300px;
     }
 
-    .note {
-      padding: 16px;
+    .lead {
+      margin: 16px 0 0;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: clamp(1.02rem, 4vw, 1.35rem);
+      max-width: 780px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 46px;
+      border: 2px solid transparent;
+      border-radius: 999px;
+      padding: 12px 18px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 0.94rem;
+    }
+
+    .button.primary {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .button.secondary {
+      border-color: rgba(255, 255, 255, 0.55);
+      color: var(--white);
+    }
+
+    .hero-visual {
+      max-width: 300px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .hero .lead,
+    .actions,
+    .stats {
+      max-width: 300px;
+    }
+
+    .crest {
+      min-height: 280px;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(245, 243, 238, 0.96), rgba(245, 243, 238, 0.88)),
+        repeating-linear-gradient(90deg, rgba(15, 39, 64, 0.06) 0 1px, transparent 1px 22px);
+      color: var(--navy);
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .crest-ring {
+      width: min(100%, 250px);
+      aspect-ratio: 1;
+      border: 9px solid var(--navy);
+      border-right-color: var(--red);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      position: relative;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .crest-ring::before,
+    .crest-ring::after {
+      content: "";
+      position: absolute;
+      width: 82px;
+      height: 138px;
+      border-radius: 999px;
+      opacity: 0.14;
+      z-index: 0;
+    }
+
+    .crest-ring::before {
+      left: 72px;
+      background: var(--navy);
+      transform: skewX(-8deg);
+    }
+
+    .crest-ring::after {
+      right: 72px;
+      background: var(--red);
+      transform: skewX(8deg);
+    }
+
+    .crest-copy {
+      position: relative;
+      z-index: 2;
+      margin-top: 0;
+      font-family: Georgia, Times New Roman, serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 2.1rem;
+      line-height: 0.9;
+      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .crest-copy span {
+      display: block;
+      color: var(--red);
+      font-family: Inter, Avenir Next, Segoe UI, Arial, sans-serif;
+      font-size: 0.62em;
+      margin-top: 10px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--white);
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.76rem;
+      margin-top: 6px;
+    }
+
+    .nav-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 16px;
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-pills a {
+      flex: 0 0 auto;
       border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      box-shadow: 0 10px 30px rgba(32, 33, 36, 0.06);
+      border-radius: 999px;
+      padding: 9px 13px;
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 850;
+      background: var(--paper);
     }
 
-    .note p {
-      margin-bottom: 10px;
+    .split {
+      display: grid;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .copy p,
+    .section-intro {
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 760px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: 1fr;
       gap: 12px;
-      margin-top: 18px;
     }
 
-    .tile {
-      min-height: 118px;
-      padding: 17px;
+    .grid.two,
+    .grid.three {
+      grid-template-columns: 1fr;
+    }
+
+    .card,
+    .program-card,
+    .step,
+    .phone-screen,
+    .quote-card {
+      background: var(--white);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      box-shadow: 0 8px 24px rgba(32, 33, 36, 0.05);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(15, 39, 64, 0.07);
     }
 
-    .tile .label {
+    .card,
+    .program-card,
+    .quote-card {
+      padding: 18px;
+    }
+
+    .label {
       display: inline-flex;
       align-items: center;
       min-height: 26px;
-      margin-bottom: 12px;
-      padding: 3px 9px;
       border-radius: 999px;
-      color: var(--navy);
-      background: var(--blue-soft);
-      font-size: 0.78rem;
-      font-weight: 750;
-      letter-spacing: 0.08em;
+      padding: 4px 9px;
+      background: rgba(179, 38, 45, 0.09);
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 900;
       text-transform: uppercase;
+      margin-bottom: 12px;
     }
 
-    .tile p {
-      margin-bottom: 0;
+    .card p,
+    .program-card p,
+    .quote-card p {
+      margin: 0;
       color: var(--muted);
-      font-size: 0.94rem;
-      line-height: 1.48;
     }
 
-    .trainer-list {
-      display: grid;
-      gap: 10px;
-      margin: 18px 0 0;
+    .program-card ul,
+    .summary-list {
+      margin: 12px 0 0;
       padding: 0;
       list-style: none;
+      display: grid;
+      gap: 9px;
     }
 
-    .trainer-list li {
-      position: relative;
-      min-height: 48px;
-      padding: 12px 14px 12px 42px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      color: var(--text);
-      font-size: 0.98rem;
+    .program-card li,
+    .summary-list li {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 0.94rem;
     }
 
-    .trainer-list li::before {
+    .program-card li::before,
+    .summary-list li::before {
       content: "";
-      position: absolute;
-      left: 15px;
-      top: 18px;
-      width: 11px;
-      height: 11px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 0 5px var(--green-soft);
+      background: var(--red);
+      margin-top: 8px;
+    }
+
+    .band {
+      background: var(--white);
+      border-block: 1px solid var(--line);
     }
 
     .steps {
       display: grid;
       gap: 12px;
-      margin-top: 18px;
+      margin-top: 20px;
     }
 
     .step {
+      padding: 16px;
       display: grid;
       grid-template-columns: 42px 1fr;
-      gap: 14px;
-      padding: 17px 0;
-      border-bottom: 1px solid var(--line);
+      gap: 12px;
+      align-items: start;
     }
 
-    .step:last-child {
-      border-bottom: 0;
-    }
-
-    .number {
-      display: grid;
-      place-items: center;
+    .step-number {
       width: 42px;
       height: 42px;
-      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
       background: var(--navy);
-      color: white;
-      font-weight: 800;
+      color: var(--white);
+      font-weight: 900;
     }
 
-    .step:first-child .number {
+    .step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .phone-row {
+      display: grid;
+      gap: 14px;
+    }
+
+    .phone-screen {
+      overflow: hidden;
+    }
+
+    .phone-head {
+      background: var(--navy);
+      color: var(--white);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .phone-head strong {
+      font-size: 0.94rem;
+    }
+
+    .phone-head span {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .phone-body {
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: var(--paper);
+    }
+
+    .mini-item strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .mini-item span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .callout {
+      border-left: 5px solid var(--red);
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(15, 39, 64, 0.07);
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .coach-strip {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .coach {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+
+    .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-weight: 900;
+      background: var(--navy);
+      flex: 0 0 auto;
+    }
+
+    .coach:nth-child(2) .avatar {
       background: var(--red);
     }
 
-    .tag {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: var(--gold-soft);
-      color: #765722;
-      font-size: 0.78rem;
-      font-weight: 750;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .payment {
-      border-left: 5px solid var(--green);
-      background: linear-gradient(90deg, var(--green-soft), var(--panel));
-    }
-
-    .quote {
-      margin-top: 18px;
-      padding: 18px;
-      border-left: 5px solid var(--red);
-      border-radius: 8px;
-      background: var(--red-soft);
-      color: var(--ink);
-      font-size: 1.05rem;
-      font-weight: 650;
-      line-height: 1.45;
-    }
-
-    .quote span {
+    .coach strong {
       display: block;
-      margin-top: 8px;
+      color: var(--navy);
+    }
+
+    .coach span {
+      display: block;
       color: var(--muted);
-      font-size: 0.92rem;
-      font-weight: 500;
+      font-size: 0.9rem;
     }
 
-    .questions {
-      display: grid;
-      gap: 10px;
-      margin: 18px 0 0;
-      padding: 0;
-      counter-reset: question;
-      list-style: none;
-    }
-
-    .questions li {
-      counter-increment: question;
-      display: grid;
-      grid-template-columns: 34px 1fr;
-      gap: 10px;
-      align-items: start;
-      padding: 13px 0;
-      border-bottom: 1px solid var(--line);
-      color: var(--text);
-    }
-
-    .questions li::before {
-      content: counter(question);
-      display: grid;
-      place-items: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      background: var(--red-soft);
-      color: var(--red);
-      font-size: 0.86rem;
-      font-weight: 800;
-    }
-
-    .summary-list {
-      display: grid;
-      gap: 10px;
-      margin: 18px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .summary-list li {
-      padding: 14px 15px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      color: var(--text);
-      font-size: 0.98rem;
-      box-shadow: 0 8px 22px rgba(32, 33, 36, 0.05);
-    }
-
-    .summary-list strong {
-      color: var(--ink);
-    }
-
-    .final {
-      margin-top: 20px;
-      padding: 22px 18px;
-      border-radius: 8px;
+    .contact-panel {
       background: var(--navy);
-      color: white;
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 22px;
       box-shadow: var(--shadow);
     }
 
-    .final h2,
-    .final p,
-    .final .eyebrow {
-      color: white;
+    .contact-panel h2 {
+      color: var(--white);
     }
 
-    .final .eyebrow {
-      color: #f1c46c;
+    .contact-panel p {
+      color: rgba(255, 255, 255, 0.82);
+      margin: 0 0 18px;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-list li {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .pitch-hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pitch-hero .section-inner {
+      padding-top: 10px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .question-list {
+      margin: 16px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .question-list li + li {
+      margin-top: 9px;
     }
 
     footer {
-      padding: 24px 0 0;
+      padding: 28px 16px 38px;
       color: var(--muted);
-      font-size: 0.9rem;
       text-align: center;
+      font-size: 0.9rem;
     }
 
-    @media (min-width: 640px) {
-      .page {
+    @media (min-width: 720px) {
+      .topbar-inner {
+        padding-inline: 24px;
+        flex-wrap: nowrap;
+      }
+
+      .section-inner,
+      .hero-grid {
+        max-width: var(--max);
+      }
+
+      .brand-text span {
+        max-width: none;
+      }
+
+      section {
+        padding: 64px 24px;
+      }
+
+      .hero {
+        padding: 58px 24px 66px;
+      }
+
+      .hero-grid,
+      .split {
+        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      }
+
+      .hero h1 {
+        max-width: 650px;
+      }
+
+      .crest-ring {
+        width: min(100%, 310px);
+      }
+
+      .hero .lead,
+      .actions,
+      .stats,
+      .hero-visual {
+        max-width: none;
+      }
+
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        width: auto;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .phone-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .coach-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-pills {
+        justify-content: center;
+      }
+    }
+
+    @media (min-width: 980px) {
+      .topbar-inner {
         padding-inline: 28px;
       }
 
-      .grid,
-      .quick-read {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .hero-grid {
+        gap: 44px;
       }
 
-      .grid .tile:first-child,
-      .quick-read .quick-item:first-child {
-        grid-column: span 2;
+      .stats {
+        max-width: 650px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .tab-switcher {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <main class="page">
-    <header class="hero">
-      <div class="hero-panel">
-        <div>
-          <p class="eyebrow">A practical proposal</p>
-          <h1>Fonseca Fitness Online Training</h1>
-          <p class="lead">The idea has become clearer: Pete and Lisa Fonseca can build an online coaching program that feels personal, simple, and as close as possible to one-on-one training.</p>
-        </div>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#home" aria-label="Fonseca Fitness home">
+          <span class="brand-mark">FF</span>
+          <span class="brand-text">
+            <strong>Fonseca Fitness</strong>
+            <span>Strength. Nutrition. Accountability.</span>
+          </span>
+        </a>
 
-        <div class="quick-read" aria-label="Key points">
-          <div class="quick-item"><strong>The brand:</strong> Fonseca Fitness, built around Pete and Lisa together.</div>
-          <div class="quick-item"><strong>What works now:</strong> people trust you because current clients send them your way.</div>
-          <div class="quick-item"><strong>The offer:</strong> health intake, workout programming, nutrition guidance, weekly check-ins, and exercise help.</div>
-          <div class="quick-item"><strong>The opportunity:</strong> online training can be accessible beyond the local area while staying personal.</div>
+        <div class="tab-switcher" role="tablist" aria-label="Site views">
+          <button class="tab-button" id="tab-website" role="tab" aria-selected="true" aria-controls="website-view" data-view-target="website">Website</button>
+          <button class="tab-button" id="tab-pitch" role="tab" aria-selected="false" aria-controls="pitch-view" data-view-target="pitch">Pitch</button>
         </div>
       </div>
     </header>
 
-    <section>
-      <p class="eyebrow">What we learned</p>
-      <h2>Fonseca Fitness Has Trust. Now It Needs Reach.</h2>
-      <div class="note">
-        <p>Right now, new clients usually come from word of mouth. That means people already trust the work when they hear about it from someone they know.</p>
-        <p>The problem is not credibility. The problem is scale. In-person training is limited by the number of hours in a day. If one client takes up a large block of time, there are only so many people you can help face to face.</p>
-        <p>The online side could change that. If the process is simple enough, Fonseca Fitness could support more people with workouts, nutrition, reminders, check-ins, and coaching from home without giving up the one-on-one training style that already works.</p>
-      </div>
-      <div class="quote">
-        "We are not a cookie-cutter training program."
-        <span>That should be the heart of the website and the online coaching offer.</span>
-      </div>
-    </section>
+    <main>
+      <div class="view is-active" id="website-view" role="tabpanel" aria-labelledby="tab-website">
+        <section class="hero" id="home">
+          <div class="hero-grid">
+            <div>
+              <p class="eyebrow">Online coaching by Pete and Lisa Fonseca</p>
+              <h1>Personal Training Without the Cookie-Cutter Plan</h1>
+              <p class="lead">Workout plans, nutrition, weekly reviews, and coaching from Pete and Lisa.</p>
+              <div class="actions">
+                <a class="button primary" href="#contact">Request a Consultation</a>
+                <a class="button secondary" href="#programs">View Programs</a>
+              </div>
+              <div class="stats" aria-label="Experience highlights">
+                <div class="stat"><strong>35</strong><span>years Pete has trained clients</span></div>
+                <div class="stat"><strong>25</strong><span>years Lisa has coached fitness</span></div>
+                <div class="stat"><strong>1:1</strong><span>mindset, even online</span></div>
+              </div>
+            </div>
 
-    <section>
-      <p class="eyebrow">Pain points</p>
-      <h2>What This Should Help With First</h2>
-      <p>The first version should solve real problems without creating another thing to babysit.</p>
-
-      <div class="grid">
-        <article class="tile">
-          <span class="label">Growth</span>
-          <h3>In-person time has a ceiling</h3>
-          <p>You can only train so many people in person during the day. Online coaching could create more room to grow.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Diets</span>
-          <h3>Diets get resent and rewritten</h3>
-          <p>Diet plans are the main thing clients need and the main thing that becomes annoying to repeat.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Reminders</span>
-          <h3>Clients need nudges</h3>
-          <p>Simple reminders could keep clients on track without turning every follow-up into a separate text thread.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Exercises</span>
-          <h3>Some movements need explaining</h3>
-          <p>If a client does not know what an exercise means, the plan should include a quick demo link and simple coaching notes.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Online</span>
-          <h3>The online side is the unknown</h3>
-          <p>The opportunity is clear, but the system needs to make online clients manageable instead of overwhelming.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Personal</span>
-          <h3>The personal approach must stay</h3>
-          <p>The platform should support customized coaching, not make the business feel generic or automated.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Health</span>
-          <h3>Medical conditions matter</h3>
-          <p>Before building a plan, Pete and Lisa need to know about blood pressure, cardiac issues, arthritis, injuries, or other conditions that affect training.</p>
-        </article>
-      </div>
-    </section>
-
-    <section>
-      <p class="eyebrow">The evolved idea</p>
-      <h2>A Website Plus a Simple Online Coaching System</h2>
-      <p>This is no longer just a website and a place to store notes. The stronger idea is a small online training system that starts with the pieces clients already need most.</p>
-
-      <ul class="trainer-list">
-        <li>A public website that explains who you are, what you offer, and why your experience matters.</li>
-        <li>A clear online training offer for people who cannot train with you in person.</li>
-        <li>A simple health intake before training starts, so plans can account for medical conditions and limitations.</li>
-        <li>A client login where each person can see their current diet plan and reminders.</li>
-        <li>Workout plans with exercise demo links, so clients are not guessing what a movement means.</li>
-        <li>A simple way for clients to communicate when they need help.</li>
-        <li>A trainer dashboard that shows who needs a diet update, reminder, or check-in.</li>
-        <li>A way to reuse structure without making anyone feel like they got a generic plan.</li>
-        <li>A workflow that can eventually support 20 to 30 online clients from home.</li>
-      </ul>
-    </section>
-
-    <section>
-      <p class="eyebrow">For clients</p>
-      <h2>What Clients Would Experience</h2>
-      <p>Clients would not need complicated software. They would open a link on their phone and see the coaching pieces that matter to them.</p>
-
-      <div class="grid">
-        <article class="tile">
-          <span class="label">First impression</span>
-          <h3>They see real experience</h3>
-          <p>Your 35 years and Lisa's 25 years should be part of the trust story from the start. The site should introduce Fonseca Fitness as Pete and Lisa together.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Health intake</span>
-          <h3>Safety before programming</h3>
-          <p>Clients answer basic readiness questions about blood pressure, heart issues, arthritis, injuries, and other medical conditions before receiving a plan.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Weekly plan</span>
-          <h3>Workout and nutrition</h3>
-          <p>Each online client gets a workout program and nutrition guidance based on their personal goals.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Exercise help</span>
-          <h3>Demo links and coaching notes</h3>
-          <p>When an exercise is unfamiliar, the plan can include a video link plus Pete/Lisa notes on what to focus on.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Check-ins</span>
-          <h3>Once per week</h3>
-          <p>Clients send weight, any training injuries, and a progress picture if they are comfortable.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Communication</span>
-          <h3>A way to ask for help</h3>
-          <p>One message per day, with questions answered within the agreed response window, keeps support helpful but manageable.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Packages</span>
-          <h3>Different levels</h3>
-          <p>Packages can be based on client need, like weight loss, weight gain, bodybuilding, over 50 fitness, or female fitness.</p>
-        </article>
-      </div>
-    </section>
-
-    <section>
-      <p class="eyebrow">What we know now</p>
-      <h2>The Online Offer Is Taking Shape</h2>
-      <p>This is enough to start thinking about a real offer, but not so much that it becomes complicated.</p>
-
-      <ul class="summary-list">
-        <li><strong>Health intake:</strong> collect blood pressure, cardiac issues, arthritis, injuries, and relevant medical conditions before building a plan.</li>
-        <li><strong>Core offer:</strong> workout program, nutrition guidance, and a weekly check-in.</li>
-        <li><strong>Exercise guidance:</strong> demo video links plus Pete/Lisa notes for form, cues, and modifications.</li>
-        <li><strong>Check-in details:</strong> weight, injuries from training, and an optional progress photo.</li>
-        <li><strong>Communication:</strong> one message per day, answered within the agreed response window.</li>
-        <li><strong>Scale rule:</strong> the system has to stay simple enough to manage 20 to 30 online clients.</li>
-        <li><strong>Brand direction:</strong> Fonseca Fitness, with Pete and Lisa together as the coaching team.</li>
-        <li><strong>Coach fit:</strong> the program recommends the right fit instead of making clients choose up front.</li>
-      </ul>
-    </section>
-
-    <section>
-      <p class="eyebrow">Brand direction</p>
-      <h2>Fonseca Fitness Should Feel Experienced, Direct, and Personal</h2>
-      <p>The brand does not need to feel trendy or local-only. It should feel accessible to anyone who wants experienced coaching and a plan built around their goals.</p>
-
-      <div class="grid">
-        <article class="tile">
-          <span class="label">Name</span>
-          <h3>Fonseca Fitness</h3>
-          <p>The Fonseca name should be part of the brand because Pete and Lisa are the trust behind the program.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Tone</span>
-          <h3>Old-school and professional</h3>
-          <p>The site can feel old-school bodybuilding, clean, no-nonsense, warm, supportive, and serious about results.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Fit</span>
-          <h3>The program recommends the coach</h3>
-          <p>Clients do not need to figure out whether Pete or Lisa is right for them. The program can guide that choice.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Packages</span>
-          <h3>Based on client goals</h3>
-          <p>Package ideas include weight loss, weight gain, bodybuilding, over 50 fitness, and female fitness.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Logo</span>
-          <h3>Direction is approved</h3>
-          <p>Use the vintage bodybuilding badge direction, then export clean logo files for the site, shirts, social pages, and icons.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Colors</span>
-          <h3>Navy, red, and off-white</h3>
-          <p>Working palette: navy #0F2740, red #B3262D, and off-white #F5F3EE.</p>
-        </article>
-        <article class="tile">
-          <span class="label">Type</span>
-          <h3>Athletic wordmark</h3>
-          <p>The wordmark should use a bold athletic slab-serif or varsity-inspired block style, with clean sans-serif support text.</p>
-        </article>
-      </div>
-    </section>
-
-    <section>
-      <p class="eyebrow">Logo assets</p>
-      <h2>Next Step Is Clean Logo Files, Not More Concepts</h2>
-      <p>The logo direction is strong enough to move forward. A first export package came back with the right idea, but the files still need cleanup before we treat them as official website or shirt artwork.</p>
-
-      <ul class="summary-list">
-        <li><strong>Website header:</strong> horizontal Fonseca Fitness logo.</li>
-        <li><strong>Homepage/marketing:</strong> full badge logo with tagline.</li>
-        <li><strong>Social/app icon:</strong> simplified circle icon without tiny text.</li>
-        <li><strong>Merch:</strong> full badge and one-color navy versions.</li>
-        <li><strong>Dark backgrounds:</strong> white/reversed logo version.</li>
-        <li><strong>Final cleanup:</strong> each file should be centered, transparent, correctly sized, and exported separately with no extra cropped logos on the canvas.</li>
-      </ul>
-    </section>
-
-    <section>
-      <p class="eyebrow">The rollout</p>
-      <h2>Start With Reach, Then Prove the Online Workflow</h2>
-      <p>There is no reason to build a big system right away. The next steps should prove the business idea before investing in a full portal.</p>
-
-      <div class="steps">
-        <article class="step">
-          <div class="number">1</div>
-          <div>
-            <h3>Public website</h3>
-            <p>A clean mobile-friendly website with your story, services, results, testimonials, and a clear online training option.</p>
-            <span class="tag">Start here</span>
+            <div class="hero-visual" aria-label="Fonseca Fitness visual direction">
+              <div class="crest">
+                <div class="crest-ring">
+                  <div class="crest-copy">Fonseca<span>Fitness</span></div>
+                </div>
+              </div>
+            </div>
           </div>
-        </article>
-        <article class="step">
-          <div class="number">2</div>
-          <div>
-            <h3>Online coaching demo</h3>
-            <p>A clickable demo showing health intake, workouts, exercise demo links, nutrition, reminders, client messages, and a trainer dashboard.</p>
-            <span class="tag">Prove the workflow</span>
+        </section>
+
+        <nav class="nav-pills" aria-label="Page sections">
+          <a href="#programs">Programs</a>
+          <a href="#process">How It Works</a>
+          <a href="#portal">Client Portal</a>
+          <a href="#health">Health Intake</a>
+          <a href="#coaches">Coaches</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <section>
+          <div class="section-inner split">
+            <div class="copy">
+              <p class="eyebrow">The promise</p>
+              <h2>Built Around the Person, Not a Template</h2>
+              <p>Fonseca Fitness is for people who want a real plan, clear direction, and accountability without feeling like they were handed the same program as everyone else.</p>
+              <p>Every client starts with their goal, experience level, health background, schedule, and comfort level. From there, Pete and Lisa recommend the right coaching path.</p>
+            </div>
+            <div class="callout">
+              <p><strong>Simple idea:</strong> give online clients the structure they need each week while keeping the personal coaching style Pete and Lisa are known for.</p>
+            </div>
           </div>
-        </article>
-        <article class="step">
-          <div class="number">3</div>
-          <div>
-            <h3>Small client portal MVP</h3>
-            <p>Start with health intake, workouts, nutrition, demo links, reminders, and simple communication for a small number of real clients.</p>
-            <span class="tag">Only after feedback</span>
+        </section>
+
+        <section class="band" id="programs">
+          <div class="section-inner">
+            <p class="eyebrow">Programs</p>
+            <h2>Coaching Paths Based on Client Need</h2>
+            <p class="section-intro">The final package names can change, but the site should make it easy for people to recognize where they fit.</p>
+
+            <div class="grid three">
+              <article class="program-card">
+                <span class="label">Popular goal</span>
+                <h3>Weight Loss</h3>
+                <p>Nutrition guidance, weekly check-ins, and workouts that match the client's starting point.</p>
+                <ul>
+                  <li>Personal nutrition plan</li>
+                  <li>Workout structure</li>
+                  <li>Progress check-ins</li>
+                </ul>
+              </article>
+
+              <article class="program-card">
+                <span class="label">Strength goal</span>
+                <h3>Muscle Gain</h3>
+                <p>Training and eating direction for people who want to build size, strength, and better habits.</p>
+                <ul>
+                  <li>Goal-based workouts</li>
+                  <li>Nutrition targets</li>
+                  <li>Exercise demo help</li>
+                </ul>
+              </article>
+
+              <article class="program-card">
+                <span class="label">Experience</span>
+                <h3>Bodybuilding</h3>
+                <p>Old-school experience with practical coaching for physique goals and consistent execution.</p>
+                <ul>
+                  <li>Structured programming</li>
+                  <li>Nutrition accountability</li>
+                  <li>Weekly review</li>
+                </ul>
+              </article>
+
+              <article class="program-card">
+                <span class="label">Longevity</span>
+                <h3>Over 50 Fitness</h3>
+                <p>Smart training for strength, mobility, health concerns, and confidence later in life.</p>
+                <ul>
+                  <li>Joint-aware exercise choices</li>
+                  <li>Health background reviewed</li>
+                  <li>Realistic weekly plan</li>
+                </ul>
+              </article>
+
+              <article class="program-card">
+                <span class="label">Support</span>
+                <h3>Women's Fitness</h3>
+                <p>Coaching matched to goals, comfort level, experience, and the right coach fit.</p>
+                <ul>
+                  <li>Recommended coach fit</li>
+                  <li>Nutrition and training</li>
+                  <li>Weekly check-in rhythm</li>
+                </ul>
+              </article>
+
+              <article class="program-card">
+                <span class="label">Hybrid</span>
+                <h3>In-Person Plus Online</h3>
+                <p>Support between sessions for clients who already train face to face but need better follow-through.</p>
+                <ul>
+                  <li>Diet plan access</li>
+                  <li>Session recap notes</li>
+                  <li>Reminders and next steps</li>
+                </ul>
+              </article>
+            </div>
           </div>
-        </article>
-        <article class="step">
-          <div class="number">4</div>
-          <div>
-            <h3>Progress, scale, and payments</h3>
-            <p>Add progress tracking, package options, and payment links only if the online business is working and the fees make sense.</p>
-            <span class="tag">Later</span>
+        </section>
+
+        <section id="process">
+          <div class="section-inner">
+            <p class="eyebrow">How it works</p>
+            <h2>A Simple Weekly Coaching Rhythm</h2>
+            <p class="section-intro">The online program should feel clear for clients and manageable for Pete and Lisa.</p>
+            <div class="steps">
+              <article class="step">
+                <div class="step-number">1</div>
+                <div>
+                  <h3>Start With a Consultation</h3>
+                  <p>The client shares their goal, training history, schedule, and what they need help with most.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">2</div>
+                <div>
+                  <h3>Complete Health Intake</h3>
+                  <p>Before a plan is written, Pete and Lisa review injuries, blood pressure, cardiac history, arthritis, and other important conditions.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">3</div>
+                <div>
+                  <h3>Receive the Weekly Plan</h3>
+                  <p>The client gets workouts, nutrition guidance, exercise demo links, and notes that explain what to focus on.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">4</div>
+                <div>
+                  <h3>Check In Once a Week</h3>
+                  <p>The client sends weight, new injuries or concerns, and optional progress photos. Pete and Lisa adjust the plan when needed.</p>
+                </div>
+              </article>
+            </div>
           </div>
-        </article>
+        </section>
+
+        <section class="band" id="portal">
+          <div class="section-inner">
+            <p class="eyebrow">Future client portal</p>
+            <h2>One Place for Plans, Notes, and Exercise Help</h2>
+            <p class="section-intro">This is the kind of simple portal we can prototype next, after Pete and Lisa review the website direction.</p>
+
+            <div class="phone-row">
+              <article class="phone-screen">
+                <div class="phone-head">
+                  <strong>Client View</strong>
+                  <span>This week</span>
+                </div>
+                <div class="phone-body">
+                  <div class="mini-item"><strong>Workout Plan</strong><span>Day 1: Chest and triceps with demo links.</span></div>
+                  <div class="mini-item"><strong>Nutrition</strong><span>Meal guidance based on weight-loss goal.</span></div>
+                  <div class="mini-item"><strong>Check-In</strong><span>Submit weight, injuries, questions, and optional photo.</span></div>
+                  <div class="mini-item"><strong>Messages</strong><span>One daily question, answered within the agreed window.</span></div>
+                </div>
+              </article>
+
+              <article class="phone-screen">
+                <div class="phone-head">
+                  <strong>Coach View</strong>
+                  <span>iPhone friendly</span>
+                </div>
+                <div class="phone-body">
+                  <div class="mini-item"><strong>Needs Attention</strong><span>3 check-ins, 2 diet updates, 1 exercise question.</span></div>
+                  <div class="mini-item"><strong>Client Profile</strong><span>Current plan, health notes, reminders, progress.</span></div>
+                  <div class="mini-item"><strong>Edit Diet</strong><span>Update plan quickly without rewriting from scratch.</span></div>
+                  <div class="mini-item"><strong>Add Recap</strong><span>Dictate or type a short note after training.</span></div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="health">
+          <div class="section-inner split">
+            <div class="copy">
+              <p class="eyebrow">Health intake</p>
+              <h2>Safety Comes Before the Plan</h2>
+              <p>Pete called out an important point: clients need to share medical conditions before training starts. The online process should ask the right questions early and make the answers easy for Pete and Lisa to review.</p>
+            </div>
+            <div class="card">
+              <span class="label">Before training</span>
+              <h3>Information to collect</h3>
+              <ul class="summary-list">
+                <li>Blood pressure concerns</li>
+                <li>Cardiac or heart issues</li>
+                <li>Arthritis, injuries, or chronic pain</li>
+                <li>Doctor restrictions or clearance status</li>
+                <li>Any condition that affects training or nutrition</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="band">
+          <div class="section-inner split">
+            <div class="card">
+              <span class="label">Exercise help</span>
+              <h3>Demo Links and Coach Notes</h3>
+              <p>If a client does not know what an exercise means, the plan should include a video link and a short note from Pete or Lisa.</p>
+            </div>
+            <div class="phone-screen">
+              <div class="phone-head">
+                <strong>Example Exercise</strong>
+                <span>Workout Day 2</span>
+              </div>
+              <div class="phone-body">
+                <div class="mini-item"><strong>Goblet Squat</strong><span>3 sets of 10</span></div>
+                <div class="mini-item"><strong>Watch Demo</strong><span>Video link attached to the exercise.</span></div>
+                <div class="mini-item"><strong>Coach Note</strong><span>Keep your chest up, sit between your knees, and message if your knees hurt.</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="coaches">
+          <div class="section-inner">
+            <p class="eyebrow">The coaches</p>
+            <h2>Pete and Lisa Together</h2>
+            <p class="section-intro">Fonseca Fitness should present Pete and Lisa as one coaching team. The program can recommend the right fit based on the client's needs instead of forcing people to choose up front.</p>
+            <div class="coach-strip">
+              <div class="coach">
+                <div class="avatar">P</div>
+                <div><strong>Pete Fonseca</strong><span>35 years of training experience, retired bodybuilder, direct and practical coaching.</span></div>
+              </div>
+              <div class="coach">
+                <div class="avatar">L</div>
+                <div><strong>Lisa Fonseca</strong><span>25 years of fitness experience, supportive coaching, and a key part of the Fonseca Fitness program.</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact">
+          <div class="section-inner">
+            <div class="contact-panel">
+              <p class="eyebrow">Start here</p>
+              <h2>Ready for a Plan That Fits You?</h2>
+              <p>Request a consultation and Pete and Lisa will recommend the best path based on your goal, experience, and health background.</p>
+              <ul class="contact-list">
+                <li><strong>Consultation request:</strong> add phone, text, or form link here.</li>
+                <li><strong>Online coaching:</strong> workout program, nutrition guidance, and weekly check-ins.</li>
+                <li><strong>In-person support:</strong> keep the face-to-face training option for clients who need it.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
 
-    <section>
-      <p class="eyebrow">Payments</p>
-      <h2>Payments Can Stay the Way They Are</h2>
-      <div class="note payment">
-        <p>If Zelle, Venmo, Cash App, checks, or cash are working for you, there is no need to change that at the beginning.</p>
-        <p>The first question is whether online training can be offered and managed well. Payments can be added later with simple links or tracking only if the convenience is worth the fees.</p>
+      <div class="view" id="pitch-view" role="tabpanel" aria-labelledby="tab-pitch">
+        <section class="pitch-hero">
+          <div class="section-inner">
+            <p class="eyebrow">Review pitch</p>
+            <h2>The Idea Behind the Website</h2>
+            <p class="section-intro">This tab keeps the planning notes visible while the website draft evolves. The goal is to support how Pete and Lisa already coach, not force them into complicated software.</p>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-inner grid two">
+            <article class="quote-card">
+              <span class="label">What we learned</span>
+              <h3>The business has trust but needs reach</h3>
+              <p>New clients usually come through word of mouth. The online side can help more people find Fonseca Fitness and make online coaching easier to manage from home.</p>
+            </article>
+            <article class="quote-card">
+              <span class="label">Main pain point</span>
+              <h3>Diets are repeated and rewritten</h3>
+              <p>Diet plans and reminders are the things Pete most often sends and resends. A simple client profile could make that easier without changing his coaching style.</p>
+            </article>
+            <article class="quote-card">
+              <span class="label">Big opportunity</span>
+              <h3>20 to 30 online clients</h3>
+              <p>In-person training is limited by hours in the day. Online coaching could create more income without needing every client to take up a full in-person time block.</p>
+            </article>
+            <article class="quote-card">
+              <span class="label">Non-negotiable</span>
+              <h3>Keep it simple</h3>
+              <p>The platform has to work from an iPhone, avoid clutter, and make weekly online coaching manageable instead of becoming another thing to babysit.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="band">
+          <div class="section-inner">
+            <p class="eyebrow">Business model so far</p>
+            <h2>What Online Clients Would Get</h2>
+            <div class="grid three">
+              <article class="card">
+                <span class="label">Workout</span>
+                <h3>Personal Program</h3>
+                <p>Exercises, sets, reps, demo links, and coach notes so clients understand what to do.</p>
+              </article>
+              <article class="card">
+                <span class="label">Nutrition</span>
+                <h3>Goal-Based Guidance</h3>
+                <p>Nutrition direction based on weight loss, muscle gain, bodybuilding, over 50 fitness, or other goals.</p>
+              </article>
+              <article class="card">
+                <span class="label">Check-in</span>
+                <h3>Weekly Review</h3>
+                <p>Weight, new injuries, questions, and optional progress photos so the plan can be adjusted.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-inner">
+            <p class="eyebrow">Phased rollout</p>
+            <h2>Start Small, Then Build the Portal</h2>
+            <div class="timeline">
+              <article class="step">
+                <div class="step-number">1</div>
+                <div>
+                  <h3>Website Draft</h3>
+                  <p>Use this page to test the public message, packages, tone, and next questions with Pete and Lisa.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">2</div>
+                <div>
+                  <h3>Clickable Portal Mockup</h3>
+                  <p>Prototype the client view and coach dashboard before building login, data storage, uploads, or payments.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">3</div>
+                <div>
+                  <h3>Real MVP</h3>
+                  <p>Build only the features that prove useful: intake, diet plans, workouts, check-ins, notes, and exercise links.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">4</div>
+                <div>
+                  <h3>Optional Payments Later</h3>
+                  <p>Keep Zelle, Cash App, Venmo, or cash if that is easiest. Add payment links only when the value is obvious.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="band">
+          <div class="section-inner split">
+            <div>
+              <p class="eyebrow">Next questions</p>
+              <h2>What We Should Ask Pete and Lisa Next</h2>
+              <ol class="question-list">
+                <li>Which package should launch first: weight loss, muscle gain, bodybuilding, over 50, women's fitness, or hybrid?</li>
+                <li>What should be included in the lowest-touch online package?</li>
+                <li>What should be included in the highest-touch package?</li>
+                <li>Should the daily message boundary be one message per day answered within 24 hours?</li>
+                <li>Which exercises do clients ask about most often?</li>
+                <li>What contact method should the website use first: phone, text, email, or a form?</li>
+              </ol>
+            </div>
+            <div class="callout">
+              <p><strong>Current recommendation:</strong> finish this website draft first, then build a clickable portal mockup using fake sample clients. Do not build real private client accounts until the workflow is approved.</p>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-
-    <section>
-      <p class="eyebrow">Next questions</p>
-      <h2>Next We Need the Visual Direction</h2>
-      <p>The name and broad feel are now much clearer. Before making a polished mockup, we should define the logo direction, colors, photos, and which packages launch first.</p>
-
-      <ol class="questions">
-        <li>Which health conditions should require medical clearance before starting?</li>
-        <li>What health questions do Pete and Lisa already ask every client?</li>
-        <li>Are the navy, red, and off-white colors approved?</li>
-        <li>Which logo version should be the main website header?</li>
-        <li>Should the first photos be portraits, gym/training photos, progress photos, or a mix?</li>
-        <li>Which packages should exist at launch?</li>
-        <li>Should "weight gain" be called "muscle gain" instead?</li>
-        <li>Is "female fitness" the right package name, or should it be worded differently?</li>
-      </ol>
-    </section>
-
-    <section class="final">
-      <p class="eyebrow">First step</p>
-      <h2>A Fonseca Fitness Website Draft and Coaching Mockup</h2>
-      <p>The first real step should be a sharper Fonseca Fitness website draft, plus a clickable mockup of how an online client would complete health intake and then see workouts, exercise demos, nutrition, reminders, and messages.</p>
-      <p>You could tap through it on your phone and tell me where it feels useful, where it feels annoying, and where it does not match how you coach.</p>
-      <p>If it feels like it could help you grow online without changing what makes your coaching personal, we keep going. If not, we simplify it.</p>
-    </section>
+    </main>
 
     <footer>
-      Made by your kid. Your feedback shapes the whole thing.
+      Fonseca Fitness website draft. Logo artwork, package names, contact details, and final photos still need approval.
     </footer>
-  </main>
+  </div>
+
+  <script>
+    const buttons = Array.from(document.querySelectorAll("[data-view-target]"));
+    const views = {
+      website: document.getElementById("website-view"),
+      pitch: document.getElementById("pitch-view")
+    };
+
+    function setView(name, updateHash = true) {
+      buttons.forEach((button) => {
+        const isActive = button.dataset.viewTarget === name;
+        button.setAttribute("aria-selected", String(isActive));
+      });
+
+      Object.entries(views).forEach(([viewName, element]) => {
+        element.classList.toggle("is-active", viewName === name);
+      });
+
+      if (updateHash) {
+        history.replaceState(null, "", name === "pitch" ? "#pitch" : "#website");
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => setView(button.dataset.viewTarget));
+    });
+
+    if (window.location.hash === "#pitch") {
+      setView("pitch", false);
+    }
+  </script>
 </body>
 </html>
