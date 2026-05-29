@@ -291,73 +291,21 @@
       max-width: 300px;
     }
 
-    .crest {
+    .logo-preview {
       min-height: 280px;
       border-radius: var(--radius);
       background:
         linear-gradient(145deg, rgba(245, 243, 238, 0.96), rgba(245, 243, 238, 0.88)),
         repeating-linear-gradient(90deg, rgba(15, 39, 64, 0.06) 0 1px, transparent 1px 22px);
-      color: var(--navy);
       display: grid;
       place-items: center;
-      padding: 20px;
-      text-align: center;
+      padding: 10px;
     }
 
-    .crest-ring {
-      width: min(100%, 250px);
-      aspect-ratio: 1;
-      border: 9px solid var(--navy);
-      border-right-color: var(--red);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      position: relative;
-      background: var(--white);
-      box-shadow: var(--shadow);
-    }
-
-    .crest-ring::before,
-    .crest-ring::after {
-      content: "";
-      position: absolute;
-      width: 82px;
-      height: 138px;
-      border-radius: 999px;
-      opacity: 0.14;
-      z-index: 0;
-    }
-
-    .crest-ring::before {
-      left: 72px;
-      background: var(--navy);
-      transform: skewX(-8deg);
-    }
-
-    .crest-ring::after {
-      right: 72px;
-      background: var(--red);
-      transform: skewX(8deg);
-    }
-
-    .crest-copy {
-      position: relative;
-      z-index: 2;
-      margin-top: 0;
-      font-family: Georgia, Times New Roman, serif;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-size: 2.1rem;
-      line-height: 0.9;
-      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.8);
-    }
-
-    .crest-copy span {
-      display: block;
-      color: var(--red);
-      font-family: Inter, Avenir Next, Segoe UI, Arial, sans-serif;
-      font-size: 0.62em;
-      margin-top: 10px;
+    .logo-preview img {
+      width: min(100%, 420px);
+      height: auto;
+      filter: drop-shadow(0 16px 22px rgba(15, 39, 64, 0.18));
     }
 
     .stats {
@@ -738,10 +686,6 @@
         max-width: 650px;
       }
 
-      .crest-ring {
-        width: min(100%, 310px);
-      }
-
       .hero .lead,
       .actions,
       .stats,
@@ -843,10 +787,8 @@
             </div>
 
             <div class="hero-visual" aria-label="Fonseca Fitness visual direction">
-              <div class="crest">
-                <div class="crest-ring">
-                  <div class="crest-copy">Fonseca<span>Fitness</span></div>
-                </div>
+              <div class="logo-preview">
+                <img src="assets/logo/fonseca-fitness-logo-transparent.png" alt="Fonseca Fitness logo concept">
               </div>
             </div>
           </div>
@@ -1219,7 +1161,7 @@
     </main>
 
     <footer>
-      Fonseca Fitness website draft. Logo artwork, package names, contact details, and final photos still need approval.
+      Fonseca Fitness website draft. Logo artwork is a cleaned web draft; package names, contact details, and final photos still need approval.
     </footer>
   </div>
 

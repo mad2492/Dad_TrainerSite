@@ -65,6 +65,29 @@ Decision:
 - Keep asking for export cleanup, not new design concepts.
 - Use the current brand colors and direction while waiting for clean files.
 
+## Chroma-Key Web Draft Asset
+
+Received `Generated image 1.png` on May 29, 2026.
+
+This was generated on a green-screen background so the background could be removed locally.
+
+Workspace files:
+
+- `assets/logo/fonseca-fitness-logo-green-source.png`
+- `assets/logo/fonseca-fitness-logo-transparent.png`
+
+Validation:
+
+- The transparent output is a PNG with alpha.
+- The image corners are fully transparent.
+- The visual direction is strong enough to use on the website draft.
+
+Decision:
+
+- Use `fonseca-fitness-logo-transparent.png` as the current web draft logo.
+- Still treat this as a cleaned raster draft, not final production artwork.
+- Final production still needs true SVG/vector recreation before serious printing, embroidery, shirts, or merchandise.
+
 Needed:
 
 - Primary full logo with tagline

@@ -18,7 +18,7 @@ The page has two main tabs:
 - Present Pete and Lisa as one coaching team.
 - Emphasize personalized coaching instead of cookie-cutter plans.
 - Show the likely online coaching rhythm before building a portal.
-- Avoid final-logo dependency until the artwork is cleaned up.
+- Use the cleaned raster logo draft while still avoiding final-logo dependency.
 
 ## Current Public Message
 
@@ -45,7 +45,7 @@ Fonseca Fitness offers personalized online coaching from Pete and Lisa Fonseca, 
 
 ## Still Needed
 
-- Final logo asset
+- Final SVG/vector logo asset
 - Real photos
 - Contact method
 - Final package names
@@ -59,4 +59,5 @@ Fonseca Fitness offers personalized online coaching from Pete and Lisa Fonseca, 
 - Static HTML remains enough for GitHub Pages.
 - The current page should not collect real client data.
 - Portal screens shown on the website are only a mockup preview.
+- Current logo file is `assets/logo/fonseca-fitness-logo-transparent.png`.
 - Real authentication, health data storage, uploads, and payments should wait until Pete and Lisa approve the workflow.
