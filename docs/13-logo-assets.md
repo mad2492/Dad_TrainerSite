@@ -77,6 +77,7 @@ Workspace files:
 - `assets/logo/fonseca-fitness-logo-transparent.png`
 - `assets/logo/fonseca-fitness-logo-green-source-v2.png`
 - `assets/logo/fonseca-fitness-logo-transparent-v2.png`
+- `assets/logo/fonseca-fitness-mark-v2.png`
 
 Validation:
 
@@ -84,6 +85,7 @@ Validation:
 - The image corners are fully transparent.
 - The visual direction is strong enough to use on the website draft.
 - The v2 logo is based on the multi-logo reference sheet and is the current active website draft.
+- The header mark is cropped from the current v2 logo for the website navigation.
 
 Decision:
 
