@@ -76,51 +76,16 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
       min-width: 0;
       text-decoration: none;
     }
 
-    .brand-mark {
-      width: 46px;
-      height: 46px;
-      flex: 0 0 auto;
-      border: 2px solid var(--navy);
-      border-right-color: var(--red);
-      border-radius: 50%;
+    .brand-lockup {
       display: block;
-      overflow: hidden;
-      background: var(--white);
-    }
-
-    .brand-mark img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.08);
-    }
-
-    .brand-text {
-      min-width: 0;
-    }
-
-    .brand-text strong {
-      display: block;
-      font-family: Georgia, Times New Roman, serif;
-      font-size: 1.02rem;
-      text-transform: uppercase;
-      line-height: 1;
-    }
-
-    .brand-text span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.75rem;
-      margin-top: 3px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 180px;
+      width: min(62vw, 315px);
+      height: 50px;
+      object-fit: contain;
+      object-position: left center;
     }
 
     .tab-switcher {
@@ -668,8 +633,9 @@
         max-width: var(--max);
       }
 
-      .brand-text span {
-        max-width: none;
+      .brand-lockup {
+        width: 390px;
+        height: 56px;
       }
 
       section {
@@ -756,13 +722,7 @@
     <header class="topbar">
       <div class="topbar-inner">
         <a class="brand" href="#home" aria-label="Fonseca Fitness home">
-          <span class="brand-mark" aria-hidden="true">
-            <img src="assets/logo/fonseca-fitness-mark-v2.png" alt="">
-          </span>
-          <span class="brand-text">
-            <strong>Fonseca Fitness</strong>
-            <span>Strength. Nutrition. Accountability.</span>
-          </span>
+          <img class="brand-lockup" src="assets/logo/fonseca-fitness-header-transparent.png" alt="Fonseca Fitness">
         </a>
 
         <div class="tab-switcher" role="tablist" aria-label="Site views">
