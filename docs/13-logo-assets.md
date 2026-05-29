@@ -79,6 +79,7 @@ Workspace files:
 - `assets/logo/fonseca-fitness-logo-transparent-v2.png`
 - `assets/logo/fonseca-fitness-logo-transparent-v3.png`
 - `assets/logo/fonseca-fitness-logo-cleaned-v5.png`
+- `assets/logo/fonseca-fitness-logo-cleaned-v6.png`
 - `assets/logo/fonseca-fitness-mark-v2.png`
 - `assets/logo/fonseca-fitness-header-green-source.png`
 - `assets/logo/fonseca-fitness-header-transparent.png`
@@ -91,12 +92,13 @@ Validation:
 - The v2 logo is based on the multi-logo reference sheet and is the current active website draft.
 - The v3 logo removed the remaining opaque light fill from the `FONSECA` wordmark region.
 - The v5 logo fills only the upper badge interior and removes the lower white outline around the `FITNESS` row.
+- The v6 logo fills the lower badge gap more completely and removes the bottom stretched-diamond flourish.
 - The header mark is cropped from the current v2 logo for the website navigation.
 - The horizontal header lockup was generated on green and chroma-keyed for the website navigation.
 
 Decision:
 
-- Use `fonseca-fitness-logo-cleaned-v5.png` as the current main web draft logo.
+- Use `fonseca-fitness-logo-cleaned-v6.png` as the current main web draft logo.
 - Still treat this as a cleaned raster draft, not final production artwork.
 - Final production still needs true SVG/vector recreation before serious printing, embroidery, shirts, or merchandise.
 
