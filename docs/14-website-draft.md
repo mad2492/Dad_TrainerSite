@@ -59,5 +59,5 @@ Fonseca Fitness offers personalized online coaching from Pete and Lisa Fonseca, 
 - Static HTML remains enough for GitHub Pages.
 - The current page should not collect real client data.
 - Portal screens shown on the website are only a mockup preview.
-- Current logo file is `assets/logo/fonseca-fitness-logo-transparent.png`.
+- Current logo file is `assets/logo/fonseca-fitness-logo-transparent-v2.png`.
 - Real authentication, health data storage, uploads, and payments should wait until Pete and Lisa approve the workflow.

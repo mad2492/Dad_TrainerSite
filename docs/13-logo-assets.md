@@ -75,16 +75,19 @@ Workspace files:
 
 - `assets/logo/fonseca-fitness-logo-green-source.png`
 - `assets/logo/fonseca-fitness-logo-transparent.png`
+- `assets/logo/fonseca-fitness-logo-green-source-v2.png`
+- `assets/logo/fonseca-fitness-logo-transparent-v2.png`
 
 Validation:
 
 - The transparent output is a PNG with alpha.
 - The image corners are fully transparent.
 - The visual direction is strong enough to use on the website draft.
+- The v2 logo is based on the multi-logo reference sheet and is the current active website draft.
 
 Decision:
 
-- Use `fonseca-fitness-logo-transparent.png` as the current web draft logo.
+- Use `fonseca-fitness-logo-transparent-v2.png` as the current web draft logo.
 - Still treat this as a cleaned raster draft, not final production artwork.
 - Final production still needs true SVG/vector recreation before serious printing, embroidery, shirts, or merchandise.
 
