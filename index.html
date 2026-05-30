@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Fonseca Fitness online coaching website draft and proposal notes.">
   <title>Fonseca Fitness</title>
+  <link rel="icon" type="image/png" href="dist/fonseca-fitness-logo-assets/fonseca-fitness-favicon.png">
   <style>
     :root {
       --navy: #0f2740;
@@ -16,9 +17,26 @@
       --line: #ded8cc;
       --gold: #bd8a3d;
       --green: #2f6e4f;
+      --surface: #ffffff;
+      --surface-soft: #f5f3ee;
+      --topbar-bg: rgba(245, 243, 238, 0.96);
+      --soft-shadow: rgba(15, 39, 64, 0.08);
       --shadow: 0 18px 50px rgba(15, 39, 64, 0.13);
       --radius: 8px;
       --max: 1120px;
+    }
+
+    body[data-theme="dark"] {
+      --paper: #071727;
+      --white: #10263a;
+      --ink: #edf2f6;
+      --muted: #b7c3ce;
+      --line: rgba(245, 243, 238, 0.18);
+      --surface: #10263a;
+      --surface-soft: #071727;
+      --topbar-bg: rgba(7, 23, 39, 0.94);
+      --soft-shadow: rgba(0, 0, 0, 0.28);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
     }
 
     * {
@@ -31,7 +49,9 @@
 
     body {
       margin: 0;
-      background: var(--paper);
+      background:
+        radial-gradient(circle at top left, rgba(179, 38, 45, 0.08), transparent 34rem),
+        var(--paper);
       color: var(--ink);
       font-family: Inter, Avenir Next, Segoe UI, Arial, sans-serif;
       line-height: 1.55;
@@ -56,7 +76,7 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(245, 243, 238, 0.96);
+      background: var(--topbar-bg);
       border-bottom: 1px solid var(--line);
       backdrop-filter: blur(14px);
     }
@@ -90,12 +110,45 @@
 
     .tab-switcher {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       padding: 3px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: var(--white);
-      box-shadow: 0 4px 16px rgba(15, 39, 64, 0.08);
+      background: var(--surface);
+      box-shadow: 0 4px 16px var(--soft-shadow);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      min-height: 44px;
+      padding: 9px 12px;
+      background: var(--surface);
+      color: var(--navy);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 4px 16px var(--soft-shadow);
+    }
+
+    body[data-theme="dark"] .theme-toggle,
+    body[data-theme="dark"] .tab-button,
+    body[data-theme="dark"] .tab-link,
+    body[data-theme="dark"] h2,
+    body[data-theme="dark"] h3,
+    body[data-theme="dark"] .nav-pills a,
+    body[data-theme="dark"] .mini-item strong,
+    body[data-theme="dark"] .coach strong {
+      color: var(--ink);
     }
 
     .tab-button,
@@ -117,6 +170,11 @@
     .tab-button[aria-selected="true"] {
       background: var(--navy);
       color: var(--white);
+    }
+
+    body[data-theme="dark"] .tab-button[aria-selected="true"] {
+      background: var(--red);
+      color: #ffffff;
     }
 
     .view {
@@ -270,6 +328,12 @@
       display: grid;
       place-items: center;
       padding: 10px;
+    }
+
+    body[data-theme="dark"] .logo-preview {
+      background:
+        linear-gradient(145deg, rgba(7, 23, 39, 0.94), rgba(16, 38, 58, 0.92)),
+        repeating-linear-gradient(90deg, rgba(245, 243, 238, 0.05) 0 1px, transparent 1px 22px);
     }
 
     .logo-preview img {
@@ -592,6 +656,94 @@
       background: rgba(255, 255, 255, 0.08);
     }
 
+    .brand-showcase {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .brand-placement {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: 0 10px 30px var(--soft-shadow);
+    }
+
+    .placement-stage {
+      min-height: 210px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: var(--surface-soft);
+    }
+
+    .placement-stage.dark {
+      background:
+        linear-gradient(135deg, rgba(15, 39, 64, 0.96), rgba(7, 23, 39, 0.96)),
+        var(--navy);
+    }
+
+    .placement-stage.paper {
+      background:
+        linear-gradient(135deg, rgba(245, 243, 238, 0.94), rgba(255, 255, 255, 0.82)),
+        var(--paper);
+    }
+
+    .mock-nav {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.78);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    body[data-theme="dark"] .mock-nav {
+      background: rgba(7, 23, 39, 0.7);
+    }
+
+    .mock-nav img {
+      width: min(64vw, 300px);
+      height: 54px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .mock-nav span {
+      width: 82px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--red);
+    }
+
+    .placement-logo {
+      width: min(100%, 360px);
+      max-height: 340px;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.16));
+    }
+
+    .placement-logo.small {
+      width: min(72%, 230px);
+    }
+
+    .placement-copy {
+      padding: 16px;
+    }
+
+    .placement-copy h3 {
+      margin-bottom: 5px;
+    }
+
+    .placement-copy p {
+      margin: 0;
+      color: var(--muted);
+    }
+
     .pitch-hero {
       background: var(--white);
       border-bottom: 1px solid var(--line);
@@ -693,6 +845,10 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
+      .brand-showcase {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .nav-pills {
         justify-content: center;
       }
@@ -716,6 +872,14 @@
       .tab-switcher {
         width: 100%;
       }
+
+      .topbar-actions {
+        width: 100%;
+      }
+
+      .theme-toggle {
+        flex: 1 0 auto;
+      }
     }
   </style>
 </head>
@@ -724,13 +888,16 @@
     <header class="topbar">
       <div class="topbar-inner">
         <a class="brand" href="#home" aria-label="Fonseca Fitness home">
-          <img class="brand-lockup" src="assets/logo/fonseca-fitness-header-transparent.png" alt="Fonseca Fitness">
+          <img class="brand-lockup" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header.png" alt="Fonseca Fitness">
         </a>
 
-        <div class="tab-switcher" role="tablist" aria-label="Site views">
-          <button class="tab-button" id="tab-website" role="tab" aria-selected="true" aria-controls="website-view" data-view-target="website">Website</button>
-          <button class="tab-button" id="tab-pitch" role="tab" aria-selected="false" aria-controls="pitch-view" data-view-target="pitch">Pitch</button>
-          <a class="tab-link" href="logo-variants.html">Logos</a>
+        <div class="topbar-actions">
+          <div class="tab-switcher" role="tablist" aria-label="Site views">
+            <button class="tab-button" id="tab-website" role="tab" aria-selected="true" aria-controls="website-view" data-view-target="website">Website</button>
+            <button class="tab-button" id="tab-pitch" role="tab" aria-selected="false" aria-controls="pitch-view" data-view-target="pitch">Pitch</button>
+            <a class="tab-link" href="logo-variants.html">Logos</a>
+          </div>
+          <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Dark</button>
         </div>
       </div>
     </header>
@@ -767,6 +934,7 @@
           <a href="#process">How It Works</a>
           <a href="#portal">Client Portal</a>
           <a href="#health">Health Intake</a>
+          <a href="#brand-check">Brand Check</a>
           <a href="#coaches">Coaches</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -956,6 +1124,59 @@
           </div>
         </section>
 
+        <section class="band" id="brand-check">
+          <div class="section-inner">
+            <p class="eyebrow">Brand check</p>
+            <h2>Logos Where They Would Actually Show Up</h2>
+            <p class="section-intro">Use the light/dark toggle in the top bar to make sure the logo files stay readable in normal website spots.</p>
+
+            <div class="brand-showcase">
+              <article class="brand-placement">
+                <div class="placement-stage paper">
+                  <div class="mock-nav">
+                    <img src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header.png" alt="Fonseca Fitness horizontal header logo">
+                    <span aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="placement-copy">
+                  <h3>Website Header</h3>
+                  <p>The horizontal lockup is the normal choice for top navigation and email signatures.</p>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="placement-stage dark">
+                  <img class="placement-logo" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-primary-no-tagline.png" alt="Fonseca Fitness primary no-tagline logo on dark background">
+                </div>
+                <div class="placement-copy">
+                  <h3>Hero or Shirt Back</h3>
+                  <p>The no-tagline version is the strongest big mark for shirts, posters, and bold website sections.</p>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="placement-stage paper">
+                  <img class="placement-logo small" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-icon-circle.png" alt="Fonseca Fitness circular icon">
+                </div>
+                <div class="placement-copy">
+                  <h3>Profile Icon</h3>
+                  <p>The simplified circle is for social profiles, app-style icons, and places where tiny text would not read.</p>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="placement-stage dark">
+                  <img class="placement-logo small" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-favicon.png" alt="Fonseca Fitness favicon icon on dark background">
+                </div>
+                <div class="placement-copy">
+                  <h3>Small Icon</h3>
+                  <p>The favicon should remain simple and recognizable when the logo is tiny.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
         <section class="band">
           <div class="section-inner split">
             <div class="card">
@@ -1134,11 +1355,20 @@
   </div>
 
   <script>
+    const themeToggle = document.getElementById("theme-toggle");
     const buttons = Array.from(document.querySelectorAll("[data-view-target]"));
     const views = {
       website: document.getElementById("website-view"),
       pitch: document.getElementById("pitch-view")
     };
+
+    function applyTheme(theme) {
+      document.body.dataset.theme = theme;
+      const isDark = theme === "dark";
+      themeToggle.textContent = isDark ? "Light" : "Dark";
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      localStorage.setItem("fonseca-theme", theme);
+    }
 
     function setView(name, updateHash = true) {
       buttons.forEach((button) => {
@@ -1160,6 +1390,12 @@
     buttons.forEach((button) => {
       button.addEventListener("click", () => setView(button.dataset.viewTarget));
     });
+
+    themeToggle.addEventListener("click", () => {
+      applyTheme(document.body.dataset.theme === "dark" ? "light" : "dark");
+    });
+
+    applyTheme(localStorage.getItem("fonseca-theme") || "light");
 
     if (window.location.hash === "#pitch") {
       setView("pitch", false);
