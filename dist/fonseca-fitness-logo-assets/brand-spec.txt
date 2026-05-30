@@ -18,6 +18,9 @@ Use for shirts, posters, larger profile headers, and places where the tagline be
 fonseca-fitness-horizontal-header.png
 Use in website navigation bars, email signatures, and narrow horizontal spaces.
 
+fonseca-fitness-horizontal-header-no-tagline.png
+Use in small website headers and tight navigation areas where the tagline becomes too small to read cleanly.
+
 fonseca-fitness-icon-circle.png
 Use as a simplified profile icon, app-style icon, or small mark where tiny text would not read well.
 
@@ -43,6 +46,9 @@ Use on dark shirts, dark social graphics, and dark website sections where the ma
 
 fonseca-fitness-horizontal-header-dark-safe.png
 Use for dark-mode website navigation and dark email/header placements.
+
+fonseca-fitness-horizontal-header-no-tagline-dark-safe.png
+Use for dark-mode website navigation when the tagline would become too small or fuzzy.
 
 fonseca-fitness-badge-circle-dark-safe.png
 Use for dark badge placements where the circular mark needs extra contrast.
