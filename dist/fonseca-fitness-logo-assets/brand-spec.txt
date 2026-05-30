@@ -13,7 +13,7 @@ fonseca-fitness-primary-full-tagline.png
 Use for website hero areas, social banners, proposal material, and general brand presentation when there is enough space for the tagline.
 
 fonseca-fitness-primary-no-tagline.png
-Use for shirts, posters, larger profile headers, and places where the tagline becomes too small.
+Use for shirts, posters, larger profile headers, and places where the tagline becomes too small. This draft is exported larger for mockups and early merchandise review.
 
 fonseca-fitness-horizontal-header.png
 Use in website navigation bars, email signatures, and narrow horizontal spaces.
