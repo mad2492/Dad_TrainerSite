@@ -888,7 +888,7 @@
     <header class="topbar">
       <div class="topbar-inner">
         <a class="brand" href="#home" aria-label="Fonseca Fitness home">
-          <img class="brand-lockup" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header.png" alt="Fonseca Fitness">
+          <img class="brand-lockup" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header.png" data-light-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header.png" data-dark-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-dark-safe.png" alt="Fonseca Fitness">
         </a>
 
         <div class="topbar-actions">
@@ -923,7 +923,7 @@
 
             <div class="hero-visual" aria-label="Fonseca Fitness visual direction">
               <div class="logo-preview">
-                <img src="assets/logo/fonseca-fitness-imagegen-transparent-interior.png" alt="Fonseca Fitness logo concept">
+                <img src="assets/logo/fonseca-fitness-imagegen-transparent-interior.png" data-light-src="assets/logo/fonseca-fitness-imagegen-transparent-interior.png" data-dark-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-primary-full-tagline-dark-safe.png" alt="Fonseca Fitness logo concept">
               </div>
             </div>
           </div>
@@ -1134,7 +1134,7 @@
               <article class="brand-placement">
                 <div class="placement-stage paper">
                   <div class="mock-nav">
-                    <img src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header.png" alt="Fonseca Fitness horizontal header logo">
+                    <img src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header.png" data-light-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header.png" data-dark-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-dark-safe.png" alt="Fonseca Fitness horizontal header logo">
                     <span aria-hidden="true"></span>
                   </div>
                 </div>
@@ -1146,7 +1146,7 @@
 
               <article class="brand-placement">
                 <div class="placement-stage dark">
-                  <img class="placement-logo" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-primary-no-tagline.png" alt="Fonseca Fitness primary no-tagline logo on dark background">
+                  <img class="placement-logo" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-primary-no-tagline-dark-safe.png" alt="Fonseca Fitness primary no-tagline logo on dark background">
                 </div>
                 <div class="placement-copy">
                   <h3>Hero or Shirt Back</h3>
@@ -1367,6 +1367,9 @@
       const isDark = theme === "dark";
       themeToggle.textContent = isDark ? "Light" : "Dark";
       themeToggle.setAttribute("aria-pressed", String(isDark));
+      document.querySelectorAll("[data-light-src][data-dark-src]").forEach((image) => {
+        image.src = isDark ? image.dataset.darkSrc : image.dataset.lightSrc;
+      });
       localStorage.setItem("fonseca-theme", theme);
     }
 

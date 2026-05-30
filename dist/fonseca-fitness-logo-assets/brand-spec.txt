@@ -33,5 +33,19 @@ Use for single-color printing, embroidery tests, invoices, and simple merchandis
 fonseca-fitness-favicon.png
 Use for browser favicon, small app icon tests, and tiny digital placements.
 
+Dark-safe variants:
+
+fonseca-fitness-primary-full-tagline-dark-safe.png
+Use on navy, black, or photo backgrounds when the full logo and tagline need to stay readable. This keeps the approved navy/red artwork and adds an off-white safety stroke.
+
+fonseca-fitness-primary-no-tagline-dark-safe.png
+Use on dark shirts, dark social graphics, and dark website sections where the main logo should read without the tagline.
+
+fonseca-fitness-horizontal-header-dark-safe.png
+Use for dark-mode website navigation and dark email/header placements.
+
+fonseca-fitness-badge-circle-dark-safe.png
+Use for dark badge placements where the circular mark needs extra contrast.
+
 Production note:
 These are cleaned web-ready PNG drafts based on the approved visual direction. Before serious print, embroidery, or merchandise production, recreate the final logo as true vector artwork.
