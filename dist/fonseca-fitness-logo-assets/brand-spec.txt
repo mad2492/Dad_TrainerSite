@@ -1,0 +1,37 @@
+Fonseca Fitness Brand Spec
+
+Primary Navy: #0F2740
+Primary Red: #B3262D
+Off-White: #F5F3EE
+
+Recommended wordmark style: bold athletic slab-serif / varsity block
+Recommended support font style: clean sans-serif
+
+Usage notes:
+
+fonseca-fitness-primary-full-tagline.png
+Use for website hero areas, social banners, proposal material, and general brand presentation when there is enough space for the tagline.
+
+fonseca-fitness-primary-no-tagline.png
+Use for shirts, posters, larger profile headers, and places where the tagline becomes too small.
+
+fonseca-fitness-horizontal-header.png
+Use in website navigation bars, email signatures, and narrow horizontal spaces.
+
+fonseca-fitness-icon-circle.png
+Use as a simplified profile icon, app-style icon, or small mark where tiny text would not read well.
+
+fonseca-fitness-badge-circle.png
+Use for badge-style placements, stickers, gym banners, and premium brand moments where the Strength / Nutrition / Accountability message should show.
+
+fonseca-fitness-reversed-white.png
+Use on dark backgrounds, navy shirts, video overlays, and dark social graphics.
+
+fonseca-fitness-one-color-navy.png
+Use for single-color printing, embroidery tests, invoices, and simple merchandise applications.
+
+fonseca-fitness-favicon.png
+Use for browser favicon, small app icon tests, and tiny digital placements.
+
+Production note:
+These are cleaned web-ready PNG drafts based on the approved visual direction. Before serious print, embroidery, or merchandise production, recreate the final logo as true vector artwork.
