@@ -98,7 +98,8 @@
       box-shadow: 0 4px 16px rgba(15, 39, 64, 0.08);
     }
 
-    .tab-button {
+    .tab-button,
+    .tab-link {
       border: 0;
       border-radius: 999px;
       background: transparent;
@@ -110,6 +111,7 @@
       font-size: 0.78rem;
       cursor: pointer;
       white-space: nowrap;
+      text-decoration: none;
     }
 
     .tab-button[aria-selected="true"] {
@@ -728,6 +730,7 @@
         <div class="tab-switcher" role="tablist" aria-label="Site views">
           <button class="tab-button" id="tab-website" role="tab" aria-selected="true" aria-controls="website-view" data-view-target="website">Website</button>
           <button class="tab-button" id="tab-pitch" role="tab" aria-selected="false" aria-controls="pitch-view" data-view-target="pitch">Pitch</button>
+          <a class="tab-link" href="logo-variants.html">Logos</a>
         </div>
       </div>
     </header>
