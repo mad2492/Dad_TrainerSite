@@ -9,12 +9,13 @@ These are transparent PNG raster exports for shirt mockups and printer review.
   - 3600 x 4200 px canvas with 300 DPI metadata.
 
 - `fonseca-fitness-shirt-back-dark-shirt.png`
+  - Current preferred dark-shirt back print.
   - Use on navy, black, charcoal, or other dark shirts.
   - 3600 x 4200 px canvas with 300 DPI metadata.
 
 - `fonseca-fitness-shirt-back-dark-shirt-v2.png`
-  - Current preferred dark-shirt back print.
-  - Uses off-white badge words, plain red divider dots, and sharper print-ready wordmarks.
+  - Retained as a prior experimental version.
+  - Do not use for the current dark-shirt mockup.
   - 3600 x 4200 px canvas with 300 DPI metadata.
 
 Recommended back placement: 11 to 12 inches wide, centered between shoulder blades.
