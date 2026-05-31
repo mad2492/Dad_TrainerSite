@@ -142,6 +142,23 @@ Preferred formats:
 - White/reversed version: dark backgrounds, navy shirts, embroidery, video overlays
 - One-color navy version: embroidery, print invoices, minimal merchandise, single-color applications
 
+## Shirt Raster Exports
+
+Folder: `dist/fonseca-fitness-shirt-assets/`
+
+Back print:
+
+- Use `fonseca-fitness-shirt-back-light-shirt.png` on white, light gray, cream, or other light shirts.
+- Use `fonseca-fitness-shirt-back-dark-shirt.png` on navy, black, charcoal, or other dark shirts.
+- Recommended back print size: 11 to 12 inches wide, centered between the shoulder blades.
+
+Front left chest:
+
+- Preferred: simplified circle icon, using `fonseca-fitness-left-chest-light-shirt.png` or `fonseca-fitness-left-chest-dark-shirt.png`.
+- Recommended front-left size: 3.25 to 3.75 inches wide.
+- Avoid the full back logo on the front-left breast area because the `Strength / Nutrition / Accountability` and ornament details become too small.
+- Use the horizontal left-chest files only if a front wordmark is required and the printer confirms the small text will hold.
+
 ## Next Prompt Goal
 
 Ask GPT for separated logo files, not a new design.
