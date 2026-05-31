@@ -4,7 +4,8 @@ Primary Navy: #0F2740
 Primary Red: #B3262D
 Off-White: #F5F3EE
 
-Recommended wordmark style: bold athletic slab-serif / varsity block
+Official draft wordmark font: Rockwell Extra Bold (ROCKEB.TTF)
+Wordmark usage: use Rockwell Extra Bold for both FONSECA and FITNESS across primary and horizontal logo assets.
 Recommended support font style: clean sans-serif
 
 Usage notes:

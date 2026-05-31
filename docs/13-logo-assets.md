@@ -22,18 +22,23 @@ Approved direction:
 
 ## Font Direction
 
-Primary wordmark:
+Official draft wordmark font:
+
+- Rockwell Extra Bold (`ROCKEB.TTF`)
+- Use for both `FONSECA` and `FITNESS` in the primary logo and horizontal header lockups.
+- Keep the wordmarks centered on the badge centerline.
+- Use a thin off-white outline only; avoid thick white blocks or mixed varsity fonts.
+
+Primary wordmark style:
 
 - Bold athletic slab-serif
 - Varsity-inspired block font
-- Possible style references: collegiate custom lettering, Bebas Neue Pro, Industry, Brothers, Tungsten
+- Style references: collegiate custom lettering and classic athletic slab-serif marks
 
 Supporting text/tagline:
 
-- Montserrat
-- Gotham
-- Inter
-- Avenir Next
+- Clean sans-serif
+- Keep secondary text smaller and simpler than the wordmark
 
 ## Needed Logo Files
 
