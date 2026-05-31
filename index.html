@@ -744,6 +744,71 @@
       color: var(--muted);
     }
 
+    .shirt-showcase {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .shirt-preview {
+      min-height: 310px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .shirt-preview.light {
+      background: var(--paper);
+    }
+
+    .shirt-preview.dark {
+      background: var(--navy);
+    }
+
+    .shirt-preview img {
+      width: min(100%, 330px);
+      max-height: 270px;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.12));
+    }
+
+    .shirt-preview.chest img {
+      width: min(72%, 190px);
+      max-height: 190px;
+    }
+
+    .asset-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .asset-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: var(--surface-soft);
+      color: var(--navy);
+      border: 1px solid var(--line);
+      font-weight: 800;
+      text-decoration: none;
+      font-size: 0.86rem;
+    }
+
+    body[data-theme="dark"] .asset-link {
+      color: var(--white);
+    }
+
+    .shirt-note {
+      margin-top: 16px;
+      color: var(--muted);
+    }
+
     .pitch-hero {
       background: var(--white);
       border-bottom: 1px solid var(--line);
@@ -849,6 +914,10 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
+      .shirt-showcase {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .nav-pills {
         justify-content: center;
       }
@@ -935,6 +1004,7 @@
           <a href="#portal">Client Portal</a>
           <a href="#health">Health Intake</a>
           <a href="#brand-check">Brand Check</a>
+          <a href="#shirt-logos">Shirt Logos</a>
           <a href="#coaches">Coaches</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -1174,6 +1244,70 @@
                 </div>
               </article>
             </div>
+          </div>
+        </section>
+
+        <section class="band" id="shirt-logos">
+          <div class="section-inner">
+            <p class="eyebrow">Shirt logos</p>
+            <h2>Back Print and Left Chest Marks</h2>
+            <p class="section-intro">The no-tagline badge is the back print. The simplified circle icon is the preferred front-left chest mark because it stays readable at small size.</p>
+
+            <div class="shirt-showcase">
+              <article class="brand-placement">
+                <div class="shirt-preview light">
+                  <img src="dist/fonseca-fitness-shirt-assets/preview-shirt-back-light.png" alt="Fonseca Fitness shirt back logo for light shirts">
+                </div>
+                <div class="placement-copy">
+                  <h3>Back Print: Light Shirts</h3>
+                  <p>Use on white, light gray, cream, or other light shirts. Recommended print width is 11 to 12 inches.</p>
+                  <div class="asset-links">
+                    <a class="asset-link" href="dist/fonseca-fitness-shirt-assets/fonseca-fitness-shirt-back-light-shirt.png" download>PNG</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="shirt-preview dark">
+                  <img src="dist/fonseca-fitness-shirt-assets/preview-shirt-back-dark.png" alt="Fonseca Fitness shirt back logo for dark shirts">
+                </div>
+                <div class="placement-copy">
+                  <h3>Back Print: Dark Shirts</h3>
+                  <p>Use on navy, black, charcoal, or other dark shirts. The dark-shirt export keeps the logo readable against deep fabric colors.</p>
+                  <div class="asset-links">
+                    <a class="asset-link" href="dist/fonseca-fitness-shirt-assets/fonseca-fitness-shirt-back-dark-shirt.png" download>PNG</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="shirt-preview chest light">
+                  <img src="dist/fonseca-fitness-shirt-assets/preview-left-chest-light.png" alt="Fonseca Fitness left chest icon for light shirts">
+                </div>
+                <div class="placement-copy">
+                  <h3>Left Chest: Light Shirts</h3>
+                  <p>Use the simplified circle icon over the front-left breast area at about 3.25 to 3.75 inches wide.</p>
+                  <div class="asset-links">
+                    <a class="asset-link" href="dist/fonseca-fitness-shirt-assets/fonseca-fitness-left-chest-light-shirt.png" download>PNG</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="shirt-preview chest dark">
+                  <img src="dist/fonseca-fitness-shirt-assets/preview-left-chest-dark.png" alt="Fonseca Fitness left chest icon for dark shirts">
+                </div>
+                <div class="placement-copy">
+                  <h3>Left Chest: Dark Shirts</h3>
+                  <p>Use the same simplified circle icon on dark shirts. It is cleaner than a tiny full wordmark in this placement.</p>
+                  <div class="asset-links">
+                    <a class="asset-link" href="dist/fonseca-fitness-shirt-assets/fonseca-fitness-left-chest-dark-shirt.png" download>PNG</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <p class="shirt-note">Download the full package: <a href="dist/fonseca-fitness-shirt-assets.zip" download>fonseca-fitness-shirt-assets.zip</a></p>
           </div>
         </section>
 
