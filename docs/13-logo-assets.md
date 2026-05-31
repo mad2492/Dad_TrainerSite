@@ -159,6 +159,17 @@ Front left chest:
 - Avoid the full back logo on the front-left breast area because the `Strength / Nutrition / Accountability` and ornament details become too small.
 - Use the horizontal left-chest files only if a front wordmark is required and the printer confirms the small text will hold.
 
+Right sleeve flag:
+
+- Folder: `dist/fonseca-fitness-shirt-assets/right-sleeve-flags/`
+- Use reversed-field American flag orientation for the right sleeve.
+- All four files use the Fonseca Fitness palette: navy `#0F2740`, red `#B3262D`, and off-white `#F5F3EE`.
+- `fonseca-fitness-right-sleeve-flag-01-patch-border.png`: safest universal option across light and dark shirts.
+- `fonseca-fitness-right-sleeve-flag-02-no-border-dark-shirts.png`: no-border option for dark shirts.
+- `fonseca-fitness-right-sleeve-flag-03-no-border-light-shirts.png`: no-border option for light shirts, with transparent light stripe areas.
+- `fonseca-fitness-right-sleeve-flag-04-navy-keyline.png`: light-shirt option with a thin navy keyline instead of a cream patch border.
+- Recommended right-sleeve size: about 3.25 to 3.75 inches wide.
+
 ## Next Prompt Goal
 
 Ask GPT for separated logo files, not a new design.
