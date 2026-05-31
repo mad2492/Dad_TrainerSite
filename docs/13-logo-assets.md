@@ -28,6 +28,8 @@ Official draft wordmark font:
 - Use for both `FONSECA` and `FITNESS` in the primary logo and horizontal header lockups.
 - Keep the wordmarks centered on the badge centerline.
 - Use a thin off-white outline only; avoid thick white blocks or mixed varsity fonts.
+- Use navy tagline text on light-background logo assets.
+- Use white tagline text only on dark-safe/reversed assets.
 
 Primary wordmark style:
 
