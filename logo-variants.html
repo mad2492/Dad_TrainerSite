@@ -79,6 +79,97 @@
       box-shadow: 0 12px 28px rgba(179, 38, 45, 0.22);
     }
 
+    .download-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .download-row .download {
+      margin: 0;
+    }
+
+    .download.secondary {
+      background: var(--navy);
+      box-shadow: 0 12px 28px rgba(15, 39, 64, 0.18);
+    }
+
+    .print-pack {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.68);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 22px;
+      box-shadow: 0 18px 46px rgba(15, 39, 64, 0.11);
+    }
+
+    .print-pack header {
+      display: block;
+      margin: 0;
+      padding: 18px 18px 0;
+    }
+
+    .print-pack h2 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 1.35rem;
+    }
+
+    .print-pack p {
+      margin: 0;
+      color: var(--muted);
+      font: 0.95rem/1.5 Arial, sans-serif;
+    }
+
+    .print-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.72fr);
+      gap: 0;
+      margin-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .print-preview {
+      min-height: 420px;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      background: var(--navy);
+    }
+
+    .print-preview img {
+      width: min(100%, 520px);
+      height: auto;
+      display: block;
+    }
+
+    .print-links {
+      padding: 20px;
+      border-left: 1px solid var(--line);
+      background: rgba(245, 243, 238, 0.62);
+    }
+
+    .print-links h3 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: 1.05rem;
+    }
+
+    .print-links ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+      font: 0.92rem/1.45 Arial, sans-serif;
+    }
+
+    .print-links a {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -148,6 +239,15 @@
         grid-template-columns: 1fr;
       }
 
+      .print-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .print-links {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
       .swatches {
         grid-template-columns: 1fr;
       }
@@ -167,7 +267,32 @@
 
     <p class="note">Variant A is the approved direction for the initial web files. The ZIP below contains separate transparent PNG assets plus a simple brand spec.</p>
 
-    <a class="download" href="dist/fonseca-fitness-logo-assets.zip" download>Download Logo ZIP</a>
+    <div class="download-row">
+      <a class="download" href="dist/fonseca-fitness-logo-assets.zip" download>Download Logo ZIP</a>
+      <a class="download secondary" href="dist/fonseca-fitness-shirt-print-downloads-2026-06-01.zip" download>Download Shirt Print ZIP</a>
+    </div>
+
+    <section class="print-pack" aria-label="Shirt print downloads">
+      <header>
+        <h2>Shirt Print Downloads</h2>
+        <p>The perfect-circle back print is the best raster file to upload to Vector Magic or send to a shirt printer for a vector-trace proof.</p>
+      </header>
+      <div class="print-grid">
+        <div class="print-preview">
+          <img src="dist/fonseca-fitness-shirt-assets/selected-back-dark-print-perfect-circle-2026-05-31/fonseca-fitness-shirt-back-dark-shirt-perfect-circle-3600x4200.png" alt="Fonseca Fitness perfect-circle dark shirt back print">
+        </div>
+        <div class="print-links">
+          <h3>Direct Downloads</h3>
+          <ul>
+            <li><a href="dist/fonseca-fitness-shirt-print-downloads-2026-06-01.zip" download>Complete shirt print ZIP</a></li>
+            <li><a href="dist/fonseca-fitness-shirt-assets/selected-back-dark-print-perfect-circle-2026-05-31/fonseca-fitness-shirt-back-dark-shirt-perfect-circle-7200x8400.png" download>Perfect-circle back print, 7200x8400 PNG</a></li>
+            <li><a href="dist/fonseca-fitness-shirt-assets/selected-back-dark-print-perfect-circle-2026-05-31/fonseca-fitness-shirt-back-dark-shirt-perfect-circle-3600x4200.png" download>Perfect-circle back print, 3600x4200 PNG</a></li>
+            <li><a href="dist/fonseca-fitness-shirt-assets/selected-back-dark-print-smoothed-2026-05-31/fonseca-fitness-shirt-back-dark-shirt-smoothed-7200x8400.png" download>Smoothed back print, 7200x8400 PNG</a></li>
+            <li><a href="dist/fonseca-fitness-shirt-assets/back-logo-no-motto-2026-05-31/variant-01-solid-offwhite-badge/fonseca-fitness-shirt-back-dark-shirt.png" download>Original liked no-motto back print PNG</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
     <section class="grid" aria-label="Logo variant comparison">
       <article class="variant">

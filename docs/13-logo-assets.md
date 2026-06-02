@@ -146,10 +146,18 @@ Preferred formats:
 
 Folder: `dist/fonseca-fitness-shirt-assets/`
 
+Public download ZIP:
+
+- `dist/fonseca-fitness-shirt-print-downloads-2026-06-01.zip`
+- Use this focused package for Vector Magic, a printer vector-trace request, or a sample shirt order.
+- Best raster source inside the ZIP: `perfect-circle/fonseca-fitness-shirt-back-dark-shirt-perfect-circle-7200x8400.png`.
+- For bulk orders, ask the printer for a vector-traced PDF/SVG/EPS proof before production.
+
 Back print:
 
 - Use `fonseca-fitness-shirt-back-light-shirt.png` on white, light gray, cream, or other light shirts.
 - Use `fonseca-fitness-shirt-back-dark-shirt.png` on navy, black, charcoal, or other dark shirts.
+- Current preferred dark-shirt print source: `selected-back-dark-print-perfect-circle-2026-05-31/fonseca-fitness-shirt-back-dark-shirt-perfect-circle-7200x8400.png`.
 - Recommended back print size: 11 to 12 inches wide, centered between the shoulder blades.
 
 Front left chest:
