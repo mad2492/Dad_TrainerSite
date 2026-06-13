@@ -161,6 +161,15 @@ VTracer test:
 - The 7200-source trace was rejected because it damaged colors and shapes; the 3600-source trace was cleaner and more practical.
 - Treat these SVGs as a starting point for Inkscape/Illustrator cleanup, not final production master artwork.
 
+VTracer liked-shirt vector batch:
+
+- Folder: `dist/fonseca-fitness-shirt-assets/vector-batch-vtracer-transparent-2026-06-13/`
+- ZIP: `dist/fonseca-fitness-liked-shirt-vectors-vtracer-2026-06-13.zip`
+- Includes the simple front-left chest marks, horizontal front marks, preferred back print variants, no-motto back variants, transparent-outline back variants, and accurate right-sleeve flag options.
+- Browser-rendered proof: `vtracer-transparent-vector-batch-browser-proof.png`.
+- These SVGs were generated with a keyed-transparent workflow to avoid VTracer tracing transparent pixels as black or green backgrounds.
+- Still not final production master artwork; use as editable SVG starting points and clean manually before bulk shirt production.
+
 Back print:
 
 - Use `fonseca-fitness-shirt-back-light-shirt.png` on white, light gray, cream, or other light shirts.
