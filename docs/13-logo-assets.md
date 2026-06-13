@@ -153,6 +153,14 @@ Public download ZIP:
 - Best raster source inside the ZIP: `perfect-circle/fonseca-fitness-shirt-back-dark-shirt-perfect-circle-7200x8400.png`.
 - For bulk orders, ask the printer for a vector-traced PDF/SVG/EPS proof before production.
 
+VTracer test:
+
+- Folder: `dist/fonseca-fitness-shirt-assets/vector-trace-vtracer-2026-06-13/`
+- Best first-pass SVG from the test: `fonseca-fitness-back-dark-logo-spline-smoother.svg`.
+- Alternate SVG from the test: `fonseca-fitness-back-dark-logo-spline-balanced.svg`.
+- The 7200-source trace was rejected because it damaged colors and shapes; the 3600-source trace was cleaner and more practical.
+- Treat these SVGs as a starting point for Inkscape/Illustrator cleanup, not final production master artwork.
+
 Back print:
 
 - Use `fonseca-fitness-shirt-back-light-shirt.png` on white, light gray, cream, or other light shirts.
