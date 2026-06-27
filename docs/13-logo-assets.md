@@ -170,6 +170,16 @@ VTracer liked-shirt vector batch:
 - These SVGs were generated with a keyed-transparent workflow to avoid VTracer tracing transparent pixels as black or green backgrounds.
 - Still not final production master artwork; use as editable SVG starting points and clean manually before bulk shirt production.
 
+3D case logo layer pack:
+
+- Folder: `dist/fonseca-fitness-shirt-assets/case-logo-layer-pack-2026-06-27/`
+- ZIP: `dist/fonseca-fitness-case-logo-layer-pack-2026-06-27.zip`
+- Source: `dist/fonseca-fitness-shirt-assets/vector-batch-vtracer-transparent-2026-06-13/fonseca-fitness-front-left-chest-dark.svg`.
+- Purpose: separated SVG layers for the blue 3D-printed snap case lid, so slicer/object colors can be assigned separately.
+- Recommended stack: off-white base disc, navy shapes, red shapes.
+- Optional stack: add the off-white detail layer only at larger print sizes. It preserves logo interior lines, but the traced detail may be too thin or noisy for small case-top printing.
+- Browser-rendered proof: `fonseca-case-logo-layer-proof.png`.
+
 Back print:
 
 - Use `fonseca-fitness-shirt-back-light-shirt.png` on white, light gray, cream, or other light shirts.
