@@ -149,6 +149,9 @@
             );
           }
           client = supabase.createClient(config.url, config.anonKey);
+          window.dispatchEvent(new CustomEvent("fonseca-auth-client-ready", {
+            detail: { client: client }
+          }));
           client.auth.onAuthStateChange((event, session) => {
             handleAuthChange(event, session);
           });

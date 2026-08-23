@@ -1609,7 +1609,7 @@
     <div class="cp-head">
       <div>
         <p class="cp-eyebrow">Online coaching client</p>
-        <h2 class="cp-title">Welcome back, Jordan (demo)</h2>
+        <h2 class="cp-title" data-hook="client-title">Welcome back, Jordan (demo)</h2>
       </div>
       <a class="cp-cta-red" href="#view-client">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l2.5 2.5L16 8"></path><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5z"></path></svg>
@@ -1630,7 +1630,7 @@
       <div class="cp-col cp-col-main">
         <article class="cp-card" style="order: 2">
           <div class="cp-card-head">
-            <h3 class="cp-card-title">This week's training</h3>
+            <h3 class="cp-card-title" data-hook="client-plan-title">This week's training</h3>
             <span class="cp-progress">2 of 4 done</span>
           </div>
 
@@ -1679,7 +1679,21 @@
           </a>
         </article>
 
-        <article class="cp-card" style="order: 4">
+        <article class="cp-card" style="order: 4" data-hook="client-packages-card" hidden>
+          <div class="cp-card-head">
+            <h3 class="cp-card-title cp-sm">Session packages</h3>
+          </div>
+          <div class="cp-orders" data-hook="client-packages"></div>
+        </article>
+
+        <article class="cp-card" style="order: 5" data-hook="client-invoices-card" hidden>
+          <div class="cp-card-head">
+            <h3 class="cp-card-title cp-sm">Invoices</h3>
+          </div>
+          <div class="cp-orders" data-hook="client-invoices"></div>
+        </article>
+
+        <article class="cp-card" style="order: 6">
           <div class="cp-card-head">
             <h3 class="cp-card-title cp-sm">Recent orders</h3>
             <a class="cp-link" href="#view-client">View all</a>
@@ -1702,7 +1716,7 @@
           </div>
         </article>
 
-        <article class="cp-card" style="order: 5">
+        <article class="cp-card" style="order: 7">
           <h3 class="cp-card-title cp-sm">Health notes</h3>
           <p class="cp-body-copy">Your intake review is on file. Flag any new injury or condition in your check-in &mdash; the plan adjusts before your next week is written.</p>
         </article>
@@ -1723,8 +1737,8 @@
   </div>
 
   <div class="co-tagline">
-    <span class="co-tag">Demo data</span>
-    <p>Sample clients and numbers for layout only.</p>
+    <span class="co-tag" data-hook="coach-tag">Demo data</span>
+    <p data-hook="coach-tagline">Sample clients and numbers for layout only.</p>
   </div>
 
   <div class="co-actions">
@@ -1742,24 +1756,24 @@
     <div class="co-stats">
       <div class="co-stat">
         <span class="co-stat-label">Active clients</span>
-        <span class="co-stat-value">18</span>
+        <span class="co-stat-value" data-hook="coach-active-clients">18</span>
       </div>
       <div class="co-stat">
         <span class="co-stat-label">Sessions this week</span>
-        <span class="co-stat-value">11</span>
+        <span class="co-stat-value" data-hook="coach-sessions-week">11</span>
       </div>
       <div class="co-stat">
         <span class="co-stat-label">Unpaid invoices</span>
-        <span class="co-stat-value co-is-red">2 · $340</span>
+        <span class="co-stat-value co-is-red" data-hook="coach-unpaid-invoices">2 · $340</span>
       </div>
       <div class="co-stat">
         <span class="co-stat-label">Packages running low</span>
-        <span class="co-stat-value co-is-gold">3</span>
+        <span class="co-stat-value co-is-gold" data-hook="coach-low-packages">3</span>
       </div>
     </div>
 
     <div class="co-split">
-      <article class="co-card">
+      <article class="co-card" data-hook="coach-schedule-card">
         <div class="co-card-pad">
           <div class="co-card-head">
             <h3>Today</h3>
@@ -1802,10 +1816,10 @@
       </article>
 
       <article class="co-card">
-        <div class="co-card-pad">
+        <div class="co-card-pad" data-hook="coach-attention">
           <div class="co-card-head">
             <h3>Needs attention</h3>
-            <span>3 items</span>
+            <span data-hook="coach-attention-count">3 items</span>
           </div>
 
           <div class="co-attn">
@@ -1844,7 +1858,7 @@
           <span>Actions</span>
         </div>
 
-        <ul class="co-clients">
+        <ul class="co-clients" data-hook="coach-clients">
           <li class="co-client">
             <div class="co-client-id">
               <span class="co-mono" aria-hidden="true">MR</span>
@@ -1927,7 +1941,7 @@
       </div>
     </article>
 
-    <div class="co-confirm" role="status">
+    <div class="co-confirm" role="status" data-hook="coach-confirmation">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-5"></path><circle cx="12" cy="12" r="9"></circle></svg>
       <p>M. Rivera paid invoice #209 — <b>$450 by bank transfer</b> (fee: $2.25)</p>
     </div>
@@ -1938,6 +1952,7 @@
 
   <script src="assets/portal-config.js"></script>
   <script src="assets/portal-auth.js"></script>
+  <script src="assets/portal-data.js"></script>
   <script>
     const themeToggle = document.getElementById("theme-toggle");
     const authLive = Boolean(window.FonsecaAuth && window.FonsecaAuth.enabled);
@@ -2013,6 +2028,7 @@
       }
       signinBtn.textContent = "Email me a sign-in link";
       signinNote.textContent = "No password needed — we'll email you a one-tap sign-in link.";
+      window.FonsecaData.reset();
 
       signinBtn.addEventListener("click", () => {
         const email = (emailInput.value || "").trim();
@@ -2046,9 +2062,11 @@
           authLabel.textContent = "Signed in as " + (profile.full_name || "member") +
             (profile.role === "coach" ? " · Coach" : "");
           setPersona(profile.role === "coach" ? "coach" : "client");
+          window.FonsecaData.load(profile);
         },
         onSignedOut: () => {
           authStrip.hidden = true;
+          window.FonsecaData.reset();
           setPersona("guest");
         }
       });
