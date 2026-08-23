@@ -239,8 +239,9 @@
     const category = categoryLabel(currentProduct.category);
     const stock = statusLabel(currentProduct.stock_qty);
     show("product-category", category);
+    show("product-crumb-category", category);
     const crumbs = hook("product-crumbs");
-    if (crumbs) {
+    if (crumbs && !hook("product-crumb-category")) {
       const categoryNode = Array.from(crumbs.childNodes)
         .find((node) => node.nodeType === Node.TEXT_NODE && node.nodeValue.indexOf("/") !== -1);
       if (categoryNode) categoryNode.nodeValue = " / " + category + " / ";

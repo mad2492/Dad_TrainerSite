@@ -519,6 +519,10 @@
     box-shadow: 0 10px 30px var(--soft-shadow);
   }
 
+  .cp-card[hidden] {
+    display: none;
+  }
+
   .cp-card-head {
     display: flex;
     align-items: center;
@@ -1601,11 +1605,43 @@
   .portal-dialog-actions .co-btn {
     flex: 1 1 0;
   }
+
+  .lens-note {
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    font-weight: 700;
+  }
+
+  .signin-card label[hidden] {
+    display: none;
+  }
+
+  .demo-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    z-index: 60;
+    width: min(calc(100% - 32px), 560px);
+    transform: translateX(-50%);
+    padding: 13px 16px;
+    border-radius: var(--radius);
+    background: var(--navy);
+    color: #ffffff;
+    box-shadow: 0 16px 38px rgba(15, 39, 64, 0.3);
+    font-size: 0.88rem;
+    font-weight: 750;
+    text-align: center;
+  }
+
+  .demo-toast[hidden] {
+    display: none;
+  }
   </style>
 </head>
 <body>
   <div class="site-shell">
-    <div class="demo-strip"><strong>Demo:</strong> switch between what a guest, a client, and Coach Pete would see. No real accounts yet.</div>
+    <div class="demo-strip"><strong>Portal preview:</strong> switch between the Visitor, Client, and Coach Pete views. Sample actions respond, but no real account or record is changed.</div>
     <div class="auth-strip" id="auth-strip" hidden>
       <span id="auth-strip-label">Signed in</span>
       <button class="auth-signout" type="button" id="auth-signout">Sign out</button>
@@ -1618,9 +1654,9 @@
 
         <div class="topbar-actions">
           <div class="tab-switcher" role="tablist" aria-label="Portal personas">
-            <button class="tab-button" id="tab-guest" role="tab" aria-selected="true" aria-controls="view-guest" data-persona-target="guest">Guest</button>
+            <button class="tab-button" id="tab-guest" role="tab" aria-selected="true" aria-controls="view-guest" data-persona-target="guest">Visitor</button>
             <button class="tab-button" id="tab-client" role="tab" aria-selected="false" aria-controls="view-client" data-persona-target="client">Client</button>
-            <button class="tab-button" id="tab-coach" role="tab" aria-selected="false" aria-controls="view-coach" data-persona-target="coach">Coach</button>
+            <button class="tab-button" id="tab-coach" role="tab" aria-selected="false" aria-controls="view-coach" data-persona-target="coach">Coach Pete</button>
           </div>
           <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Dark</button>
         </div>
@@ -1632,8 +1668,8 @@
         <div class="guest-wrap">
           <div class="guest-intro">
             <p class="eyebrow">Fonseca Fitness Portal</p>
-            <h1>One login. Three different front doors.</h1>
-            <p>Clients see their plan, check-ins, and orders. Coach Pete sees his people, their session packages, and invoices. Guests see this page — a place to sign in or start coaching.</p>
+            <h1>See the experience from three points of view.</h1>
+            <p>Tap Client or Coach Pete above to see how the same business could work for each person. These are sample screens only, so no account is needed.</p>
             <div class="persona-cards">
               <button class="persona-card" type="button" data-persona-target="client">
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M2.5 9.5v5M21.5 9.5v5M6.5 12h11"></path></svg>
@@ -1642,7 +1678,7 @@
               </button>
               <button class="persona-card" type="button" data-persona-target="coach">
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17.5" cy="9" r="2.8"></circle><path d="M15.5 14.6a5.4 5.4 0 0 1 6 5.4"></path></svg>
-                <span><strong>Training portal</strong><span>Coach view — clients, session packs, invoices.</span></span>
+                <span><strong>Coach dashboard</strong><span>Coach view — clients, session packs, invoices.</span></span>
                 <span class="go" aria-hidden="true">Preview →</span>
               </button>
             </div>
@@ -1671,11 +1707,13 @@
         <p class="cp-eyebrow">Online coaching client</p>
         <h2 class="cp-title" data-hook="client-title">Welcome back, Jordan (demo)</h2>
       </div>
-      <a class="cp-cta-red" href="#view-client">
+      <a class="cp-cta-red" href="#client" data-demo-message="Check-in forms are planned for a later round. This preview shows where the weekly flow would begin.">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l2.5 2.5L16 8"></path><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5z"></path></svg>
         Start this week's check-in
       </a>
     </div>
+
+    <p class="lens-note">Explore the sample layout. Buttons show what would come next without changing any real plan, check-in, or order.</p>
 
     <nav class="cp-tabs" aria-label="Portal sections">
       <span class="cp-tab is-active">My plan</span>
@@ -1708,7 +1746,7 @@
             <div class="cp-day is-todo is-next">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg>
               <span class="cp-day-name">Day 3 &middot; Upper body push</span>
-              <a class="cp-day-open" href="#view-client">Open workout &rarr;</a>
+              <a class="cp-day-open" href="#client" data-demo-message="Workout details and exercise videos are planned for a later round.">Open workout &rarr;</a>
             </div>
 
             <div class="cp-day is-todo is-last">
@@ -1733,7 +1771,7 @@
         <article class="cp-checkin" style="order: 1">
           <p class="cp-checkin-eyebrow">Weekly check-in</p>
           <p class="cp-checkin-copy">Due Sunday &mdash; weight, how the week felt, optional photos.</p>
-          <a class="cp-cta-white" href="#view-client">
+          <a class="cp-cta-white" href="#client" data-demo-message="Check-in forms are planned for a later round. This preview shows where the weekly flow would begin.">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
             Check in now
           </a>
@@ -1756,7 +1794,7 @@
         <article class="cp-card" style="order: 6" data-hook="client-orders-card">
           <div class="cp-card-head">
             <h3 class="cp-card-title cp-sm">Recent orders</h3>
-            <a class="cp-link" href="#view-client">View all</a>
+            <a class="cp-link" href="#client" data-demo-message="The full order history is planned for a later round.">View all</a>
           </div>
           <div class="cp-orders" data-hook="client-orders">
             <div class="cp-order">
@@ -1798,7 +1836,7 @@
 
   <div class="co-tagline">
     <span class="co-tag" data-hook="coach-tag">Demo data</span>
-    <p data-hook="coach-tagline">Sample clients and numbers for layout only.</p>
+    <p data-hook="coach-tagline">Sample clients and numbers for layout only. Actions demonstrate the next step without changing real records.</p>
   </div>
 
   <div class="co-actions">
@@ -2023,12 +2061,22 @@
     </form>
   </dialog>
 
+  <div class="demo-toast" id="demo-toast" role="status" aria-live="polite" hidden></div>
+
   <script src="assets/portal-config.js"></script>
   <script src="assets/portal-auth.js"></script>
   <script src="assets/portal-data.js"></script>
   <script>
     const themeToggle = document.getElementById("theme-toggle");
     const authLive = Boolean(window.FonsecaAuth && window.FonsecaAuth.enabled);
+
+    if (!authLive) {
+      const signinCard = document.querySelector("#view-guest .signin-card");
+      signinCard.querySelector("h2").textContent = "Client view preview";
+      signinCard.querySelectorAll("label").forEach((label) => { label.hidden = true; });
+      signinCard.querySelector(".signin-btn").textContent = "Show the client view";
+      signinCard.querySelector(".signin-note").textContent = "No email or password is needed for this walkthrough.";
+    }
 
     if (authLive) {
       document.querySelector(".signin-btn").removeAttribute("data-persona-target");
@@ -2085,6 +2133,32 @@
 
     applyTheme(localStorage.getItem("fonseca-theme") || "light");
     setPersona(window.location.hash.replace("#", "") || "guest", false);
+
+    if (!authLive) {
+      const demoToast = document.getElementById("demo-toast");
+      let demoToastTimer;
+      const showDemoMessage = (message) => {
+        window.clearTimeout(demoToastTimer);
+        demoToast.textContent = message || "This sample action is planned for a later round and does not change real records.";
+        demoToast.hidden = false;
+        demoToastTimer = window.setTimeout(() => { demoToast.hidden = true; }, 4200);
+      };
+
+      document.querySelectorAll("[data-demo-message]").forEach((control) => {
+        control.addEventListener("click", (event) => {
+          event.preventDefault();
+          history.replaceState(null, "", "#client");
+          showDemoMessage(control.dataset.demoMessage);
+        });
+      });
+
+      document.querySelectorAll("#view-coach button").forEach((control) => {
+        control.addEventListener("click", (event) => {
+          event.preventDefault();
+          showDemoMessage("This coach action is included to test the workflow idea. It does not change a real client, session, invoice, or message.");
+        });
+      });
+    }
 
     if (authLive) {
       const demoStrip = document.querySelector(".demo-strip");

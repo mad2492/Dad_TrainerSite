@@ -472,6 +472,10 @@
       box-shadow: 0 10px 30px var(--soft-shadow);
     }
 
+    .lab-card[hidden] {
+      display: none;
+    }
+
     .lab-card svg {
       flex: 0 0 auto;
       color: var(--green);
@@ -616,7 +620,7 @@
   </style>
 </head>
 <body data-storefront-page="product">
-  <div class="demo-strip" data-hook="storefront-demo-strip"><strong>Demo storefront:</strong> sample products and prices — nothing can be purchased yet.</div>
+  <div class="demo-strip" data-hook="storefront-demo-strip"><strong>Sample product page:</strong> choose an option and add it to the connected preview cart. Nothing here can be purchased.</div>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -639,7 +643,7 @@
   <main>
     <div class="wrap">
       <nav class="crumbs" aria-label="Breadcrumb" data-hook="product-crumbs">
-        <a href="shop.html">Shop</a> / Recovery / <strong data-hook="product-crumb-name">BPC-157</strong>
+        <a href="shop.html">Shop</a> / <span data-hook="product-crumb-category">Recovery</span> / <strong data-hook="product-crumb-name">BPC-157</strong>
       </nav>
 
       <div class="product-grid">
@@ -647,11 +651,6 @@
         <div class="gallery">
           <div class="gallery-main">
             <svg width="140" height="212" viewBox="0 0 64 96" fill="none" role="img" aria-label="Illustration of a BPC-157 vial"><rect x="24" y="4" width="16" height="10" rx="2" fill="#0f2740"></rect><rect x="20" y="14" width="24" height="6" rx="2" fill="#bd8a3d"></rect><rect x="14" y="22" width="36" height="66" rx="6" fill="#ffffff" stroke="#0f2740" stroke-width="2"></rect><rect x="18" y="46" width="28" height="30" rx="3" fill="#f5f3ee" stroke="#ded8cc"></rect><rect x="21" y="51" width="22" height="4" rx="1" fill="#0f2740"></rect><rect x="21" y="59" width="16" height="3" rx="1" fill="#b3262d"></rect></svg>
-          </div>
-          <div class="thumbs">
-            <button class="thumb is-active" type="button" aria-label="View 1" aria-pressed="true"></button>
-            <button class="thumb" type="button" aria-label="View 2" aria-pressed="false"></button>
-            <button class="thumb" type="button" aria-label="View 3" aria-pressed="false"></button>
           </div>
         </div>
 
@@ -665,7 +664,7 @@
             </div>
           </div>
 
-          <p class="description" data-hook="product-description">[Product description — what it is, who it's for, and how it fits a training plan. Written in Pete and Lisa's plain-language voice, reviewed before launch.]</p>
+          <p class="description" data-hook="product-description">A sample product-page layout showing where reviewed product details, documentation, and coach guidance could appear before any future sale.</p>
 
           <div data-hook="product-size-section">
             <span class="field-label" id="size-label">Size</span>
@@ -692,23 +691,23 @@
           <div class="lab-card">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5.5v5.6c0 4.9 3.4 9 8 10.4 4.6-1.4 8-5.5 8-10.4V5.5Z"></path><path d="m8.8 12 2.2 2.2 4.2-4.7"></path></svg>
             <div>
-              <strong>Batch lab report included</strong>
-              <p>Every order ships with the certificate of analysis for its batch. <a href="#">View sample report (PDF)</a></p>
+              <strong>Documentation preview</strong>
+              <p>This area shows where reviewed product documentation could be presented before launch.</p>
             </div>
           </div>
 
           <div class="accordions">
             <details>
               <summary>How it ships &amp; storage</summary>
-              <p>[Shipping method, packaging, and storage instructions — plain-language copy to be written and reviewed before launch.]</p>
+              <p>Final shipping, packaging, and storage guidance would be written and reviewed before any product is offered.</p>
             </details>
             <details>
               <summary>Questions? Ask your coach</summary>
-              <p>[How clients reach Pete or Lisa with product questions, and the agreed response window — copy to be confirmed.]</p>
+              <p>A future version could let coaching clients bring general storefront questions into their regular check-in. Product decisions would still require appropriate professional guidance.</p>
             </details>
             <details>
               <summary>Returns &amp; policies</summary>
-              <p>[Return window, exceptions, and policy links — review with legal before launch.]</p>
+              <p>Return terms, exceptions, and customer policies have not been set for this preview and would be reviewed before launch.</p>
             </details>
           </div>
         </div>
@@ -718,11 +717,12 @@
   </main>
 
   <footer class="site-footer">
-    <p>[Required regulatory / disclaimer copy for peptide products — review with legal before launch] &middot; &copy; Fonseca Fitness</p>
+    <p>Preview only &mdash; not a live store. Product information, safety wording, and policies will be reviewed before launch. &middot; &copy; Fonseca Fitness</p>
   </footer>
 
   <script src="assets/portal-config.js"></script>
   <script src="assets/portal-auth.js"></script>
+  <script src="assets/demo-store.js"></script>
   <script>
     var CART_KEY = "fonseca-cart-demo";
     var THEME_KEY = "fonseca-theme";
@@ -777,7 +777,7 @@
     });
 
     applyTheme(readStore(THEME_KEY) || "light");
-    if (!liveStorefront) {
+    if (!liveStorefront && !window.FonsecaDemoCart) {
       paintCartCount();
     }
 
