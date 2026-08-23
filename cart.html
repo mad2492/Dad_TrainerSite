@@ -659,8 +659,8 @@
     }
   </style>
 </head>
-<body>
-  <div class="demo-strip"><strong>Demo storefront:</strong> sample products and prices — nothing can be purchased yet.</div>
+<body data-storefront-page="cart">
+  <div class="demo-strip" data-hook="storefront-demo-strip"><strong>Demo storefront:</strong> sample products and prices — nothing can be purchased yet.</div>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -673,7 +673,7 @@
         <a class="nav-link" href="portal.html">Portal</a>
         <a class="cart-button" href="cart.html" aria-label="Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.5a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.2L21.5 8H6"></path></svg>
-          <span class="cart-count" id="cart-count" hidden>0</span>
+          <span class="cart-count" id="cart-count" data-hook="storefront-cart-count" hidden>0</span>
         </a>
         <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Dark</button>
       </div>
@@ -699,7 +699,7 @@
   <main>
     <div class="cart-grid">
 
-      <div class="cart-col">
+      <div class="cart-col" data-hook="cart-items">
         <h1>Your cart</h1>
 
         <article class="line-item" data-item="bpc" data-unit="54.00">
@@ -740,7 +740,7 @@
           </button>
         </article>
 
-        <p class="cart-empty" id="cart-empty" hidden>Your cart is empty. <a href="shop.html">Back to the shop</a>.</p>
+        <p class="cart-empty" id="cart-empty" data-hook="cart-empty" hidden>Your cart is empty. <a href="shop.html">Back to the shop</a>.</p>
 
         <div class="coach-band">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 15.5v.5"></path></svg>
@@ -751,13 +751,13 @@
       <aside class="summary" aria-labelledby="summary-title">
         <h2 id="summary-title">Order summary</h2>
         <div class="summary-rows">
-          <div class="summary-row"><span>Subtotal</span><span id="subtotal">$82.00</span></div>
+          <div class="summary-row"><span>Subtotal</span><span id="subtotal" data-hook="cart-subtotal">$82.00</span></div>
           <div class="summary-row"><span>Shipping</span><span>[calculated at checkout]</span></div>
           <div class="summary-row"><span>Tax</span><span>[calculated at checkout]</span></div>
         </div>
-        <div class="summary-total"><span>Total</span><span id="total">$82.00</span></div>
-        <button class="continue-btn" type="button" id="continue-btn" aria-disabled="true">Continue to shipping</button>
-        <p class="checkout-note" id="checkout-note" role="status"></p>
+        <div class="summary-total"><span>Total</span><span id="total" data-hook="cart-total">$82.00</span></div>
+        <button class="continue-btn" type="button" id="continue-btn" data-hook="cart-order-action" aria-disabled="true">Continue to shipping</button>
+        <p class="checkout-note" id="checkout-note" data-hook="cart-message" role="status"></p>
 
         <div class="pay">
           <span class="pay-label">Pay your way</span>
@@ -786,9 +786,12 @@
     <p>[Required regulatory / disclaimer copy for peptide products — review with legal before launch] &middot; &copy; Fonseca Fitness</p>
   </footer>
 
+  <script src="assets/portal-config.js"></script>
+  <script src="assets/portal-auth.js"></script>
   <script>
     var CART_KEY = "fonseca-cart-demo";
     var THEME_KEY = "fonseca-theme";
+    var liveStorefront = Boolean(window.FonsecaAuth && window.FonsecaAuth.enabled);
 
     function readStore(key) {
       try {
@@ -834,7 +837,8 @@
 
     applyTheme(readStore(THEME_KEY) || "light");
 
-    /* ---------- cart demo state ---------- */
+    if (!liveStorefront) {
+      /* ---------- cart demo state ---------- */
 
     var items = Array.prototype.slice.call(document.querySelectorAll(".line-item"));
     var subtotalEl = document.getElementById("subtotal");
@@ -897,7 +901,9 @@
       noteEl.textContent = "Demo — checkout isn't wired up yet";
     });
 
-    render();
+      render();
+    }
   </script>
+  <script src="assets/shop-data.js"></script>
 </body>
 </html>

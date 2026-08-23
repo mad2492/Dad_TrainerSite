@@ -500,8 +500,8 @@
     }
   </style>
 </head>
-<body>
-  <div class="demo-strip"><strong>Demo storefront:</strong> sample products and prices — nothing can be purchased yet.</div>
+<body data-storefront-page="shop">
+  <div class="demo-strip" data-hook="storefront-demo-strip"><strong>Demo storefront:</strong> sample products and prices — nothing can be purchased yet.</div>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -516,7 +516,7 @@
         </nav>
         <a class="cart-button" href="cart.html" id="cart-button" aria-label="Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.5a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.2L21.5 8H6"></path></svg>
-          <span class="cart-count" id="cart-count" hidden>0</span>
+          <span class="cart-count" id="cart-count" data-hook="storefront-cart-count" hidden>0</span>
         </a>
         <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Dark</button>
       </div>
@@ -540,7 +540,7 @@
         <button class="chip" type="button" data-filter="supplies" aria-pressed="false">Supplies</button>
       </div>
 
-      <div class="grid" id="product-grid">
+      <div class="grid" id="product-grid" data-hook="shop-product-grid">
 
         <article class="card" data-category="recovery">
           <div class="card-media">
@@ -660,10 +660,13 @@
     </div>
   </footer>
 
+  <script src="assets/portal-config.js"></script>
+  <script src="assets/portal-auth.js"></script>
   <script>
     (function () {
       var THEME_KEY = "fonseca-theme";
       var CART_KEY = "fonseca-cart-demo";
+      var liveStorefront = Boolean(window.FonsecaAuth && window.FonsecaAuth.enabled);
       var themeToggle = document.getElementById("theme-toggle");
       var cartCount = document.getElementById("cart-count");
 
@@ -704,25 +707,27 @@
 
       /* ---------- cart demo ---------- */
 
-      var count = parseInt(readStore(CART_KEY), 10);
-      if (!isFinite(count) || count < 0) {
-        count = 0;
-      }
+      if (!liveStorefront) {
+        var count = parseInt(readStore(CART_KEY), 10);
+        if (!isFinite(count) || count < 0) {
+          count = 0;
+        }
 
-      function renderCart() {
-        cartCount.textContent = String(count);
-        cartCount.hidden = count === 0;
-      }
+        function renderCart() {
+          cartCount.textContent = String(count);
+          cartCount.hidden = count === 0;
+        }
 
-      document.querySelectorAll("[data-add]").forEach(function (button) {
-        button.addEventListener("click", function () {
-          count += 1;
-          writeStore(CART_KEY, String(count));
-          renderCart();
+        document.querySelectorAll("[data-add]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            count += 1;
+            writeStore(CART_KEY, String(count));
+            renderCart();
+          });
         });
-      });
 
-      renderCart();
+        renderCart();
+      }
 
       /* ---------- category filter ---------- */
 
@@ -742,5 +747,6 @@
       });
     })();
   </script>
+  <script src="assets/shop-data.js"></script>
 </body>
 </html>

@@ -615,8 +615,8 @@
     }
   </style>
 </head>
-<body>
-  <div class="demo-strip"><strong>Demo storefront:</strong> sample products and prices — nothing can be purchased yet.</div>
+<body data-storefront-page="product">
+  <div class="demo-strip" data-hook="storefront-demo-strip"><strong>Demo storefront:</strong> sample products and prices — nothing can be purchased yet.</div>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -629,7 +629,7 @@
         <a class="nav-link" href="portal.html">Portal</a>
         <a class="cart-button" href="cart.html" aria-label="Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.5a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.2L21.5 8H6"></path></svg>
-          <span class="cart-count" id="cart-count" hidden>0</span>
+          <span class="cart-count" id="cart-count" data-hook="storefront-cart-count" hidden>0</span>
         </a>
         <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Dark</button>
       </div>
@@ -639,7 +639,7 @@
   <main>
     <div class="wrap">
       <nav class="crumbs" aria-label="Breadcrumb">
-        <a href="shop.html">Shop</a> / Recovery / <strong>BPC-157</strong>
+        <a href="shop.html">Shop</a> / <span data-hook="product-crumb-category">Recovery</span> / <strong data-hook="product-crumb-name">BPC-157</strong>
       </nav>
 
       <div class="product-grid">
@@ -657,19 +657,19 @@
 
         <div class="detail">
           <div class="detail-head">
-            <p class="eyebrow">Recovery</p>
-            <h1>BPC-157</h1>
+            <p class="eyebrow" data-hook="product-category">Recovery</p>
+            <h1 data-hook="product-name">BPC-157</h1>
             <div class="price-row">
-              <span class="price" id="price">$54.00</span>
-              <span class="stock-pill">In stock</span>
+              <span class="price" id="price" data-hook="product-price">$54.00</span>
+              <span class="stock-pill" data-hook="product-stock">In stock</span>
             </div>
           </div>
 
-          <p class="description">[Product description — what it is, who it's for, and how it fits a training plan. Written in Pete and Lisa's plain-language voice, reviewed before launch.]</p>
+          <p class="description" data-hook="product-description">[Product description — what it is, who it's for, and how it fits a training plan. Written in Pete and Lisa's plain-language voice, reviewed before launch.]</p>
 
-          <div>
+          <div data-hook="product-size-section">
             <span class="field-label" id="size-label">Size</span>
-            <div class="size-pills" role="group" aria-labelledby="size-label">
+            <div class="size-pills" role="group" aria-labelledby="size-label" data-hook="product-sizes">
               <button class="size-pill" type="button" data-size="5mg" data-price="54.00" aria-pressed="true">5mg</button>
               <button class="size-pill" type="button" data-size="10mg" data-price="89.00" aria-pressed="false">10mg</button>
             </div>
@@ -678,16 +678,16 @@
           <div class="buy-row">
             <div class="stepper">
               <button class="step-btn" type="button" id="qty-minus" aria-label="Decrease quantity">&minus;</button>
-              <span class="step-value" id="qty" aria-live="polite">1</span>
+              <span class="step-value" id="qty" data-hook="product-qty" aria-live="polite">1</span>
               <button class="step-btn" type="button" id="qty-plus" aria-label="Increase quantity">+</button>
             </div>
-            <button class="add-btn" type="button" id="add-to-cart">
+            <button class="add-btn" type="button" id="add-to-cart" data-hook="product-add">
               <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.5a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.2L21.5 8H6"></path></svg>
               Add to cart
             </button>
           </div>
 
-          <p class="add-note" id="add-note" role="status"></p>
+          <p class="add-note" id="add-note" data-hook="product-message" role="status"></p>
 
           <div class="lab-card">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5.5v5.6c0 4.9 3.4 9 8 10.4 4.6-1.4 8-5.5 8-10.4V5.5Z"></path><path d="m8.8 12 2.2 2.2 4.2-4.7"></path></svg>
@@ -721,9 +721,12 @@
     <p>[Required regulatory / disclaimer copy for peptide products — review with legal before launch] &middot; &copy; Fonseca Fitness</p>
   </footer>
 
+  <script src="assets/portal-config.js"></script>
+  <script src="assets/portal-auth.js"></script>
   <script>
     var CART_KEY = "fonseca-cart-demo";
     var THEME_KEY = "fonseca-theme";
+    var liveStorefront = Boolean(window.FonsecaAuth && window.FonsecaAuth.enabled);
 
     function readStore(key) {
       try {
@@ -774,7 +777,9 @@
     });
 
     applyTheme(readStore(THEME_KEY) || "light");
-    paintCartCount();
+    if (!liveStorefront) {
+      paintCartCount();
+    }
 
     /* ---------- gallery thumbs ---------- */
 
@@ -788,7 +793,8 @@
       });
     });
 
-    /* ---------- size + price ---------- */
+    if (!liveStorefront) {
+      /* ---------- size + price ---------- */
 
     var priceEl = document.getElementById("price");
     var sizePills = Array.prototype.slice.call(document.querySelectorAll(".size-pill"));
@@ -825,12 +831,14 @@
 
     var addNote = document.getElementById("add-note");
 
-    document.getElementById("add-to-cart").addEventListener("click", function () {
-      var next = readCartCount() + qty;
-      writeStore(CART_KEY, String(next));
-      paintCartCount();
-      addNote.textContent = "Added " + qty + (qty === 1 ? " item" : " items") + " to your cart (demo).";
-    });
+      document.getElementById("add-to-cart").addEventListener("click", function () {
+        var next = readCartCount() + qty;
+        writeStore(CART_KEY, String(next));
+        paintCartCount();
+        addNote.textContent = "Added " + qty + (qty === 1 ? " item" : " items") + " to your cart (demo).";
+      });
+    }
   </script>
+  <script src="assets/shop-data.js"></script>
 </body>
 </html>
