@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fonseca Fitness portal demo — preview the guest, client, and coach experiences.">
+  <title>Fonseca Fitness Portal</title>
+  <link rel="icon" type="image/png" href="dist/fonseca-fitness-logo-assets/fonseca-fitness-favicon.png">
+  <style>
+    :root {
+      --navy: #0f2740;
+      --red: #b3262d;
+      --paper: #f5f3ee;
+      --white: #ffffff;
+      --ink: #1d242c;
+      --muted: #5d6670;
+      --line: #ded8cc;
+      --gold: #bd8a3d;
+      --green: #2f6e4f;
+      --surface: #ffffff;
+      --surface-soft: #f5f3ee;
+      --topbar-bg: rgba(245, 243, 238, 0.96);
+      --soft-shadow: rgba(15, 39, 64, 0.08);
+      --shadow: 0 18px 50px rgba(15, 39, 64, 0.13);
+      --radius: 8px;
+      --max: 1120px;
+    }
+
+    body[data-theme="dark"] {
+      --paper: #071727;
+      --white: #10263a;
+      --ink: #edf2f6;
+      --muted: #b7c3ce;
+      --line: rgba(245, 243, 238, 0.18);
+      --surface: #10263a;
+      --surface-soft: #071727;
+      --topbar-bg: rgba(7, 23, 39, 0.94);
+      --soft-shadow: rgba(0, 0, 0, 0.28);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, Avenir Next, Segoe UI, Arial, sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    img,
+    svg {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--topbar-bg);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      text-decoration: none;
+    }
+
+    .brand-lockup {
+      display: block;
+      width: min(52vw, 260px);
+      height: 44px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .tab-switcher {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      box-shadow: 0 4px 16px var(--soft-shadow);
+    }
+
+    .tab-button {
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      padding: 9px 14px;
+      min-height: 38px;
+      font: inherit;
+      font-weight: 800;
+      font-size: 0.78rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .tab-button[aria-selected="true"] {
+      background: var(--navy);
+      color: #ffffff;
+    }
+
+    body[data-theme="dark"] .tab-button[aria-selected="true"] {
+      background: var(--red);
+      color: #ffffff;
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      min-height: 44px;
+      padding: 9px 12px;
+      background: var(--surface);
+      color: var(--navy);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 4px 16px var(--soft-shadow);
+    }
+
+    body[data-theme="dark"] .theme-toggle {
+      color: var(--ink);
+    }
+
+    .demo-strip {
+      background: var(--navy);
+      color: #edf2f6;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 8px 16px;
+    }
+
+    .demo-strip strong {
+      color: var(--gold);
+    }
+
+    .persona-view {
+      display: none;
+    }
+
+    .persona-view.is-active {
+      display: block;
+    }
+
+    /* Guest view */
+    .guest-wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 16px 72px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (min-width: 860px) {
+      .guest-wrap {
+        grid-template-columns: 1.1fr 1fr;
+        padding-top: 64px;
+        gap: 48px;
+      }
+    }
+
+    .guest-intro .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 0 0 10px;
+    }
+
+    .guest-intro h1 {
+      font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+      line-height: 1.15;
+      color: var(--navy);
+      margin: 0 0 12px;
+    }
+
+    body[data-theme="dark"] .guest-intro h1 {
+      color: var(--ink);
+    }
+
+    .guest-intro p {
+      color: var(--muted);
+      margin: 0 0 20px;
+      max-width: 46ch;
+    }
+
+    .persona-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .persona-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      text-align: left;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      font: inherit;
+      color: var(--ink);
+      cursor: pointer;
+      min-height: 44px;
+      box-shadow: 0 4px 16px var(--soft-shadow);
+    }
+
+    .persona-card svg {
+      flex-shrink: 0;
+      color: var(--red);
+    }
+
+    .persona-card strong {
+      display: block;
+      color: var(--navy);
+    }
+
+    body[data-theme="dark"] .persona-card strong {
+      color: var(--ink);
+    }
+
+    .persona-card span {
+      display: block;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .persona-card .go {
+      margin-left: auto;
+      color: var(--red);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .signin-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .signin-card h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--navy);
+    }
+
+    body[data-theme="dark"] .signin-card h2 {
+      color: var(--ink);
+    }
+
+    .signin-card label {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .signin-card input {
+      font: inherit;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+      color: var(--ink);
+      min-height: 44px;
+    }
+
+    .signin-btn {
+      background: var(--red);
+      color: #ffffff;
+      border: 0;
+      border-radius: var(--radius);
+      padding: 14px;
+      font: inherit;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      min-height: 48px;
+    }
+
+    .signin-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0;
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--red);
+      text-decoration: none;
+      margin-top: 18px;
+      min-height: 44px;
+    }
+
+    /* @VIEW_STYLES */
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <div class="demo-strip"><strong>Demo:</strong> switch between what a guest, a client, and Coach Pete would see. No real accounts yet.</div>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html" aria-label="Fonseca Fitness home">
+          <img class="brand-lockup" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline.png" data-light-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline.png" data-dark-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline-dark-safe.png" alt="Fonseca Fitness">
+        </a>
+
+        <div class="topbar-actions">
+          <div class="tab-switcher" role="tablist" aria-label="Portal personas">
+            <button class="tab-button" id="tab-guest" role="tab" aria-selected="true" aria-controls="view-guest" data-persona-target="guest">Guest</button>
+            <button class="tab-button" id="tab-client" role="tab" aria-selected="false" aria-controls="view-client" data-persona-target="client">Client</button>
+            <button class="tab-button" id="tab-coach" role="tab" aria-selected="false" aria-controls="view-coach" data-persona-target="coach">Coach</button>
+          </div>
+          <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Dark</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="persona-view is-active" id="view-guest" role="tabpanel" aria-labelledby="tab-guest">
+        <div class="guest-wrap">
+          <div class="guest-intro">
+            <p class="eyebrow">Fonseca Fitness Portal</p>
+            <h1>One login. Three different front doors.</h1>
+            <p>Clients see their plan, check-ins, and orders. Coach Pete sees his people, their session packages, and invoices. Guests see this page — a place to sign in or start coaching.</p>
+            <div class="persona-cards">
+              <button class="persona-card" type="button" data-persona-target="client">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M2.5 9.5v5M21.5 9.5v5M6.5 12h11"></path></svg>
+                <span><strong>Client portal</strong><span>Weekly plan, check-ins, orders, coach notes.</span></span>
+                <span class="go" aria-hidden="true">Preview →</span>
+              </button>
+              <button class="persona-card" type="button" data-persona-target="coach">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17.5" cy="9" r="2.8"></circle><path d="M15.5 14.6a5.4 5.4 0 0 1 6 5.4"></path></svg>
+                <span><strong>Training portal</strong><span>Coach view — clients, session packs, invoices.</span></span>
+                <span class="go" aria-hidden="true">Preview →</span>
+              </button>
+            </div>
+            <a class="back-link" href="index.html">← Back to the main site</a>
+          </div>
+
+          <form class="signin-card" onsubmit="return false">
+            <h2>Sign in</h2>
+            <label>Email
+              <input type="email" name="email" placeholder="you@example.com" autocomplete="off">
+            </label>
+            <label>Password
+              <input type="password" name="password" placeholder="••••••••" autocomplete="off">
+            </label>
+            <button class="signin-btn" type="button" data-persona-target="client">Sign in</button>
+            <p class="signin-note">Demo only — the button previews the client portal. Real accounts come later.</p>
+          </form>
+        </div>
+      </section>
+
+      <!-- @CLIENT_VIEW -->
+
+      <!-- @COACH_VIEW -->
+    </main>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+    const personaButtons = Array.from(document.querySelectorAll("[data-persona-target]"));
+    const tabs = Array.from(document.querySelectorAll(".tab-button[data-persona-target]"));
+    const views = {
+      guest: document.getElementById("view-guest"),
+      client: document.getElementById("view-client"),
+      coach: document.getElementById("view-coach")
+    };
+
+    function applyTheme(theme) {
+      document.body.dataset.theme = theme;
+      const isDark = theme === "dark";
+      themeToggle.textContent = isDark ? "Light" : "Dark";
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      document.querySelectorAll("[data-light-src][data-dark-src]").forEach((image) => {
+        image.src = isDark ? image.dataset.darkSrc : image.dataset.lightSrc;
+      });
+      localStorage.setItem("fonseca-theme", theme);
+    }
+
+    function setPersona(name, updateHash = true) {
+      if (!views[name]) {
+        name = "guest";
+      }
+
+      tabs.forEach((button) => {
+        button.setAttribute("aria-selected", String(button.dataset.personaTarget === name));
+      });
+
+      Object.entries(views).forEach(([viewName, element]) => {
+        if (element) {
+          element.classList.toggle("is-active", viewName === name);
+        }
+      });
+
+      if (updateHash) {
+        history.replaceState(null, "", "#" + name);
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    personaButtons.forEach((button) => {
+      button.addEventListener("click", () => setPersona(button.dataset.personaTarget));
+    });
+
+    themeToggle.addEventListener("click", () => {
+      applyTheme(document.body.dataset.theme === "dark" ? "light" : "dark");
+    });
+
+    applyTheme(localStorage.getItem("fonseca-theme") || "light");
+    setPersona(window.location.hash.replace("#", "") || "guest", false);
+  </script>
+</body>
+</html>
