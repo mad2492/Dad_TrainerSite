@@ -472,6 +472,10 @@
       box-shadow: 0 10px 30px var(--soft-shadow);
     }
 
+    .lab-card[hidden] {
+      display: none;
+    }
+
     .lab-card svg {
       flex: 0 0 auto;
       color: var(--green);
@@ -615,8 +619,8 @@
     }
   </style>
 </head>
-<body>
-  <div class="demo-strip"><strong>Demo storefront:</strong> sample products and prices — nothing can be purchased yet.</div>
+<body data-storefront-page="product">
+  <div class="demo-strip" data-hook="storefront-demo-strip"><strong>Sample product page:</strong> choose an option and add it to the connected preview cart. Nothing here can be purchased.</div>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -629,7 +633,7 @@
         <a class="nav-link" href="portal.html">Portal</a>
         <a class="cart-button" href="cart.html" aria-label="Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.5a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.2L21.5 8H6"></path></svg>
-          <span class="cart-count" id="cart-count" hidden>0</span>
+          <span class="cart-count" id="cart-count" data-hook="storefront-cart-count" hidden>0</span>
         </a>
         <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Dark</button>
       </div>
@@ -638,8 +642,8 @@
 
   <main>
     <div class="wrap">
-      <nav class="crumbs" aria-label="Breadcrumb">
-        <a href="shop.html">Shop</a> / Recovery / <strong>BPC-157</strong>
+      <nav class="crumbs" aria-label="Breadcrumb" data-hook="product-crumbs">
+        <a href="shop.html">Shop</a> / <span data-hook="product-crumb-category">Recovery</span> / <strong data-hook="product-crumb-name">BPC-157</strong>
       </nav>
 
       <div class="product-grid">
@@ -648,28 +652,23 @@
           <div class="gallery-main">
             <svg width="140" height="212" viewBox="0 0 64 96" fill="none" role="img" aria-label="Illustration of a BPC-157 vial"><rect x="24" y="4" width="16" height="10" rx="2" fill="#0f2740"></rect><rect x="20" y="14" width="24" height="6" rx="2" fill="#bd8a3d"></rect><rect x="14" y="22" width="36" height="66" rx="6" fill="#ffffff" stroke="#0f2740" stroke-width="2"></rect><rect x="18" y="46" width="28" height="30" rx="3" fill="#f5f3ee" stroke="#ded8cc"></rect><rect x="21" y="51" width="22" height="4" rx="1" fill="#0f2740"></rect><rect x="21" y="59" width="16" height="3" rx="1" fill="#b3262d"></rect></svg>
           </div>
-          <div class="thumbs">
-            <button class="thumb is-active" type="button" aria-label="View 1" aria-pressed="true"></button>
-            <button class="thumb" type="button" aria-label="View 2" aria-pressed="false"></button>
-            <button class="thumb" type="button" aria-label="View 3" aria-pressed="false"></button>
-          </div>
         </div>
 
         <div class="detail">
           <div class="detail-head">
-            <p class="eyebrow">Recovery</p>
-            <h1>BPC-157</h1>
+            <p class="eyebrow" data-hook="product-category">Recovery</p>
+            <h1 data-hook="product-name">BPC-157</h1>
             <div class="price-row">
-              <span class="price" id="price">$54.00</span>
-              <span class="stock-pill">In stock</span>
+              <span class="price" id="price" data-hook="product-price">$54.00</span>
+              <span class="stock-pill" data-hook="product-stock">In stock</span>
             </div>
           </div>
 
-          <p class="description">[Product description — what it is, who it's for, and how it fits a training plan. Written in Pete and Lisa's plain-language voice, reviewed before launch.]</p>
+          <p class="description" data-hook="product-description">A sample product-page layout showing where reviewed product details, documentation, and coach guidance could appear before any future sale.</p>
 
-          <div>
+          <div data-hook="product-size-section">
             <span class="field-label" id="size-label">Size</span>
-            <div class="size-pills" role="group" aria-labelledby="size-label">
+            <div class="size-pills" role="group" aria-labelledby="size-label" data-hook="product-sizes">
               <button class="size-pill" type="button" data-size="5mg" data-price="54.00" aria-pressed="true">5mg</button>
               <button class="size-pill" type="button" data-size="10mg" data-price="89.00" aria-pressed="false">10mg</button>
             </div>
@@ -678,37 +677,37 @@
           <div class="buy-row">
             <div class="stepper">
               <button class="step-btn" type="button" id="qty-minus" aria-label="Decrease quantity">&minus;</button>
-              <span class="step-value" id="qty" aria-live="polite">1</span>
+              <span class="step-value" id="qty" data-hook="product-qty" aria-live="polite">1</span>
               <button class="step-btn" type="button" id="qty-plus" aria-label="Increase quantity">+</button>
             </div>
-            <button class="add-btn" type="button" id="add-to-cart">
+            <button class="add-btn" type="button" id="add-to-cart" data-hook="product-add">
               <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.5a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.2L21.5 8H6"></path></svg>
               Add to cart
             </button>
           </div>
 
-          <p class="add-note" id="add-note" role="status"></p>
+          <p class="add-note" id="add-note" data-hook="product-message" role="status"></p>
 
           <div class="lab-card">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5.5v5.6c0 4.9 3.4 9 8 10.4 4.6-1.4 8-5.5 8-10.4V5.5Z"></path><path d="m8.8 12 2.2 2.2 4.2-4.7"></path></svg>
             <div>
-              <strong>Batch lab report included</strong>
-              <p>Every order ships with the certificate of analysis for its batch. <a href="#">View sample report (PDF)</a></p>
+              <strong>Documentation preview</strong>
+              <p>This area shows where reviewed product documentation could be presented before launch.</p>
             </div>
           </div>
 
           <div class="accordions">
             <details>
               <summary>How it ships &amp; storage</summary>
-              <p>[Shipping method, packaging, and storage instructions — plain-language copy to be written and reviewed before launch.]</p>
+              <p>Final shipping, packaging, and storage guidance would be written and reviewed before any product is offered.</p>
             </details>
             <details>
               <summary>Questions? Ask your coach</summary>
-              <p>[How clients reach Pete or Lisa with product questions, and the agreed response window — copy to be confirmed.]</p>
+              <p>A future version could let coaching clients bring general storefront questions into their regular check-in. Product decisions would still require appropriate professional guidance.</p>
             </details>
             <details>
               <summary>Returns &amp; policies</summary>
-              <p>[Return window, exceptions, and policy links — review with legal before launch.]</p>
+              <p>Return terms, exceptions, and customer policies have not been set for this preview and would be reviewed before launch.</p>
             </details>
           </div>
         </div>
@@ -718,12 +717,16 @@
   </main>
 
   <footer class="site-footer">
-    <p>[Required regulatory / disclaimer copy for peptide products — review with legal before launch] &middot; &copy; Fonseca Fitness</p>
+    <p>Preview only &mdash; not a live store. Product information, safety wording, and policies will be reviewed before launch. &middot; &copy; Fonseca Fitness</p>
   </footer>
 
+  <script src="assets/portal-config.js"></script>
+  <script src="assets/portal-auth.js"></script>
+  <script src="assets/demo-store.js"></script>
   <script>
     var CART_KEY = "fonseca-cart-demo";
     var THEME_KEY = "fonseca-theme";
+    var liveStorefront = Boolean(window.FonsecaAuth && window.FonsecaAuth.enabled);
 
     function readStore(key) {
       try {
@@ -774,7 +777,9 @@
     });
 
     applyTheme(readStore(THEME_KEY) || "light");
-    paintCartCount();
+    if (!liveStorefront && !window.FonsecaDemoCart) {
+      paintCartCount();
+    }
 
     /* ---------- gallery thumbs ---------- */
 
@@ -788,7 +793,8 @@
       });
     });
 
-    /* ---------- size + price ---------- */
+    if (!liveStorefront) {
+      /* ---------- size + price ---------- */
 
     var priceEl = document.getElementById("price");
     var sizePills = Array.prototype.slice.call(document.querySelectorAll(".size-pill"));
@@ -825,12 +831,14 @@
 
     var addNote = document.getElementById("add-note");
 
-    document.getElementById("add-to-cart").addEventListener("click", function () {
-      var next = readCartCount() + qty;
-      writeStore(CART_KEY, String(next));
-      paintCartCount();
-      addNote.textContent = "Added " + qty + (qty === 1 ? " item" : " items") + " to your cart (demo).";
-    });
+      document.getElementById("add-to-cart").addEventListener("click", function () {
+        var next = readCartCount() + qty;
+        writeStore(CART_KEY, String(next));
+        paintCartCount();
+        addNote.textContent = "Added " + qty + (qty === 1 ? " item" : " items") + " to your cart (demo).";
+      });
+    }
   </script>
+  <script src="assets/shop-data.js"></script>
 </body>
 </html>

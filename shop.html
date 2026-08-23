@@ -500,8 +500,8 @@
     }
   </style>
 </head>
-<body>
-  <div class="demo-strip"><strong>Demo storefront:</strong> sample products and prices — nothing can be purchased yet.</div>
+<body data-storefront-page="shop">
+  <div class="demo-strip" data-hook="storefront-demo-strip"><strong>Sample shop:</strong> explore product pages and try the connected preview cart. Nothing here can be purchased.</div>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -516,7 +516,7 @@
         </nav>
         <a class="cart-button" href="cart.html" id="cart-button" aria-label="Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.5a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.2L21.5 8H6"></path></svg>
-          <span class="cart-count" id="cart-count" hidden>0</span>
+          <span class="cart-count" id="cart-count" data-hook="storefront-cart-count" hidden>0</span>
         </a>
         <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Dark</button>
       </div>
@@ -526,9 +526,9 @@
   <main>
     <div class="wrap">
       <div class="shop-head">
-        <p class="eyebrow">The shop</p>
-        <h1>Peptides &amp; merch</h1>
-        <p class="shop-intro">Every peptide ships with its batch lab report. Not sure what fits your plan? Ask Pete or Lisa in your weekly check-in.</p>
+        <p class="eyebrow">Future storefront preview</p>
+        <h1>Sample products &amp; merch</h1>
+        <p class="shop-intro">Try the filters, open any sample product, and add items to the cart. Final products, documentation, and policies would be reviewed before launch.</p>
       </div>
 
       <div class="chips" role="group" aria-label="Filter products by category">
@@ -537,10 +537,9 @@
         <button class="chip" type="button" data-filter="growth" aria-pressed="false">Growth &amp; performance</button>
         <button class="chip" type="button" data-filter="metabolic" aria-pressed="false">Metabolic</button>
         <button class="chip" type="button" data-filter="merch" aria-pressed="false">Merch</button>
-        <button class="chip" type="button" data-filter="supplies" aria-pressed="false">Supplies</button>
       </div>
 
-      <div class="grid" id="product-grid">
+      <div class="grid" id="product-grid" data-hook="shop-product-grid">
 
         <article class="card" data-category="recovery">
           <div class="card-media">
@@ -549,14 +548,14 @@
           </div>
           <div class="card-body">
             <span class="card-cat">Recovery</span>
-            <a class="card-name" href="product.html">BPC-157 &middot; 5mg</a>
+            <a class="card-name" href="product.html?demo=bpc-157">BPC-157 &middot; 5mg</a>
             <span class="card-lab">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-5"></path><circle cx="12" cy="12" r="9"></circle></svg>
-              Batch lab report
+              Sample documentation
             </span>
             <div class="card-foot">
               <span class="price">$54.00</span>
-              <button class="add-btn" type="button" data-add="BPC-157 · 5mg">Add</button>
+              <button class="add-btn" type="button" data-demo-product="bpc-157-5">Add</button>
             </div>
           </div>
         </article>
@@ -568,14 +567,14 @@
           </div>
           <div class="card-body">
             <span class="card-cat">Recovery</span>
-            <a class="card-name" href="product.html">TB-500 &middot; 5mg</a>
+            <a class="card-name" href="product.html?demo=tb-500">TB-500 &middot; 5mg</a>
             <span class="card-lab">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-5"></path><circle cx="12" cy="12" r="9"></circle></svg>
-              Batch lab report
+              Sample documentation
             </span>
             <div class="card-foot">
               <span class="price">$62.00</span>
-              <button class="add-btn" type="button" data-add="TB-500 · 5mg">Add</button>
+              <button class="add-btn" type="button" data-demo-product="tb-500-5">Add</button>
             </div>
           </div>
         </article>
@@ -587,14 +586,14 @@
           </div>
           <div class="card-body">
             <span class="card-cat">Growth &amp; performance</span>
-            <a class="card-name" href="product.html">CJC-1295 / Ipamorelin &middot; 10mg</a>
+            <a class="card-name" href="product.html?demo=cjc-ipamorelin">CJC-1295 / Ipamorelin &middot; 10mg</a>
             <span class="card-lab">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-5"></path><circle cx="12" cy="12" r="9"></circle></svg>
-              Batch lab report
+              Sample documentation
             </span>
             <div class="card-foot">
               <span class="price">$89.00</span>
-              <button class="add-btn" type="button" data-add="CJC-1295 / Ipamorelin · 10mg">Add</button>
+              <button class="add-btn" type="button" data-demo-product="cjc-ipamorelin-10">Add</button>
             </div>
           </div>
         </article>
@@ -606,10 +605,10 @@
           </div>
           <div class="card-body">
             <span class="card-cat">Metabolic</span>
-            <a class="card-name" href="product.html">MOTS-c &middot; 10mg</a>
+            <a class="card-name" href="product.html?demo=mots-c">MOTS-c &middot; 10mg</a>
             <span class="card-lab">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-5"></path><circle cx="12" cy="12" r="9"></circle></svg>
-              Batch lab report
+              Sample documentation
             </span>
             <div class="card-foot">
               <span class="price">$74.00</span>
@@ -625,11 +624,11 @@
           </div>
           <div class="card-body">
             <span class="card-cat">Merch</span>
-            <a class="card-name" href="product.html">Fonseca Fitness Tee &middot; Navy</a>
+            <a class="card-name" href="product.html?demo=tee-navy">Fonseca Fitness Tee &middot; Navy</a>
             <span class="card-sizes">S &middot; M &middot; L &middot; XL &middot; 2XL</span>
             <div class="card-foot">
               <span class="price">$28.00</span>
-              <button class="add-btn" type="button" data-add="Fonseca Fitness Tee · Navy">Add</button>
+              <button class="add-btn" type="button" data-demo-product="tee-navy">Add</button>
             </div>
           </div>
         </article>
@@ -641,11 +640,11 @@
           </div>
           <div class="card-body">
             <span class="card-cat">Merch</span>
-            <a class="card-name" href="product.html">Fonseca Fitness Tee &middot; Bone</a>
+            <a class="card-name" href="product.html?demo=tee-bone">Fonseca Fitness Tee &middot; Bone</a>
             <span class="card-sizes">S &middot; M &middot; L &middot; XL &middot; 2XL</span>
             <div class="card-foot">
               <span class="price">$28.00</span>
-              <button class="add-btn" type="button" data-add="Fonseca Fitness Tee · Bone">Add</button>
+              <button class="add-btn" type="button" data-demo-product="tee-bone">Add</button>
             </div>
           </div>
         </article>
@@ -656,14 +655,18 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <p>[Required regulatory / disclaimer copy for peptide products — review with legal before launch] &middot; &copy; Fonseca Fitness</p>
+      <p>Preview only &mdash; not a live store. Product information, safety wording, and policies will be reviewed before launch. &middot; &copy; Fonseca Fitness</p>
     </div>
   </footer>
 
+  <script src="assets/portal-config.js"></script>
+  <script src="assets/portal-auth.js"></script>
+  <script src="assets/demo-store.js"></script>
   <script>
     (function () {
       var THEME_KEY = "fonseca-theme";
       var CART_KEY = "fonseca-cart-demo";
+      var liveStorefront = Boolean(window.FonsecaAuth && window.FonsecaAuth.enabled);
       var themeToggle = document.getElementById("theme-toggle");
       var cartCount = document.getElementById("cart-count");
 
@@ -704,25 +707,27 @@
 
       /* ---------- cart demo ---------- */
 
-      var count = parseInt(readStore(CART_KEY), 10);
-      if (!isFinite(count) || count < 0) {
-        count = 0;
-      }
+      if (!liveStorefront && !window.FonsecaDemoCart) {
+        var count = parseInt(readStore(CART_KEY), 10);
+        if (!isFinite(count) || count < 0) {
+          count = 0;
+        }
 
-      function renderCart() {
-        cartCount.textContent = String(count);
-        cartCount.hidden = count === 0;
-      }
+        function renderCart() {
+          cartCount.textContent = String(count);
+          cartCount.hidden = count === 0;
+        }
 
-      document.querySelectorAll("[data-add]").forEach(function (button) {
-        button.addEventListener("click", function () {
-          count += 1;
-          writeStore(CART_KEY, String(count));
-          renderCart();
+        document.querySelectorAll("[data-add]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            count += 1;
+            writeStore(CART_KEY, String(count));
+            renderCart();
+          });
         });
-      });
 
-      renderCart();
+        renderCart();
+      }
 
       /* ---------- category filter ---------- */
 
@@ -742,5 +747,6 @@
       });
     })();
   </script>
+  <script src="assets/shop-data.js"></script>
 </body>
 </html>

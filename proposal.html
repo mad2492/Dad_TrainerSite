@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fonseca Fitness online coaching website draft and proposal notes.">
+  <title>Fonseca Fitness</title>
+  <link rel="icon" type="image/png" href="dist/fonseca-fitness-logo-assets/fonseca-fitness-favicon.png">
+  <style>
+    :root {
+      --navy: #0f2740;
+      --red: #b3262d;
+      --paper: #f5f3ee;
+      --white: #ffffff;
+      --ink: #1d242c;
+      --muted: #5d6670;
+      --line: #ded8cc;
+      --gold: #bd8a3d;
+      --green: #2f6e4f;
+      --surface: #ffffff;
+      --surface-soft: #f5f3ee;
+      --topbar-bg: rgba(245, 243, 238, 0.96);
+      --soft-shadow: rgba(15, 39, 64, 0.08);
+      --shadow: 0 18px 50px rgba(15, 39, 64, 0.13);
+      --radius: 8px;
+      --max: 1120px;
+    }
+
+    body[data-theme="dark"] {
+      --paper: #071727;
+      --white: #10263a;
+      --ink: #edf2f6;
+      --muted: #b7c3ce;
+      --line: rgba(245, 243, 238, 0.18);
+      --surface: #10263a;
+      --surface-soft: #071727;
+      --topbar-bg: rgba(7, 23, 39, 0.94);
+      --soft-shadow: rgba(0, 0, 0, 0.28);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(179, 38, 45, 0.08), transparent 34rem),
+        var(--paper);
+      color: var(--ink);
+      font-family: Inter, Avenir Next, Segoe UI, Arial, sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    img,
+    svg {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-shell {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--topbar-bg);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      text-decoration: none;
+    }
+
+    .brand-lockup {
+      display: block;
+      width: min(62vw, 315px);
+      height: 50px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .tab-switcher {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      box-shadow: 0 4px 16px var(--soft-shadow);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      min-height: 44px;
+      padding: 9px 12px;
+      background: var(--surface);
+      color: var(--navy);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 4px 16px var(--soft-shadow);
+    }
+
+    body[data-theme="dark"] .theme-toggle,
+    body[data-theme="dark"] .tab-button,
+    body[data-theme="dark"] .tab-link,
+    body[data-theme="dark"] h2,
+    body[data-theme="dark"] h3,
+    body[data-theme="dark"] .nav-pills a,
+    body[data-theme="dark"] .mini-item strong,
+    body[data-theme="dark"] .coach strong {
+      color: var(--ink);
+    }
+
+    .tab-button,
+    .tab-link {
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      padding: 9px 11px;
+      min-height: 38px;
+      font: inherit;
+      font-weight: 800;
+      font-size: 0.78rem;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .tab-button[aria-selected="true"] {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    body[data-theme="dark"] .tab-button[aria-selected="true"] {
+      background: var(--red);
+      color: #ffffff;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.is-active {
+      display: block;
+    }
+
+    section {
+      padding: 42px 16px;
+    }
+
+    .section-inner {
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(15, 39, 64, 0.96), rgba(15, 39, 64, 0.88)),
+        radial-gradient(circle at 25% 15%, rgba(179, 38, 45, 0.34), transparent 32%);
+      color: var(--white);
+      padding: 28px 16px 34px;
+    }
+
+    .hero-grid {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      display: grid;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-grid > *,
+    .split > * {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--red);
+      font-size: 0.76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .hero .eyebrow {
+      color: #f0c8c7;
+    }
+
+    h1,
+    h2,
+    h3 {
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, Times New Roman, serif;
+      font-size: clamp(2rem, 7vw, 4.2rem);
+      line-height: 0.98;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-family: Georgia, Times New Roman, serif;
+      font-size: clamp(1.7rem, 6vw, 3.2rem);
+      line-height: 1.04;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 1.02rem;
+      line-height: 1.2;
+    }
+
+    .hero h2 {
+      color: var(--white);
+    }
+
+    .hero h1 {
+      max-width: 300px;
+    }
+
+    .lead {
+      margin: 16px 0 0;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: clamp(1.02rem, 4vw, 1.35rem);
+      max-width: 780px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 46px;
+      border: 2px solid transparent;
+      border-radius: 999px;
+      padding: 12px 18px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 0.94rem;
+    }
+
+    .button.primary {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .button.secondary {
+      border-color: rgba(255, 255, 255, 0.55);
+      color: var(--white);
+    }
+
+    .hero-visual {
+      max-width: 300px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .hero .lead,
+    .actions,
+    .stats {
+      max-width: 300px;
+    }
+
+    .logo-preview {
+      min-height: 280px;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(245, 243, 238, 0.96), rgba(245, 243, 238, 0.88)),
+        repeating-linear-gradient(90deg, rgba(15, 39, 64, 0.06) 0 1px, transparent 1px 22px);
+      display: grid;
+      place-items: center;
+      padding: 10px;
+    }
+
+    body[data-theme="dark"] .logo-preview {
+      background:
+        linear-gradient(145deg, rgba(7, 23, 39, 0.94), rgba(16, 38, 58, 0.92)),
+        repeating-linear-gradient(90deg, rgba(245, 243, 238, 0.05) 0 1px, transparent 1px 22px);
+    }
+
+    .logo-preview img {
+      width: min(100%, 420px);
+      height: auto;
+      filter: drop-shadow(0 16px 22px rgba(15, 39, 64, 0.18));
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--white);
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.76rem;
+      margin-top: 6px;
+    }
+
+    .nav-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 16px;
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-pills a {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 13px;
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 850;
+      background: var(--paper);
+    }
+
+    .split {
+      display: grid;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .copy p,
+    .section-intro {
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 760px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid.two,
+    .grid.three {
+      grid-template-columns: 1fr;
+    }
+
+    .card,
+    .program-card,
+    .step,
+    .phone-screen,
+    .quote-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(15, 39, 64, 0.07);
+    }
+
+    .card,
+    .program-card,
+    .quote-card {
+      padding: 18px;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      border-radius: 999px;
+      padding: 4px 9px;
+      background: rgba(179, 38, 45, 0.09);
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .card p,
+    .program-card p,
+    .quote-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .program-card ul,
+    .summary-list {
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 9px;
+    }
+
+    .program-card li,
+    .summary-list li {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .program-card li::before,
+    .summary-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      margin-top: 8px;
+    }
+
+    .band {
+      background: var(--white);
+      border-block: 1px solid var(--line);
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .step {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 900;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .phone-row {
+      display: grid;
+      gap: 14px;
+    }
+
+    .phone-screen {
+      overflow: hidden;
+    }
+
+    .phone-head {
+      background: var(--navy);
+      color: var(--white);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .phone-head strong {
+      font-size: 0.94rem;
+    }
+
+    .phone-head span {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .phone-body {
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: var(--paper);
+    }
+
+    .mini-item strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .mini-item span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .callout {
+      border-left: 5px solid var(--red);
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(15, 39, 64, 0.07);
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .coach-strip {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .coach {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+
+    .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-weight: 900;
+      background: var(--navy);
+      flex: 0 0 auto;
+    }
+
+    .coach:nth-child(2) .avatar {
+      background: var(--red);
+    }
+
+    .coach strong {
+      display: block;
+      color: var(--navy);
+    }
+
+    .coach span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-panel {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-panel h2 {
+      color: var(--white);
+    }
+
+    .contact-panel p {
+      color: rgba(255, 255, 255, 0.82);
+      margin: 0 0 18px;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-list li {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .brand-showcase {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .brand-placement {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: 0 10px 30px var(--soft-shadow);
+    }
+
+    .placement-stage {
+      min-height: 210px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: var(--surface-soft);
+    }
+
+    .placement-stage.dark {
+      background:
+        linear-gradient(135deg, rgba(15, 39, 64, 0.96), rgba(7, 23, 39, 0.96)),
+        var(--navy);
+    }
+
+    .placement-stage.paper {
+      background:
+        linear-gradient(135deg, rgba(245, 243, 238, 0.94), rgba(255, 255, 255, 0.82)),
+        var(--paper);
+    }
+
+    .mock-nav {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.78);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    body[data-theme="dark"] .mock-nav {
+      background: rgba(7, 23, 39, 0.7);
+    }
+
+    .mock-nav img {
+      width: min(64vw, 300px);
+      height: 54px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .mock-nav span {
+      width: 82px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--red);
+    }
+
+    .placement-logo {
+      width: min(100%, 360px);
+      max-height: 340px;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.16));
+    }
+
+    .placement-logo.small {
+      width: min(72%, 230px);
+    }
+
+    .placement-copy {
+      padding: 16px;
+    }
+
+    .placement-copy h3 {
+      margin-bottom: 5px;
+    }
+
+    .placement-copy p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .shirt-showcase {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .shirt-preview {
+      min-height: 310px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .shirt-preview.light {
+      background: var(--paper);
+    }
+
+    .shirt-preview.dark {
+      background: var(--navy);
+    }
+
+    .shirt-preview img {
+      width: min(100%, 330px);
+      max-height: 270px;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.12));
+    }
+
+    .shirt-preview.chest img {
+      width: min(72%, 190px);
+      max-height: 190px;
+    }
+
+    .asset-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .asset-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: var(--surface-soft);
+      color: var(--navy);
+      border: 1px solid var(--line);
+      font-weight: 800;
+      text-decoration: none;
+      font-size: 0.86rem;
+    }
+
+    body[data-theme="dark"] .asset-link {
+      color: var(--white);
+    }
+
+    .shirt-note {
+      margin-top: 16px;
+      color: var(--muted);
+    }
+
+    .pitch-hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pitch-hero .section-inner {
+      padding-top: 10px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .question-list {
+      margin: 16px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .question-list li + li {
+      margin-top: 9px;
+    }
+
+    footer {
+      padding: 28px 16px 38px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (min-width: 720px) {
+      .topbar-inner {
+        padding-inline: 24px;
+        flex-wrap: nowrap;
+      }
+
+      .section-inner,
+      .hero-grid {
+        max-width: var(--max);
+      }
+
+      .brand-lockup {
+        width: 390px;
+        height: 56px;
+      }
+
+      section {
+        padding: 64px 24px;
+      }
+
+      .hero {
+        padding: 58px 24px 66px;
+      }
+
+      .hero-grid,
+      .split {
+        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      }
+
+      .hero h1 {
+        max-width: 650px;
+      }
+
+      .hero .lead,
+      .actions,
+      .stats,
+      .hero-visual {
+        max-width: none;
+      }
+
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        width: auto;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .phone-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .coach-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .brand-showcase {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .shirt-showcase {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-pills {
+        justify-content: center;
+      }
+    }
+
+    @media (min-width: 980px) {
+      .topbar-inner {
+        padding-inline: 28px;
+      }
+
+      .hero-grid {
+        gap: 44px;
+      }
+
+      .stats {
+        max-width: 650px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .tab-switcher {
+        width: 100%;
+      }
+
+      .topbar-actions {
+        width: 100%;
+      }
+
+      .theme-toggle {
+        flex: 1 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#home" aria-label="Fonseca Fitness home">
+          <img class="brand-lockup" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline.png" data-light-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline.png" data-dark-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline-dark-safe.png" alt="Fonseca Fitness">
+        </a>
+
+        <div class="topbar-actions">
+          <div class="tab-switcher" role="tablist" aria-label="Site views">
+            <button class="tab-button" id="tab-website" role="tab" aria-selected="true" aria-controls="website-view" data-view-target="website">Website</button>
+            <button class="tab-button" id="tab-pitch" role="tab" aria-selected="false" aria-controls="pitch-view" data-view-target="pitch">Pitch</button>
+            <a class="tab-link" href="logo-variants.html">Logos</a>
+            <a class="tab-link" href="portal.html">Portal</a>
+            <a class="tab-link" href="shop.html">Shop</a>
+          </div>
+          <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Dark</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="view is-active" id="website-view" role="tabpanel" aria-labelledby="tab-website">
+        <section class="hero" id="home">
+          <div class="hero-grid">
+            <div>
+              <p class="eyebrow">Online coaching by Pete and Lisa Fonseca</p>
+              <h1>Personal Training Without the Cookie-Cutter Plan</h1>
+              <p class="lead">Workout plans, nutrition, weekly reviews, and coaching from Pete and Lisa.</p>
+              <div class="actions">
+                <a class="button primary" href="#contact">Request a Consultation</a>
+                <a class="button secondary" href="#programs">View Programs</a>
+              </div>
+              <div class="stats" aria-label="Experience highlights">
+                <div class="stat"><strong>35</strong><span>years Pete has trained clients</span></div>
+                <div class="stat"><strong>25</strong><span>years Lisa has coached fitness</span></div>
+                <div class="stat"><strong>1:1</strong><span>mindset, even online</span></div>
+              </div>
+            </div>
+
+            <div class="hero-visual" aria-label="Fonseca Fitness visual direction">
+              <div class="logo-preview">
+                <img src="dist/fonseca-fitness-logo-assets/fonseca-fitness-primary-full-tagline.png?v=full-spacing-1" data-light-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-primary-full-tagline.png?v=full-spacing-1" data-dark-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-primary-full-tagline-dark-safe.png?v=full-spacing-1" alt="Fonseca Fitness logo concept">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <nav class="nav-pills" aria-label="Page sections">
+          <a href="#programs">Programs</a>
+          <a href="#process">How It Works</a>
+          <a href="#portal">Client Portal</a>
+          <a href="#health">Health Intake</a>
+          <a href="#brand-check">Brand Check</a>
+          <a href="#shirt-logos">Shirt Logos</a>
+          <a href="#coaches">Coaches</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <section>
+          <div class="section-inner split">
+            <div class="copy">
+              <p class="eyebrow">The promise</p>
+              <h2>Built Around the Person, Not a Template</h2>
+              <p>Fonseca Fitness is for people who want a real plan, clear direction, and accountability without feeling like they were handed the same program as everyone else.</p>
+              <p>Every client starts with their goal, experience level, health background, schedule, and comfort level. From there, Pete and Lisa recommend the right coaching path.</p>
+            </div>
+            <div class="callout">
+              <p><strong>Simple idea:</strong> give online clients the structure they need each week while keeping the personal coaching style Pete and Lisa are known for.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="band" id="programs">
+          <div class="section-inner">
+            <p class="eyebrow">Programs</p>
+            <h2>Coaching Paths Based on Client Need</h2>
+            <p class="section-intro">The final package names can change, but the site should make it easy for people to recognize where they fit.</p>
+
+            <div class="grid three">
+              <article class="program-card">
+                <span class="label">Popular goal</span>
+                <h3>Weight Loss</h3>
+                <p>Nutrition guidance, weekly check-ins, and workouts that match the client's starting point.</p>
+                <ul>
+                  <li>Personal nutrition plan</li>
+                  <li>Workout structure</li>
+                  <li>Progress check-ins</li>
+                </ul>
+              </article>
+
+              <article class="program-card">
+                <span class="label">Strength goal</span>
+                <h3>Muscle Gain</h3>
+                <p>Training and eating direction for people who want to build size, strength, and better habits.</p>
+                <ul>
+                  <li>Goal-based workouts</li>
+                  <li>Nutrition targets</li>
+                  <li>Exercise demo help</li>
+                </ul>
+              </article>
+
+              <article class="program-card">
+                <span class="label">Experience</span>
+                <h3>Bodybuilding</h3>
+                <p>Old-school experience with practical coaching for physique goals and consistent execution.</p>
+                <ul>
+                  <li>Structured programming</li>
+                  <li>Nutrition accountability</li>
+                  <li>Weekly review</li>
+                </ul>
+              </article>
+
+              <article class="program-card">
+                <span class="label">Longevity</span>
+                <h3>Over 50 Fitness</h3>
+                <p>Smart training for strength, mobility, health concerns, and confidence later in life.</p>
+                <ul>
+                  <li>Joint-aware exercise choices</li>
+                  <li>Health background reviewed</li>
+                  <li>Realistic weekly plan</li>
+                </ul>
+              </article>
+
+              <article class="program-card">
+                <span class="label">Support</span>
+                <h3>Women's Fitness</h3>
+                <p>Coaching matched to goals, comfort level, experience, and the right coach fit.</p>
+                <ul>
+                  <li>Recommended coach fit</li>
+                  <li>Nutrition and training</li>
+                  <li>Weekly check-in rhythm</li>
+                </ul>
+              </article>
+
+              <article class="program-card">
+                <span class="label">Hybrid</span>
+                <h3>In-Person Plus Online</h3>
+                <p>Support between sessions for clients who already train face to face but need better follow-through.</p>
+                <ul>
+                  <li>Diet plan access</li>
+                  <li>Session recap notes</li>
+                  <li>Reminders and next steps</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="process">
+          <div class="section-inner">
+            <p class="eyebrow">How it works</p>
+            <h2>A Simple Weekly Coaching Rhythm</h2>
+            <p class="section-intro">The online program should feel clear for clients and manageable for Pete and Lisa.</p>
+            <div class="steps">
+              <article class="step">
+                <div class="step-number">1</div>
+                <div>
+                  <h3>Start With a Consultation</h3>
+                  <p>The client shares their goal, training history, schedule, and what they need help with most.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">2</div>
+                <div>
+                  <h3>Complete Health Intake</h3>
+                  <p>Before a plan is written, Pete and Lisa review injuries, blood pressure, cardiac history, arthritis, and other important conditions.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">3</div>
+                <div>
+                  <h3>Receive the Weekly Plan</h3>
+                  <p>The client gets workouts, nutrition guidance, exercise demo links, and notes that explain what to focus on.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">4</div>
+                <div>
+                  <h3>Check In Once a Week</h3>
+                  <p>The client sends weight, new injuries or concerns, and optional progress photos. Pete and Lisa adjust the plan when needed.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="band" id="portal">
+          <div class="section-inner">
+            <p class="eyebrow">Future client portal</p>
+            <h2>One Place for Plans, Notes, and Exercise Help</h2>
+            <p class="section-intro">This is the kind of simple portal we can prototype next, after Pete and Lisa review the website direction.</p>
+
+            <div class="phone-row">
+              <article class="phone-screen">
+                <div class="phone-head">
+                  <strong>Client View</strong>
+                  <span>This week</span>
+                </div>
+                <div class="phone-body">
+                  <div class="mini-item"><strong>Workout Plan</strong><span>Day 1: Chest and triceps with demo links.</span></div>
+                  <div class="mini-item"><strong>Nutrition</strong><span>Meal guidance based on weight-loss goal.</span></div>
+                  <div class="mini-item"><strong>Check-In</strong><span>Submit weight, injuries, questions, and optional photo.</span></div>
+                  <div class="mini-item"><strong>Messages</strong><span>One daily question, answered within the agreed window.</span></div>
+                </div>
+              </article>
+
+              <article class="phone-screen">
+                <div class="phone-head">
+                  <strong>Coach View</strong>
+                  <span>iPhone friendly</span>
+                </div>
+                <div class="phone-body">
+                  <div class="mini-item"><strong>Needs Attention</strong><span>3 check-ins, 2 diet updates, 1 exercise question.</span></div>
+                  <div class="mini-item"><strong>Client Profile</strong><span>Current plan, health notes, reminders, progress.</span></div>
+                  <div class="mini-item"><strong>Edit Diet</strong><span>Update plan quickly without rewriting from scratch.</span></div>
+                  <div class="mini-item"><strong>Add Recap</strong><span>Dictate or type a short note after training.</span></div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="health">
+          <div class="section-inner split">
+            <div class="copy">
+              <p class="eyebrow">Health intake</p>
+              <h2>Safety Comes Before the Plan</h2>
+              <p>Pete called out an important point: clients need to share medical conditions before training starts. The online process should ask the right questions early and make the answers easy for Pete and Lisa to review.</p>
+            </div>
+            <div class="card">
+              <span class="label">Before training</span>
+              <h3>Information to collect</h3>
+              <ul class="summary-list">
+                <li>Blood pressure concerns</li>
+                <li>Cardiac or heart issues</li>
+                <li>Arthritis, injuries, or chronic pain</li>
+                <li>Doctor restrictions or clearance status</li>
+                <li>Any condition that affects training or nutrition</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="band" id="brand-check">
+          <div class="section-inner">
+            <p class="eyebrow">Brand check</p>
+            <h2>Logos Where They Would Actually Show Up</h2>
+            <p class="section-intro">Use the light/dark toggle in the top bar to make sure the logo files stay readable in normal website spots.</p>
+
+            <div class="brand-showcase">
+              <article class="brand-placement">
+                <div class="placement-stage paper">
+                  <div class="mock-nav">
+                    <img src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline.png" data-light-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline.png" data-dark-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline-dark-safe.png" alt="Fonseca Fitness horizontal header logo">
+                    <span aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="placement-copy">
+                  <h3>Website Header</h3>
+                  <p>The horizontal lockup is the normal choice for top navigation and email signatures.</p>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="placement-stage dark">
+                  <img class="placement-logo" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-primary-no-tagline-dark-safe.png" alt="Fonseca Fitness primary no-tagline logo on dark background">
+                </div>
+                <div class="placement-copy">
+                  <h3>Hero or Shirt Back</h3>
+                  <p>The no-tagline version is the strongest big mark for shirts, posters, and bold website sections.</p>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="placement-stage paper">
+                  <img class="placement-logo small" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-icon-circle.png" alt="Fonseca Fitness circular icon">
+                </div>
+                <div class="placement-copy">
+                  <h3>Profile Icon</h3>
+                  <p>The simplified circle is for social profiles, app-style icons, and places where tiny text would not read.</p>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="placement-stage dark">
+                  <img class="placement-logo small" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-favicon.png" alt="Fonseca Fitness favicon icon on dark background">
+                </div>
+                <div class="placement-copy">
+                  <h3>Small Icon</h3>
+                  <p>The favicon should remain simple and recognizable when the logo is tiny.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="band" id="shirt-logos">
+          <div class="section-inner">
+            <p class="eyebrow">Shirt logos</p>
+            <h2>Back Print and Left Chest Marks</h2>
+            <p class="section-intro">The no-tagline badge is the back print. The simplified circle icon is the preferred front-left chest mark because it stays readable at small size.</p>
+
+            <div class="shirt-showcase">
+              <article class="brand-placement">
+                <div class="shirt-preview light">
+                  <img src="dist/fonseca-fitness-shirt-assets/preview-shirt-back-light.png?v=tight-1" alt="Fonseca Fitness shirt back logo for light shirts">
+                </div>
+                <div class="placement-copy">
+                  <h3>Back Print: Light Shirts</h3>
+                  <p>Use on white, light gray, cream, or other light shirts. Recommended print width is 11 to 12 inches.</p>
+                  <div class="asset-links">
+                    <a class="asset-link" href="dist/fonseca-fitness-shirt-assets/fonseca-fitness-shirt-back-light-shirt.png" download>PNG</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="shirt-preview dark">
+                  <img src="dist/fonseca-fitness-shirt-assets/selected-back-dark-print-perfect-circle-2026-05-31/fonseca-fitness-shirt-back-dark-shirt-perfect-circle-3600x4200.png?v=perfect-circle-1" alt="Fonseca Fitness perfect-circle shirt back logo for dark shirts">
+                </div>
+                <div class="placement-copy">
+                  <h3>Back Print: Dark Shirts</h3>
+                  <p>Use on navy, black, charcoal, or other dark shirts. This is the cleaner high-resolution raster with the outer badge rebuilt as a smooth circle.</p>
+                  <div class="asset-links">
+                    <a class="asset-link" href="dist/fonseca-fitness-shirt-assets/selected-back-dark-print-perfect-circle-2026-05-31/fonseca-fitness-shirt-back-dark-shirt-perfect-circle-7200x8400.png" download>7200 PNG</a>
+                    <a class="asset-link" href="dist/fonseca-fitness-shirt-assets/selected-back-dark-print-perfect-circle-2026-05-31/fonseca-fitness-shirt-back-dark-shirt-perfect-circle-3600x4200.png" download>3600 PNG</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="shirt-preview chest light">
+                  <img src="dist/fonseca-fitness-shirt-assets/preview-left-chest-light.png?v=tight-1" alt="Fonseca Fitness left chest icon for light shirts">
+                </div>
+                <div class="placement-copy">
+                  <h3>Left Chest: Light Shirts</h3>
+                  <p>Use the simplified circle icon over the front-left breast area at about 3.25 to 3.75 inches wide.</p>
+                  <div class="asset-links">
+                    <a class="asset-link" href="dist/fonseca-fitness-shirt-assets/fonseca-fitness-left-chest-light-shirt.png" download>PNG</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="brand-placement">
+                <div class="shirt-preview chest dark">
+                  <img src="dist/fonseca-fitness-shirt-assets/preview-left-chest-dark.png?v=tight-1" alt="Fonseca Fitness left chest icon for dark shirts">
+                </div>
+                <div class="placement-copy">
+                  <h3>Left Chest: Dark Shirts</h3>
+                  <p>Use the same simplified circle icon on dark shirts. It is cleaner than a tiny full wordmark in this placement.</p>
+                  <div class="asset-links">
+                    <a class="asset-link" href="dist/fonseca-fitness-shirt-assets/fonseca-fitness-left-chest-dark-shirt.png" download>PNG</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <p class="shirt-note">Download the focused shirt print package: <a href="dist/fonseca-fitness-shirt-print-downloads-2026-06-01.zip" download>fonseca-fitness-shirt-print-downloads-2026-06-01.zip</a>. Older full asset package: <a href="dist/fonseca-fitness-shirt-assets.zip" download>fonseca-fitness-shirt-assets.zip</a>.</p>
+          </div>
+        </section>
+
+        <section class="band">
+          <div class="section-inner split">
+            <div class="card">
+              <span class="label">Exercise help</span>
+              <h3>Demo Links and Coach Notes</h3>
+              <p>If a client does not know what an exercise means, the plan should include a video link and a short note from Pete or Lisa.</p>
+            </div>
+            <div class="phone-screen">
+              <div class="phone-head">
+                <strong>Example Exercise</strong>
+                <span>Workout Day 2</span>
+              </div>
+              <div class="phone-body">
+                <div class="mini-item"><strong>Goblet Squat</strong><span>3 sets of 10</span></div>
+                <div class="mini-item"><strong>Watch Demo</strong><span>Video link attached to the exercise.</span></div>
+                <div class="mini-item"><strong>Coach Note</strong><span>Keep your chest up, sit between your knees, and message if your knees hurt.</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="coaches">
+          <div class="section-inner">
+            <p class="eyebrow">The coaches</p>
+            <h2>Pete and Lisa Together</h2>
+            <p class="section-intro">Fonseca Fitness should present Pete and Lisa as one coaching team. The program can recommend the right fit based on the client's needs instead of forcing people to choose up front.</p>
+            <div class="coach-strip">
+              <div class="coach">
+                <div class="avatar">P</div>
+                <div><strong>Pete Fonseca</strong><span>35 years of training experience, retired bodybuilder, direct and practical coaching.</span></div>
+              </div>
+              <div class="coach">
+                <div class="avatar">L</div>
+                <div><strong>Lisa Fonseca</strong><span>25 years of fitness experience, supportive coaching, and a key part of the Fonseca Fitness program.</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact">
+          <div class="section-inner">
+            <div class="contact-panel">
+              <p class="eyebrow">Start here</p>
+              <h2>Ready for a Plan That Fits You?</h2>
+              <p>Request a consultation and Pete and Lisa will recommend the best path based on your goal, experience, and health background.</p>
+              <ul class="contact-list">
+                <li><strong>Consultation request:</strong> add phone, text, or form link here.</li>
+                <li><strong>Online coaching:</strong> workout program, nutrition guidance, and weekly check-ins.</li>
+                <li><strong>In-person support:</strong> keep the face-to-face training option for clients who need it.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="view" id="pitch-view" role="tabpanel" aria-labelledby="tab-pitch">
+        <section class="pitch-hero">
+          <div class="section-inner">
+            <p class="eyebrow">Review pitch</p>
+            <h2>The Idea Behind the Website</h2>
+            <p class="section-intro">This tab keeps the planning notes visible while the website draft evolves. The goal is to support how Pete and Lisa already coach, not force them into complicated software.</p>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-inner grid two">
+            <article class="quote-card">
+              <span class="label">What we learned</span>
+              <h3>The business has trust but needs reach</h3>
+              <p>New clients usually come through word of mouth. The online side can help more people find Fonseca Fitness and make online coaching easier to manage from home.</p>
+            </article>
+            <article class="quote-card">
+              <span class="label">Main pain point</span>
+              <h3>Diets are repeated and rewritten</h3>
+              <p>Diet plans and reminders are the things Pete most often sends and resends. A simple client profile could make that easier without changing his coaching style.</p>
+            </article>
+            <article class="quote-card">
+              <span class="label">Big opportunity</span>
+              <h3>20 to 30 online clients</h3>
+              <p>In-person training is limited by hours in the day. Online coaching could create more income without needing every client to take up a full in-person time block.</p>
+            </article>
+            <article class="quote-card">
+              <span class="label">Non-negotiable</span>
+              <h3>Keep it simple</h3>
+              <p>The platform has to work from an iPhone, avoid clutter, and make weekly online coaching manageable instead of becoming another thing to babysit.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="band">
+          <div class="section-inner">
+            <p class="eyebrow">Business model so far</p>
+            <h2>What Online Clients Would Get</h2>
+            <div class="grid three">
+              <article class="card">
+                <span class="label">Workout</span>
+                <h3>Personal Program</h3>
+                <p>Exercises, sets, reps, demo links, and coach notes so clients understand what to do.</p>
+              </article>
+              <article class="card">
+                <span class="label">Nutrition</span>
+                <h3>Goal-Based Guidance</h3>
+                <p>Nutrition direction based on weight loss, muscle gain, bodybuilding, over 50 fitness, or other goals.</p>
+              </article>
+              <article class="card">
+                <span class="label">Check-in</span>
+                <h3>Weekly Review</h3>
+                <p>Weight, new injuries, questions, and optional progress photos so the plan can be adjusted.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-inner">
+            <p class="eyebrow">Phased rollout</p>
+            <h2>Start Small, Then Build the Portal</h2>
+            <div class="timeline">
+              <article class="step">
+                <div class="step-number">1</div>
+                <div>
+                  <h3>Website Draft</h3>
+                  <p>Use this page to test the public message, packages, tone, and next questions with Pete and Lisa.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">2</div>
+                <div>
+                  <h3>Clickable Portal Mockup</h3>
+                  <p>Prototype the client view and coach dashboard before building login, data storage, uploads, or payments.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">3</div>
+                <div>
+                  <h3>Real MVP</h3>
+                  <p>Build only the features that prove useful: intake, diet plans, workouts, check-ins, notes, and exercise links.</p>
+                </div>
+              </article>
+              <article class="step">
+                <div class="step-number">4</div>
+                <div>
+                  <h3>Optional Payments Later</h3>
+                  <p>Keep Zelle, Cash App, Venmo, or cash if that is easiest. Add payment links only when the value is obvious.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="band">
+          <div class="section-inner split">
+            <div>
+              <p class="eyebrow">Next questions</p>
+              <h2>What We Should Ask Pete and Lisa Next</h2>
+              <ol class="question-list">
+                <li>Which package should launch first: weight loss, muscle gain, bodybuilding, over 50, women's fitness, or hybrid?</li>
+                <li>What should be included in the lowest-touch online package?</li>
+                <li>What should be included in the highest-touch package?</li>
+                <li>Should the daily message boundary be one message per day answered within 24 hours?</li>
+                <li>Which exercises do clients ask about most often?</li>
+                <li>What contact method should the website use first: phone, text, email, or a form?</li>
+              </ol>
+            </div>
+            <div class="callout">
+              <p><strong>Current recommendation:</strong> finish this website draft first, then build a clickable portal mockup using fake sample clients. Do not build real private client accounts until the workflow is approved.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      Fonseca Fitness website draft. Logo artwork is a cleaned web draft; package names, contact details, and final photos still need approval.
+    </footer>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+    const buttons = Array.from(document.querySelectorAll("[data-view-target]"));
+    const views = {
+      website: document.getElementById("website-view"),
+      pitch: document.getElementById("pitch-view")
+    };
+
+    function applyTheme(theme) {
+      document.body.dataset.theme = theme;
+      const isDark = theme === "dark";
+      themeToggle.textContent = isDark ? "Light" : "Dark";
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      document.querySelectorAll("[data-light-src][data-dark-src]").forEach((image) => {
+        image.src = isDark ? image.dataset.darkSrc : image.dataset.lightSrc;
+      });
+      localStorage.setItem("fonseca-theme", theme);
+    }
+
+    function setView(name, updateHash = true) {
+      buttons.forEach((button) => {
+        const isActive = button.dataset.viewTarget === name;
+        button.setAttribute("aria-selected", String(isActive));
+      });
+
+      Object.entries(views).forEach(([viewName, element]) => {
+        element.classList.toggle("is-active", viewName === name);
+      });
+
+      if (updateHash) {
+        history.replaceState(null, "", name === "pitch" ? "#pitch" : "#website");
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => setView(button.dataset.viewTarget));
+    });
+
+    themeToggle.addEventListener("click", () => {
+      applyTheme(document.body.dataset.theme === "dark" ? "light" : "dark");
+    });
+
+    applyTheme(localStorage.getItem("fonseca-theme") || "light");
+
+    if (window.location.hash === "#pitch") {
+      setView("pitch", false);
+    }
+  </script>
+</body>
+</html>
