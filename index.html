@@ -383,37 +383,13 @@
       width: 100%;
     }
 
-    /* seam + badge */
+    /* red rule separating the two paths */
 
     .seam {
       position: relative;
       background: var(--red);
       height: 4px;
       flex: 0 0 4px;
-    }
-
-    .seam-badge {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 68px;
-      height: 68px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      box-shadow: var(--shadow);
-      z-index: 5;
-    }
-
-    .seam-badge img {
-      width: 52px;
-      height: 52px;
-      max-width: none;
-      display: block;
     }
 
     /* shop tiles */
@@ -757,18 +733,6 @@
         flex: 0 0 4px;
       }
 
-      .seam-badge {
-        top: 44px;
-        transform: translate(-50%, 0);
-        width: 84px;
-        height: 84px;
-      }
-
-      .seam-badge img {
-        width: 64px;
-        height: 64px;
-      }
-
       .panel-title {
         font-size: clamp(3rem, 5vw, 4.5rem);
       }
@@ -885,11 +849,7 @@
         </div>
       </div>
 
-      <div class="seam">
-        <span class="seam-badge">
-          <img src="dist/fonseca-fitness-logo-assets/fonseca-fitness-icon-circle.png" alt="" aria-hidden="true">
-        </span>
-      </div>
+      <div class="seam" aria-hidden="true"></div>
 
       <div class="panel panel-shop" aria-labelledby="shop-title">
         <p class="eyebrow">The shop</p>
