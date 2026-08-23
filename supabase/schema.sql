@@ -1,5 +1,5 @@
 -- Fonseca Fitness — Supabase database schema
--- Idempotent: safe to run once (or again) on a fresh Supabase project via the SQL editor.
+-- Idempotent: safe to run once (or again) on a Supabase project via the SQL editor.
 
 -- ---------------------------------------------------------------------------
 -- Tables
@@ -51,7 +51,7 @@ create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
 security definer
-set search_path = public
+set search_path = ''
 as $$
 begin
   insert into public.profiles (id, full_name, role)
@@ -75,7 +75,7 @@ returns boolean
 language sql
 stable
 security definer
-set search_path = public
+set search_path = ''
 as $$
   select exists (
     select 1 from public.profiles
@@ -91,10 +91,16 @@ create or replace function public.prevent_role_change()
 returns trigger
 language plpgsql
 security definer
-set search_path = public
+set search_path = ''
 as $$
 begin
-  if new.role is distinct from old.role and not public.is_coach() then
+  -- Browser requests always have an auth.uid(). Trusted database operations
+  -- (including the documented SQL Editor promotion) do not. RLS still blocks
+  -- untrusted anonymous requests before this trigger can run.
+  if new.role is distinct from old.role
+    and auth.uid() is not null
+    and not public.is_coach()
+  then
     raise exception 'Only a coach can change roles.';
   end if;
   return new;
@@ -133,77 +139,110 @@ alter table public.packages enable row level security;
 alter table public.session_log enable row level security;
 alter table public.invoices enable row level security;
 
+-- Supabase grants broad table privileges to its API roles by default. Take
+-- those back, then grant only the operations the policies below can allow.
+revoke all on table public.profiles from anon, authenticated;
+revoke all on table public.packages from anon, authenticated;
+revoke all on table public.session_log from anon, authenticated;
+revoke all on table public.invoices from anon, authenticated;
+revoke all on table public.package_remaining from anon, authenticated;
+
+grant select, update on table public.profiles to authenticated;
+grant select, insert, update, delete on table public.packages to authenticated;
+grant select, insert, update, delete on table public.session_log to authenticated;
+grant select, insert, update, delete on table public.invoices to authenticated;
+grant select on table public.package_remaining to authenticated;
+
+-- Trigger functions never need direct API access. is_coach() is intentionally
+-- callable only by signed-in users and reveals only the caller's own role.
+revoke all on function public.handle_new_user() from public, anon, authenticated;
+revoke all on function public.prevent_role_change() from public, anon, authenticated;
+revoke all on function public.is_coach() from public, anon, authenticated;
+grant execute on function public.is_coach() to authenticated;
+
 -- profiles
 
 drop policy if exists "profiles_select_own_or_coach" on public.profiles;
 create policy "profiles_select_own_or_coach" on public.profiles
-  for select using (id = auth.uid() or public.is_coach());
+  for select to authenticated
+  using (id = (select auth.uid()) or (select public.is_coach()));
 
 drop policy if exists "profiles_update_own_or_coach" on public.profiles;
 create policy "profiles_update_own_or_coach" on public.profiles
-  for update using (id = auth.uid() or public.is_coach())
-  with check (id = auth.uid() or public.is_coach());
+  for update to authenticated
+  using (id = (select auth.uid()) or (select public.is_coach()))
+  with check (id = (select auth.uid()) or (select public.is_coach()));
 -- Note: role changes by non-coaches are blocked by the protect_profile_role trigger.
 
 -- packages
 
 drop policy if exists "packages_select_own_or_coach" on public.packages;
 create policy "packages_select_own_or_coach" on public.packages
-  for select using (client_id = auth.uid() or public.is_coach());
+  for select to authenticated
+  using (client_id = (select auth.uid()) or (select public.is_coach()));
 
 drop policy if exists "packages_insert_coach" on public.packages;
 create policy "packages_insert_coach" on public.packages
-  for insert with check (public.is_coach());
+  for insert to authenticated with check ((select public.is_coach()));
 
 drop policy if exists "packages_update_coach" on public.packages;
 create policy "packages_update_coach" on public.packages
-  for update using (public.is_coach()) with check (public.is_coach());
+  for update to authenticated
+  using ((select public.is_coach()))
+  with check ((select public.is_coach()));
 
 drop policy if exists "packages_delete_coach" on public.packages;
 create policy "packages_delete_coach" on public.packages
-  for delete using (public.is_coach());
+  for delete to authenticated using ((select public.is_coach()));
 
 -- session_log (clients see rows via their package's client_id)
 
 drop policy if exists "session_log_select_own_or_coach" on public.session_log;
 create policy "session_log_select_own_or_coach" on public.session_log
-  for select using (
-    public.is_coach()
+  for select to authenticated
+  using (
+    (select public.is_coach())
     or exists (
       select 1 from public.packages pk
-      where pk.id = session_log.package_id and pk.client_id = auth.uid()
+      where pk.id = session_log.package_id
+        and pk.client_id = (select auth.uid())
     )
   );
 
 drop policy if exists "session_log_insert_coach" on public.session_log;
 create policy "session_log_insert_coach" on public.session_log
-  for insert with check (public.is_coach());
+  for insert to authenticated with check ((select public.is_coach()));
 
 drop policy if exists "session_log_update_coach" on public.session_log;
 create policy "session_log_update_coach" on public.session_log
-  for update using (public.is_coach()) with check (public.is_coach());
+  for update to authenticated
+  using ((select public.is_coach()))
+  with check ((select public.is_coach()));
 
 drop policy if exists "session_log_delete_coach" on public.session_log;
 create policy "session_log_delete_coach" on public.session_log
-  for delete using (public.is_coach());
+  for delete to authenticated using ((select public.is_coach()));
 
 -- invoices
 
 drop policy if exists "invoices_select_own_or_coach" on public.invoices;
 create policy "invoices_select_own_or_coach" on public.invoices
-  for select using (client_id = auth.uid() or public.is_coach());
+  for select to authenticated
+  using (client_id = (select auth.uid()) or (select public.is_coach()));
 
 drop policy if exists "invoices_insert_coach" on public.invoices;
 create policy "invoices_insert_coach" on public.invoices
-  for insert with check (public.is_coach());
+  for insert to authenticated with check ((select public.is_coach()));
 
 drop policy if exists "invoices_update_coach" on public.invoices;
 create policy "invoices_update_coach" on public.invoices
-  for update using (public.is_coach()) with check (public.is_coach());
+  for update to authenticated
+  using ((select public.is_coach()))
+  with check ((select public.is_coach()));
 
 drop policy if exists "invoices_delete_coach" on public.invoices;
 create policy "invoices_delete_coach" on public.invoices
-  for delete using (public.is_coach());
+  for delete to authenticated using ((select public.is_coach()));
 
 -- ---------------------------------------------------------------------------
 -- Promoting a user to coach (run manually, once, for the coach's account).
