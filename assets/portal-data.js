@@ -232,6 +232,266 @@
     }
   };
 
+  const profileById = (clientId) => coachState.profiles.find((profile) => profile.id === clientId);
+  const formLabel = (caption, control) => {
+    const wrapper = make("label", "", caption);
+    wrapper.appendChild(control);
+    return wrapper;
+  };
+  const hiddenInput = (name, value) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value;
+    return input;
+  };
+  const selectInput = (name, options) => {
+    const select = document.createElement("select");
+    select.name = name;
+    select.required = true;
+    options.forEach((option) => {
+      const item = document.createElement("option");
+      item.value = option.value;
+      item.textContent = option.label;
+      select.appendChild(item);
+    });
+    return select;
+  };
+  const textInput = (name, type, required, placeholder) => {
+    const input = document.createElement("input");
+    input.name = name;
+    input.type = type;
+    input.required = Boolean(required);
+    if (placeholder) input.placeholder = placeholder;
+    return input;
+  };
+
+  let dialogAction = null;
+  const dialog = () => document.getElementById("coach-action-dialog");
+  const dialogForm = () => document.getElementById("coach-action-form");
+  const dialogFields = () => hook("coach-dialog-fields");
+  const dialogSubmit = () => hook("coach-dialog-submit");
+
+  const addClientChoice = (fields, requestedClientId, onChange) => {
+    const profiles = coachState.profiles;
+    const selectedId = requestedClientId || (profiles[0] && profiles[0].id) || "";
+    if (requestedClientId || profiles.length === 1) {
+      fields.appendChild(hiddenInput("client_id", selectedId));
+      const profile = profileById(selectedId);
+      fields.appendChild(make("p", "signin-note", "Client: " + ((profile && profile.full_name) || "Unnamed client")));
+      return selectedId;
+    }
+    const select = selectInput("client_id", profiles.map((profile) => ({
+      value: profile.id,
+      label: profile.full_name || "Unnamed client"
+    })));
+    if (onChange) select.addEventListener("change", () => onChange(select.value));
+    fields.appendChild(formLabel("Client", select));
+    return selectedId;
+  };
+
+  const renderPackageChoice = (container, clientId) => {
+    clear(container);
+    const packages = clientPackages(clientId).filter((item) => (Number(item.sessions_remaining) || 0) > 0);
+    const submit = dialogSubmit();
+    if (!packages.length) {
+      container.appendChild(make("p", "signin-note", "This client has no package with sessions to log."));
+      if (submit) submit.disabled = true;
+      return;
+    }
+    if (submit) submit.disabled = false;
+    if (packages.length === 1) {
+      container.appendChild(hiddenInput("package_id", packages[0].package_id));
+      container.appendChild(make(
+        "p",
+        "signin-note",
+        "Package: " + packages[0].name + " · " + packages[0].sessions_remaining + " sessions left"
+      ));
+      return;
+    }
+    container.appendChild(formLabel("Package", selectInput("package_id", packages.map((item) => ({
+      value: item.package_id,
+      label: item.name + " · " + item.sessions_remaining + " left"
+    })))));
+  };
+
+  const buildLogSession = (requestedClientId) => {
+    const fields = dialogFields();
+    const packageHost = make("div", "portal-dialog-fields");
+    const selectedId = addClientChoice(fields, requestedClientId, (clientId) => renderPackageChoice(packageHost, clientId));
+    fields.appendChild(packageHost);
+    renderPackageChoice(packageHost, selectedId);
+    const note = document.createElement("textarea");
+    note.name = "note";
+    note.placeholder = "Optional session note";
+    fields.appendChild(formLabel("Session note", note));
+  };
+
+  const buildNewInvoice = (requestedClientId) => {
+    const fields = dialogFields();
+    addClientChoice(fields, requestedClientId);
+    const amount = textInput("amount", "number", true, "0.00");
+    amount.min = "0.01";
+    amount.step = "0.01";
+    fields.appendChild(formLabel("Amount", amount));
+    fields.appendChild(formLabel("Memo", textInput("memo", "text", true, "Training package")));
+    fields.appendChild(formLabel("Method", selectInput("method", [
+      { value: "ach", label: "Bank transfer (ACH)" },
+      { value: "card", label: "Card" },
+      { value: "cash", label: "Cash" }
+    ])));
+    fields.appendChild(formLabel("Stripe Payment Link (optional)", textInput("pay_link_url", "url", false, "https://buy.stripe.com/…")));
+  };
+
+  const buildMarkPaid = (clientId) => {
+    const fields = dialogFields();
+    const profile = profileById(clientId);
+    const invoices = clientInvoices(clientId);
+    fields.appendChild(hiddenInput("client_id", clientId));
+    fields.appendChild(make("p", "signin-note", "Client: " + ((profile && profile.full_name) || "Unnamed client")));
+    if (!invoices.length) {
+      fields.appendChild(make("p", "signin-note", "This client has no unpaid invoice."));
+      dialogSubmit().disabled = true;
+      return;
+    }
+    if (invoices.length === 1) {
+      fields.appendChild(hiddenInput("invoice_id", invoices[0].id));
+      fields.appendChild(make("p", "signin-note", (invoices[0].memo || "Training invoice") + " · " + money(invoices[0].amount_cents)));
+    } else {
+      fields.appendChild(formLabel("Invoice", selectInput("invoice_id", invoices.map((invoice) => ({
+        value: invoice.id,
+        label: (invoice.memo || "Training invoice") + " · " + money(invoice.amount_cents)
+      })))));
+    }
+  };
+
+  const openCoachDialog = (action, requestedClientId) => {
+    if (!enabled || !activeProfile || activeProfile.role !== "coach") return;
+    const actionDialog = dialog();
+    const fields = dialogFields();
+    const submit = dialogSubmit();
+    if (!actionDialog || !fields || !submit || typeof actionDialog.showModal !== "function") {
+      setCoachState("Coach actions are not supported in this browser.");
+      return;
+    }
+    dialogAction = action;
+    clear(fields);
+    setText("coach-dialog-note", "");
+    submit.disabled = false;
+    if (!coachState.profiles.length) {
+      setText("coach-dialog-title", "Coach action");
+      setText("coach-dialog-intro", "Add a client profile before recording coach actions.");
+      submit.disabled = true;
+    } else if (action === "log-session") {
+      setText("coach-dialog-title", "Log a session");
+      setText("coach-dialog-intro", "Record one completed training session.");
+      buildLogSession(requestedClientId);
+    } else if (action === "new-invoice") {
+      setText("coach-dialog-title", "New invoice");
+      setText("coach-dialog-intro", "Record an invoice that has already been sent to the client.");
+      buildNewInvoice(requestedClientId);
+    } else if (action === "mark-paid") {
+      setText("coach-dialog-title", "Mark invoice paid");
+      setText("coach-dialog-intro", "Confirm the manual payment before updating the invoice.");
+      buildMarkPaid(requestedClientId);
+    }
+    actionDialog.showModal();
+  };
+
+  const actionResult = (result, description) => {
+    if (result && result.error) {
+      throw new Error(description + ": " + (result.error.message || "request failed"));
+    }
+  };
+
+  const saveCoachAction = (formData) => {
+    if (dialogAction === "log-session") {
+      return client.from("session_log").insert({
+        package_id: formData.get("package_id"),
+        coach_id: activeProfile.id,
+        note: String(formData.get("note") || "").trim() || null
+      }).then((result) => {
+        actionResult(result, "Could not log the session");
+        return "Session logged. Package totals are refreshed.";
+      });
+    }
+    if (dialogAction === "new-invoice") {
+      const amountCents = Math.round(Number(formData.get("amount")) * 100);
+      const enteredPayLink = String(formData.get("pay_link_url") || "").trim();
+      if (!Number.isFinite(amountCents) || amountCents <= 0) {
+        return Promise.reject(new Error("Enter an amount greater than zero."));
+      }
+      if (enteredPayLink && !safePayLink(enteredPayLink)) {
+        return Promise.reject(new Error("Enter a complete http or https payment-link URL."));
+      }
+      return client.from("invoices").insert({
+        client_id: formData.get("client_id"),
+        amount_cents: amountCents,
+        memo: String(formData.get("memo") || "").trim(),
+        method: formData.get("method"),
+        pay_link_url: enteredPayLink ? safePayLink(enteredPayLink) : null,
+        status: "sent",
+        sent_at: new Date().toISOString()
+      }).then((result) => {
+        actionResult(result, "Could not create the invoice");
+        return "Invoice recorded as sent.";
+      });
+    }
+    if (dialogAction === "mark-paid") {
+      return client.from("invoices")
+        .update({ status: "paid", paid_at: new Date().toISOString() })
+        .eq("id", formData.get("invoice_id"))
+        .then((result) => {
+          actionResult(result, "Could not mark the invoice paid");
+          return "Invoice marked paid.";
+        });
+    }
+    return Promise.reject(new Error("Choose a coach action and try again."));
+  };
+
+  const showCoachConfirmation = (message) => {
+    const confirmation = hook("coach-confirmation");
+    if (!confirmation) return;
+    const text = confirmation.querySelector("p");
+    if (text) text.textContent = message;
+    confirmation.hidden = false;
+  };
+
+  const initializeCoachActions = () => {
+    if (!enabled) return;
+    const coachView = document.getElementById("view-coach");
+    const actionDialog = dialog();
+    const form = dialogForm();
+    if (!coachView || !actionDialog || !form) return;
+
+    coachView.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-coach-action]");
+      if (!button) return;
+      openCoachDialog(button.dataset.coachAction, button.dataset.clientId || "");
+    });
+    actionDialog.querySelector("[data-coach-dialog-cancel]").addEventListener("click", () => actionDialog.close());
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const submit = dialogSubmit();
+      submit.disabled = true;
+      setText("coach-dialog-note", "Saving…");
+      Promise.resolve()
+        .then(() => saveCoachAction(new FormData(form)))
+        .then((message) => window.FonsecaData.refresh().then(() => message))
+        .then((message) => {
+          actionDialog.close();
+          showCoachConfirmation(message);
+        })
+        .catch((error) => {
+          console.warn("FonsecaData:", error);
+          setText("coach-dialog-note", error.message || "We could not save that change. Please try again.");
+        })
+        .finally(() => {
+          submit.disabled = false;
+        });
+    });
+  };
+
   const setClientState = (message) => {
     setText("client-title", message);
     setText("client-plan-title", "This week's training · Sample plan");
@@ -334,4 +594,5 @@
     reset: reset,
     refresh: () => activeProfile ? load(activeProfile) : Promise.resolve()
   };
+  initializeCoachActions();
 })();

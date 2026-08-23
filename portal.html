@@ -1541,6 +1541,61 @@
     background: var(--gold);
     border: 0;
   }
+
+  /* Live coach actions use one native dialog and the existing card/button
+     language. These rules only provide the dialog behavior and form layout. */
+  .portal-dialog {
+    width: min(92vw, 520px);
+    max-width: 520px;
+    max-height: 90vh;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--ink);
+    box-shadow: var(--shadow);
+  }
+
+  .portal-dialog::backdrop {
+    background: rgba(7, 23, 39, 0.72);
+  }
+
+  .portal-dialog .signin-card {
+    max-height: 90vh;
+    margin: 0;
+    overflow-y: auto;
+  }
+
+  .portal-dialog-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .portal-dialog .signin-card select,
+  .portal-dialog .signin-card textarea {
+    min-height: 44px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface-soft);
+    color: var(--ink);
+    font: inherit;
+  }
+
+  .portal-dialog .signin-card textarea {
+    min-height: 92px;
+    resize: vertical;
+  }
+
+  .portal-dialog-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .portal-dialog-actions .co-btn {
+    flex: 1 1 0;
+  }
   </style>
 </head>
 <body>
@@ -1742,11 +1797,11 @@
   </div>
 
   <div class="co-actions">
-    <button class="co-btn co-primary" type="button">
+    <button class="co-btn co-primary" type="button" data-coach-action="log-session">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
       Log session
     </button>
-    <button class="co-btn co-outline" type="button">
+    <button class="co-btn co-outline" type="button" data-coach-action="new-invoice">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6ZM14 3v5h5"></path><path d="M9 13h6M9 17h4"></path></svg>
       New invoice
     </button>
@@ -1949,6 +2004,19 @@
 </section>
     </main>
   </div>
+
+  <dialog class="portal-dialog" id="coach-action-dialog" aria-labelledby="coach-dialog-title">
+    <form class="signin-card" id="coach-action-form">
+      <h2 id="coach-dialog-title" data-hook="coach-dialog-title">Coach action</h2>
+      <p class="signin-note" data-hook="coach-dialog-intro"></p>
+      <div class="portal-dialog-fields" data-hook="coach-dialog-fields"></div>
+      <p class="signin-note" role="status" data-hook="coach-dialog-note"></p>
+      <div class="portal-dialog-actions">
+        <button class="co-btn co-outline" type="button" data-coach-dialog-cancel>Cancel</button>
+        <button class="co-btn co-primary" type="submit" data-hook="coach-dialog-submit">Save</button>
+      </div>
+    </form>
+  </dialog>
 
   <script src="assets/portal-config.js"></script>
   <script src="assets/portal-auth.js"></script>
