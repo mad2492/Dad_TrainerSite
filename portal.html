@@ -347,7 +347,1170 @@
       min-height: 44px;
     }
 
-    /* @VIEW_STYLES */
+    
+  /* ============ Client portal view (cp-) ============ */
+  #view-client {
+    --cp-navy-solid: #0f2740;   /* literal: navy card must stay navy in both themes */
+    --cp-on-navy: #edf2f6;
+    --cp-on-navy-gold: #bd8a3d;
+    --cp-on-red: #ffffff;       /* literal: text/CTA on red + on navy card */
+    padding: 28px 0 48px;
+  }
+
+  #view-client *,
+  #view-client *::before,
+  #view-client *::after {
+    box-sizing: border-box;
+  }
+
+  .cp-wrap {
+    width: 100%;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* ---------- welcome header ---------- */
+  .cp-head {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding-bottom: 20px;
+  }
+
+  .cp-eyebrow {
+    margin: 0;
+    color: var(--gold);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .cp-title {
+    margin: 6px 0 0;
+    color: var(--navy);
+    font-size: clamp(1.55rem, 6.4vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+
+  body[data-theme="dark"] .cp-title {
+    color: var(--ink);
+  }
+
+  .cp-cta-red {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 48px;
+    padding: 13px 22px;
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--red);
+    color: var(--cp-on-red);
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 10px 26px var(--soft-shadow);
+  }
+
+  .cp-cta-red svg {
+    flex: 0 0 auto;
+  }
+
+  /* ---------- tab strip ---------- */
+  .cp-tabs {
+    display: flex;
+    gap: 4px;
+    margin: 0 -16px;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cp-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cp-tab {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 12px 14px;
+    border-bottom: 3px solid transparent;
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .cp-tab.is-active {
+    color: var(--navy);
+    font-weight: 800;
+    border-bottom-color: var(--red);
+  }
+
+  body[data-theme="dark"] .cp-tab.is-active {
+    color: var(--ink);
+  }
+
+  /* ---------- layout ---------- */
+  .cp-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 22px;
+  }
+
+  .cp-col {
+    display: contents;
+  }
+
+  .cp-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 10px 30px var(--soft-shadow);
+  }
+
+  .cp-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .cp-card-title {
+    margin: 0;
+    color: var(--navy);
+    font-size: 1.12rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  body[data-theme="dark"] .cp-card-title {
+    color: var(--ink);
+  }
+
+  .cp-card-title.cp-sm {
+    font-size: 1.02rem;
+  }
+
+  .cp-progress {
+    color: var(--green);
+    font-size: 0.83rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  body[data-theme="dark"] .cp-progress {
+    color: var(--ink);
+  }
+
+  .cp-link {
+    color: var(--red);
+    font-size: 0.83rem;
+    font-weight: 800;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  /* ---------- workout rows ---------- */
+  .cp-days {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cp-day {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 12px 14px;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: var(--surface-soft);
+  }
+
+  .cp-day svg {
+    flex: 0 0 auto;
+  }
+
+  .cp-day-name {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  .cp-day.is-done .cp-day-name {
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+
+  .cp-day.is-done svg {
+    color: var(--green);
+  }
+
+  body[data-theme="dark"] .cp-day.is-done svg {
+    color: var(--ink);
+  }
+
+  .cp-day.is-todo svg {
+    color: var(--muted);
+  }
+
+  .cp-day.is-next {
+    background: var(--surface);
+    border-color: var(--navy);
+    border-width: 2px;
+    flex-wrap: wrap;
+  }
+
+  body[data-theme="dark"] .cp-day.is-next {
+    border-color: var(--ink);
+  }
+
+  .cp-day.is-next .cp-day-name {
+    color: var(--navy);
+    font-weight: 800;
+  }
+
+  body[data-theme="dark"] .cp-day.is-next .cp-day-name {
+    color: var(--ink);
+  }
+
+  .cp-day-open {
+    flex: 0 0 auto;
+    color: var(--red);
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .cp-day.is-last {
+    background: var(--surface);
+    border-color: var(--line);
+  }
+
+  .cp-note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  /* ---------- coach note ---------- */
+  .cp-coach {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .cp-avatar {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: var(--red);
+    color: var(--cp-on-red);
+    font-size: 0.86rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  .cp-bubble {
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    background: var(--surface-soft);
+    border-radius: var(--radius);
+    padding: 13px 15px;
+    color: var(--muted);
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+
+  /* ---------- navy check-in card ---------- */
+  .cp-checkin {
+    background: var(--cp-navy-solid);
+    border: 1px solid var(--cp-navy-solid);
+    border-radius: var(--radius);
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: var(--shadow);
+  }
+
+  .cp-checkin-eyebrow {
+    margin: 0;
+    color: var(--cp-on-navy-gold);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .cp-checkin-copy {
+    margin: 0;
+    color: var(--cp-on-navy);
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.42;
+  }
+
+  .cp-cta-white {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--cp-on-red);
+    color: var(--cp-navy-solid);
+    font: inherit;
+    font-size: 0.94rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* ---------- orders ---------- */
+  .cp-orders {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cp-order {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 11px 0;
+  }
+
+  .cp-order + .cp-order {
+    border-top: 1px solid var(--line);
+  }
+
+  .cp-order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .cp-order-name {
+    color: var(--ink);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .cp-order-id {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .cp-pill {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 5px 11px;
+    font-size: 0.74rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .cp-pill.cp-shipped {
+    background: var(--surface-soft);
+    background: color-mix(in srgb, var(--green) 14%, transparent);
+    color: var(--green);
+  }
+
+  body[data-theme="dark"] .cp-pill.cp-shipped {
+    color: var(--ink);
+  }
+
+  .cp-pill.cp-delivered {
+    background: var(--surface-soft);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+
+  .cp-body-copy {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* ---------- desktop ---------- */
+  @media (min-width: 860px) {
+    #view-client {
+      padding: 40px 0 64px;
+    }
+
+    .cp-wrap {
+      padding: 0 24px;
+    }
+
+    .cp-head {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 22px;
+    }
+
+    .cp-tabs {
+      margin: 0;
+      padding: 0;
+      gap: 6px;
+      overflow-x: visible;
+    }
+
+    .cp-tab {
+      padding: 12px 18px;
+      font-size: 0.95rem;
+    }
+
+    .cp-grid {
+      display: grid;
+      grid-template-columns: 1.7fr 1fr;
+      gap: 26px;
+      align-items: start;
+      padding-top: 30px;
+    }
+
+    .cp-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cp-card,
+    .cp-checkin {
+      padding: 24px 26px;
+    }
+
+    .cp-card-title {
+      font-size: 1.24rem;
+    }
+
+    .cp-card-title.cp-sm {
+      font-size: 1.06rem;
+    }
+
+    .cp-day {
+      padding: 14px 16px;
+    }
+
+    .cp-day-name {
+      font-size: 0.97rem;
+    }
+  }
+
+  /* ============================================================
+     Training portal — coach view (Pete). Mobile-first.
+     All colors come from the host page's custom properties.
+     The only literals are the fixed-contrast band/accent inks,
+     which must read identically in light and dark themes.
+     ============================================================ */
+
+  #view-coach {
+    --co-band: #0f2740;          /* navy band, identical in both themes */
+    --co-on-band: #edf2f6;       /* text on navy band / on red buttons */
+    --co-on-band-dim: rgba(237, 242, 246, 0.72);
+    --co-band-accent: #bd8a3d;   /* gold eyebrow on navy band */
+    --co-gap: 16px;
+
+    width: 100%;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 16px 32px;
+    color: var(--ink);
+    font-family: inherit;
+  }
+
+  #view-coach *,
+  #view-coach *::before,
+  #view-coach *::after {
+    box-sizing: border-box;
+  }
+
+  #view-coach svg {
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  /* ---------- navy header band ---------- */
+
+  .co-band {
+    background: var(--co-band);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .co-band-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .co-eyebrow {
+    margin: 0;
+    color: var(--co-band-accent);
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .co-band h2 {
+    margin: 0;
+    color: var(--co-on-band);
+    font-family: inherit;
+    font-size: 1.32rem;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .co-band-sub {
+    margin: 2px 0 0;
+    color: var(--co-on-band-dim);
+    font-size: 0.8rem;
+  }
+
+  .co-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: var(--red);
+    color: var(--co-on-band);
+    display: grid;
+    place-items: center;
+    font-size: 0.92rem;
+    font-weight: 900;
+    flex: 0 0 auto;
+  }
+
+  /* ---------- demo tag ---------- */
+
+  .co-tagline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 0;
+  }
+
+  .co-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 26px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 10px;
+    background: var(--surface-soft);
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .co-tagline p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  /* ---------- shared shells ---------- */
+
+  .co-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--co-gap);
+    margin-top: var(--co-gap);
+  }
+
+  .co-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 10px 30px var(--soft-shadow);
+  }
+
+  .co-card-pad {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .co-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .co-card-head h3 {
+    margin: 0;
+    color: var(--navy);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .co-card-head span {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  /* ---------- buttons ---------- */
+
+  .co-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    background: var(--surface);
+    color: var(--navy);
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .co-btn.co-primary {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--co-on-band);
+  }
+
+  .co-btn.co-outline {
+    border-color: var(--navy);
+    color: var(--navy);
+  }
+
+  .co-btn.co-quiet {
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .co-btn.co-small {
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+
+  .co-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: var(--co-gap);
+  }
+
+  .co-actions .co-btn {
+    flex: 1 1 0;
+  }
+
+  /* ---------- stats ---------- */
+
+  .co-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .co-stat {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 10px 30px var(--soft-shadow);
+  }
+
+  .co-stat-label {
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .co-stat-value {
+    color: var(--navy);
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1.05;
+  }
+
+  .co-stat-value.co-is-red {
+    color: var(--red);
+  }
+
+  .co-stat-value.co-is-gold {
+    color: var(--gold);
+  }
+
+  /* ---------- today schedule ---------- */
+
+  .co-slot {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: var(--surface-soft);
+  }
+
+  .co-slot.co-is-next {
+    background: var(--surface);
+    border: 1.5px solid var(--navy);
+  }
+
+  .co-time {
+    width: 52px;
+    flex: 0 0 52px;
+    color: var(--navy);
+    font-size: 0.8rem;
+    font-weight: 900;
+  }
+
+  .co-slot-body {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .co-slot-name {
+    color: var(--ink);
+    font-size: 0.92rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .co-note {
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+
+  .co-note.co-is-gold {
+    color: var(--gold);
+  }
+
+  .co-note.co-is-green {
+    color: var(--green);
+  }
+
+  .co-note.co-is-red {
+    color: var(--red);
+  }
+
+  /* ---------- client list ---------- */
+
+  .co-thead {
+    display: none;
+  }
+
+  .co-clients {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .co-client {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface-soft);
+  }
+
+  .co-client-id {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .co-mono {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    color: var(--co-on-band);
+    background: var(--navy);
+    font-size: 0.78rem;
+    font-weight: 900;
+  }
+
+  .co-mono.co-is-green {
+    background: var(--green);
+  }
+
+  .co-mono.co-is-red {
+    background: var(--red);
+  }
+
+  .co-mono.co-is-gold {
+    background: var(--gold);
+  }
+
+  .co-client-name {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .co-client-name strong {
+    color: var(--ink);
+    font-size: 0.94rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .co-client-name span {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .co-pill {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    min-height: 26px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 12px;
+    background: var(--surface);
+    color: var(--navy);
+    font-size: 0.74rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .co-pill.co-is-green {
+    color: var(--green);
+  }
+
+  .co-package {
+    color: var(--ink);
+    font-size: 0.85rem;
+  }
+
+  .co-package b {
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  .co-meter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .co-track {
+    flex: 1 1 auto;
+    max-width: 110px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--line);
+    overflow: hidden;
+  }
+
+  .co-fill {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--navy);
+  }
+
+  .co-fill.co-is-gold {
+    background: var(--gold);
+  }
+
+  .co-fill.co-is-green {
+    background: var(--green);
+  }
+
+  .co-fill.co-is-red {
+    background: var(--red);
+  }
+
+  .co-left {
+    font-size: 0.85rem;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  .co-left.co-is-gold {
+    color: var(--gold);
+  }
+
+  .co-left.co-is-green {
+    color: var(--green);
+  }
+
+  .co-left.co-is-red {
+    color: var(--red);
+  }
+
+  .co-row-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .co-row-actions .co-btn {
+    flex: 1 1 0;
+  }
+
+  /* ---------- needs attention ---------- */
+
+  .co-attn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 4px 0;
+  }
+
+  .co-attn + .co-attn {
+    border-top: 1px solid var(--line);
+  }
+
+  .co-attn p {
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    color: var(--ink);
+    font-size: 0.86rem;
+  }
+
+  .co-attn p b {
+    font-weight: 900;
+  }
+
+  .co-review {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 8px 4px 8px 10px;
+    border: 0;
+    background: none;
+    color: var(--red);
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 900;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  /* ---------- confirmation strip ---------- */
+
+  .co-confirm {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--green);
+    border-left: 5px solid var(--green);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 14px 16px;
+    color: var(--green);
+  }
+
+  .co-confirm p {
+    margin: 0;
+    color: var(--ink);
+    font-size: 0.84rem;
+    line-height: 1.4;
+  }
+
+  .co-confirm p b {
+    font-weight: 800;
+  }
+
+  /* ---------- desktop ---------- */
+
+  @media (min-width: 860px) {
+    #view-coach {
+      --co-gap: 20px;
+      padding: 0 24px 44px;
+    }
+
+    .co-band {
+      padding: 24px 28px;
+    }
+
+    .co-band h2 {
+      font-size: 1.7rem;
+    }
+
+    .co-avatar {
+      width: 52px;
+      height: 52px;
+      font-size: 1rem;
+    }
+
+    .co-actions {
+      justify-content: flex-start;
+    }
+
+    .co-actions .co-btn {
+      flex: 0 0 auto;
+      min-width: 190px;
+    }
+
+    .co-stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--co-gap);
+    }
+
+    .co-stat {
+      padding: 18px 20px;
+    }
+
+    .co-stat-value {
+      font-size: 1.75rem;
+    }
+
+    .co-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+      gap: var(--co-gap);
+      align-items: start;
+    }
+
+    .co-card-pad {
+      padding: 20px 24px;
+    }
+
+    .co-thead,
+    .co-client {
+      display: grid;
+      grid-template-columns: 2fr 1.1fr 1.6fr 1.3fr 1.7fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .co-thead {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .co-client {
+      background: var(--surface);
+      padding: 14px;
+    }
+
+    .co-package b {
+      display: none;
+    }
+
+    .co-row-actions .co-btn {
+      flex: 1 1 auto;
+    }
+  }
+
+  /* Dark theme: navy text reads as ink; navy-background avatars keep the
+     band navy with a hairline so they hold shape on dark surfaces. */
+  body[data-theme="dark"] #view-coach {
+    --navy: var(--ink);
+  }
+
+  body[data-theme="dark"] #view-coach .co-mono {
+    background: var(--co-band);
+    border: 1px solid var(--line);
+  }
+
+  body[data-theme="dark"] #view-coach .co-mono.co-is-green {
+    background: var(--green);
+    border: 0;
+  }
+
+  body[data-theme="dark"] #view-coach .co-mono.co-is-red {
+    background: var(--red);
+    border: 0;
+  }
+
+  body[data-theme="dark"] #view-coach .co-mono.co-is-gold {
+    background: var(--gold);
+    border: 0;
+  }
   </style>
 </head>
 <body>
@@ -406,9 +1569,336 @@
         </div>
       </section>
 
-      <!-- @CLIENT_VIEW -->
+      <section id="view-client" class="persona-view" aria-label="Client portal">
+  <div class="cp-wrap">
 
-      <!-- @COACH_VIEW -->
+    <div class="cp-head">
+      <div>
+        <p class="cp-eyebrow">Online coaching client</p>
+        <h2 class="cp-title">Welcome back, Jordan (demo)</h2>
+      </div>
+      <a class="cp-cta-red" href="#view-client">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l2.5 2.5L16 8"></path><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5z"></path></svg>
+        Start this week's check-in
+      </a>
+    </div>
+
+    <nav class="cp-tabs" aria-label="Portal sections">
+      <span class="cp-tab is-active">My plan</span>
+      <span class="cp-tab">Check-ins</span>
+      <span class="cp-tab">Orders</span>
+      <span class="cp-tab">Health notes</span>
+      <span class="cp-tab">Profile</span>
+    </nav>
+
+    <div class="cp-grid">
+
+      <div class="cp-col cp-col-main">
+        <article class="cp-card" style="order: 2">
+          <div class="cp-card-head">
+            <h3 class="cp-card-title">This week's training</h3>
+            <span class="cp-progress">2 of 4 done</span>
+          </div>
+
+          <div class="cp-days">
+            <div class="cp-day is-done">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-5"></path><circle cx="12" cy="12" r="9"></circle></svg>
+              <span class="cp-day-name">Day 1 &middot; Lower body strength</span>
+            </div>
+
+            <div class="cp-day is-done">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-5"></path><circle cx="12" cy="12" r="9"></circle></svg>
+              <span class="cp-day-name">Day 2 &middot; Zone 2 cardio, 35 min</span>
+            </div>
+
+            <div class="cp-day is-todo is-next">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg>
+              <span class="cp-day-name">Day 3 &middot; Upper body push</span>
+              <a class="cp-day-open" href="#view-client">Open workout &rarr;</a>
+            </div>
+
+            <div class="cp-day is-todo is-last">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg>
+              <span class="cp-day-name">Day 4 &middot; Full body + core</span>
+            </div>
+          </div>
+
+          <p class="cp-note">Don't know an exercise? Every one links to a short video and a note from Pete or Lisa.</p>
+        </article>
+
+        <article class="cp-card" style="order: 3">
+          <h3 class="cp-card-title">Note from your coach</h3>
+          <div class="cp-coach">
+            <div class="cp-avatar" aria-hidden="true">LF</div>
+            <p class="cp-bubble">Nice week &mdash; weight trend looks steady. I bumped your Day 3 pressing volume slightly; keep the last set two reps shy of failure. &mdash; Lisa</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="cp-col cp-col-side">
+        <article class="cp-checkin" style="order: 1">
+          <p class="cp-checkin-eyebrow">Weekly check-in</p>
+          <p class="cp-checkin-copy">Due Sunday &mdash; weight, how the week felt, optional photos.</p>
+          <a class="cp-cta-white" href="#view-client">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            Check in now
+          </a>
+        </article>
+
+        <article class="cp-card" style="order: 4">
+          <div class="cp-card-head">
+            <h3 class="cp-card-title cp-sm">Recent orders</h3>
+            <a class="cp-link" href="#view-client">View all</a>
+          </div>
+          <div class="cp-orders">
+            <div class="cp-order">
+              <span class="cp-order-info">
+                <span class="cp-order-name">BPC-157 &middot; 5mg</span>
+                <span class="cp-order-id">Order #1042</span>
+              </span>
+              <span class="cp-pill cp-shipped">Shipped</span>
+            </div>
+            <div class="cp-order">
+              <span class="cp-order-info">
+                <span class="cp-order-name">Fonseca Tee &middot; Navy</span>
+                <span class="cp-order-id">Order #1038</span>
+              </span>
+              <span class="cp-pill cp-delivered">Delivered</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="cp-card" style="order: 5">
+          <h3 class="cp-card-title cp-sm">Health notes</h3>
+          <p class="cp-body-copy">Your intake review is on file. Flag any new injury or condition in your check-in &mdash; the plan adjusts before your next week is written.</p>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+      <section id="view-coach" class="persona-view" aria-labelledby="co-title">
+  <div class="co-band">
+    <div class="co-band-text">
+      <p class="co-eyebrow">Coach view</p>
+      <h2 id="co-title">Morning, Pete</h2>
+      <p class="co-band-sub">Tuesday · 3 sessions on the book</p>
+    </div>
+    <div class="co-avatar" aria-hidden="true">PF</div>
+  </div>
+
+  <div class="co-tagline">
+    <span class="co-tag">Demo data</span>
+    <p>Sample clients and numbers for layout only.</p>
+  </div>
+
+  <div class="co-actions">
+    <button class="co-btn co-primary" type="button">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+      Log session
+    </button>
+    <button class="co-btn co-outline" type="button">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6ZM14 3v5h5"></path><path d="M9 13h6M9 17h4"></path></svg>
+      New invoice
+    </button>
+  </div>
+
+  <div class="co-stack">
+    <div class="co-stats">
+      <div class="co-stat">
+        <span class="co-stat-label">Active clients</span>
+        <span class="co-stat-value">18</span>
+      </div>
+      <div class="co-stat">
+        <span class="co-stat-label">Sessions this week</span>
+        <span class="co-stat-value">11</span>
+      </div>
+      <div class="co-stat">
+        <span class="co-stat-label">Unpaid invoices</span>
+        <span class="co-stat-value co-is-red">2 · $340</span>
+      </div>
+      <div class="co-stat">
+        <span class="co-stat-label">Packages running low</span>
+        <span class="co-stat-value co-is-gold">3</span>
+      </div>
+    </div>
+
+    <div class="co-split">
+      <article class="co-card">
+        <div class="co-card-pad">
+          <div class="co-card-head">
+            <h3>Today</h3>
+            <span>3 sessions</span>
+          </div>
+
+          <div class="co-slot">
+            <span class="co-time">7:00a</span>
+            <div class="co-slot-body">
+              <span class="co-slot-name">M. Rivera</span>
+              <span class="co-note co-is-gold">3 sessions left · renewal due</span>
+            </div>
+            <button class="co-btn co-small" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+              Done
+            </button>
+          </div>
+
+          <div class="co-slot">
+            <span class="co-time">9:00a</span>
+            <div class="co-slot-body">
+              <span class="co-slot-name">D. Kim</span>
+              <span class="co-note co-is-green">14 sessions left</span>
+            </div>
+            <button class="co-btn co-small" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+              Done
+            </button>
+          </div>
+
+          <div class="co-slot co-is-next">
+            <span class="co-time">4:30p</span>
+            <div class="co-slot-body">
+              <span class="co-slot-name">S. Alvarez</span>
+              <span class="co-note co-is-red">1 left · invoice overdue</span>
+            </div>
+            <button class="co-btn co-small co-primary" type="button">Invoice</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="co-card">
+        <div class="co-card-pad">
+          <div class="co-card-head">
+            <h3>Needs attention</h3>
+            <span>3 items</span>
+          </div>
+
+          <div class="co-attn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5M12 16v.5"></path></svg>
+            <p>2 unpaid invoices · <b>$340</b></p>
+            <button class="co-review" type="button">Review →</button>
+          </div>
+
+          <div class="co-attn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="12" width="4" height="8" rx="1"></rect><rect x="10" y="8" width="4" height="12" rx="1"></rect><rect x="16" y="4" width="4" height="16" rx="1"></rect></svg>
+            <p>3 clients low on sessions</p>
+            <button class="co-review" type="button">Review →</button>
+          </div>
+
+          <div class="co-attn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16l-1.5 12h-13ZM8 8V6a4 4 0 0 1 8 0v2"></path></svg>
+            <p>1 new store order to pack</p>
+            <button class="co-review" type="button">Review →</button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <article class="co-card">
+      <div class="co-card-pad">
+        <div class="co-card-head">
+          <h3>Clients</h3>
+          <span>In-person and online</span>
+        </div>
+
+        <div class="co-thead" aria-hidden="true">
+          <span>Client</span>
+          <span>Type</span>
+          <span>Package</span>
+          <span>Sessions left</span>
+          <span>Actions</span>
+        </div>
+
+        <ul class="co-clients">
+          <li class="co-client">
+            <div class="co-client-id">
+              <span class="co-mono" aria-hidden="true">MR</span>
+              <span class="co-client-name">
+                <strong>M. Rivera</strong>
+                <span>Last session Tue</span>
+              </span>
+            </div>
+            <span class="co-pill">In-person</span>
+            <span class="co-package"><b>Package</b>10-session pack</span>
+            <div class="co-meter">
+              <span class="co-track"><span class="co-fill co-is-gold" style="width: 30%"></span></span>
+              <span class="co-left co-is-gold">3 left</span>
+            </div>
+            <div class="co-row-actions">
+              <button class="co-btn co-small" type="button">Log session</button>
+              <button class="co-btn co-small co-outline" type="button">Renewal</button>
+            </div>
+          </li>
+
+          <li class="co-client">
+            <div class="co-client-id">
+              <span class="co-mono co-is-green" aria-hidden="true">DK</span>
+              <span class="co-client-name">
+                <strong>D. Kim</strong>
+                <span>Last session Thu</span>
+              </span>
+            </div>
+            <span class="co-pill">In-person</span>
+            <span class="co-package"><b>Package</b>20-session pack</span>
+            <div class="co-meter">
+              <span class="co-track"><span class="co-fill co-is-green" style="width: 70%"></span></span>
+              <span class="co-left co-is-green">14 left</span>
+            </div>
+            <div class="co-row-actions">
+              <button class="co-btn co-small" type="button">Log session</button>
+              <button class="co-btn co-small co-quiet" type="button">Invoice</button>
+            </div>
+          </li>
+
+          <li class="co-client">
+            <div class="co-client-id">
+              <span class="co-mono co-is-red" aria-hidden="true">SA</span>
+              <span class="co-client-name">
+                <strong>S. Alvarez</strong>
+                <span>Invoice #211 overdue 6 days</span>
+              </span>
+            </div>
+            <span class="co-pill">In-person</span>
+            <span class="co-package"><b>Package</b>5-session pack</span>
+            <div class="co-meter">
+              <span class="co-track"><span class="co-fill co-is-red" style="width: 20%"></span></span>
+              <span class="co-left co-is-red">1 left</span>
+            </div>
+            <div class="co-row-actions">
+              <button class="co-btn co-small" type="button">Log session</button>
+              <button class="co-btn co-small co-primary" type="button">Resend invoice</button>
+            </div>
+          </li>
+
+          <li class="co-client">
+            <div class="co-client-id">
+              <span class="co-mono co-is-gold" aria-hidden="true">JC</span>
+              <span class="co-client-name">
+                <strong>J. Carter</strong>
+                <span>Check-in due Sunday</span>
+              </span>
+            </div>
+            <span class="co-pill co-is-green">Online</span>
+            <span class="co-package"><b>Package</b>Monthly coaching</span>
+            <div class="co-meter">
+              <span class="co-left co-is-green">Auto-renews</span>
+            </div>
+            <div class="co-row-actions">
+              <button class="co-btn co-small" type="button">Open plan</button>
+              <button class="co-btn co-small co-quiet" type="button">Message</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </article>
+
+    <div class="co-confirm" role="status">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-5"></path><circle cx="12" cy="12" r="9"></circle></svg>
+      <p>M. Rivera paid invoice #209 — <b>$450 by bank transfer</b> (fee: $2.25)</p>
+    </div>
+  </div>
+</section>
     </main>
   </div>
 
