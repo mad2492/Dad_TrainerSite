@@ -20,7 +20,7 @@ Purpose: get the free database and login system running behind the client portal
 
 1. Go to **Authentication → Sign In / Providers**.
 2. Make sure **Email** is enabled.
-3. Turn **off** "Confirm email" password requirements aren't needed — we want the "magic link" style login, where clients type their email and click a link. (If you see a toggle for magic links specifically, enable it.)
+3. Passwords aren't needed — we want the "magic link" style login, where clients type their email and click a link they receive. (If you see a toggle for magic links or OTP specifically, enable it.)
 4. Leave **signups enabled**. Clients need to be able to create their own accounts. This is safe: every new signup automatically gets the limited `client` role and can only ever see their own data.
 
 ## 4. Copy your project keys into the site

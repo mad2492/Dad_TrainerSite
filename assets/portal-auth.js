@@ -107,8 +107,11 @@
     },
 
     signInWithEmail: (email) => {
-      if (!enabled || !client) {
+      if (!enabled) {
         return Promise.resolve({ ok: false, error: "Sign-in is not available in demo mode." });
+      }
+      if (!client) {
+        return Promise.resolve({ ok: false, error: "The sign-in service could not be reached. Check your connection and reload." });
       }
       const redirectTo = window.location.href.split("#")[0];
       return client.auth

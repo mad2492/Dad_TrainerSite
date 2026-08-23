@@ -170,6 +170,36 @@
       color: var(--gold);
     }
 
+    .auth-strip {
+      background: var(--green);
+      color: #ffffff;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .auth-strip[hidden] {
+      display: none;
+    }
+
+    .auth-signout {
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 999px;
+      background: transparent;
+      color: #ffffff;
+      font: inherit;
+      font-weight: 800;
+      font-size: 0.74rem;
+      padding: 4px 12px;
+      min-height: 28px;
+      cursor: pointer;
+    }
+
     .persona-view {
       display: none;
     }
@@ -1516,6 +1546,10 @@
 <body>
   <div class="site-shell">
     <div class="demo-strip"><strong>Demo:</strong> switch between what a guest, a client, and Coach Pete would see. No real accounts yet.</div>
+    <div class="auth-strip" id="auth-strip" hidden>
+      <span id="auth-strip-label">Signed in</span>
+      <button class="auth-signout" type="button" id="auth-signout">Sign out</button>
+    </div>
     <header class="topbar">
       <div class="topbar-inner">
         <a class="brand" href="index.html" aria-label="Fonseca Fitness home">
@@ -1902,8 +1936,16 @@
     </main>
   </div>
 
+  <script src="assets/portal-config.js"></script>
+  <script src="assets/portal-auth.js"></script>
   <script>
     const themeToggle = document.getElementById("theme-toggle");
+    const authLive = Boolean(window.FonsecaAuth && window.FonsecaAuth.enabled);
+
+    if (authLive) {
+      document.querySelector(".signin-btn").removeAttribute("data-persona-target");
+    }
+
     const personaButtons = Array.from(document.querySelectorAll("[data-persona-target]"));
     const tabs = Array.from(document.querySelectorAll(".tab-button[data-persona-target]"));
     const views = {
@@ -1955,6 +1997,55 @@
 
     applyTheme(localStorage.getItem("fonseca-theme") || "light");
     setPersona(window.location.hash.replace("#", "") || "guest", false);
+
+    if (authLive) {
+      const demoStrip = document.querySelector(".demo-strip");
+      const authStrip = document.getElementById("auth-strip");
+      const authLabel = document.getElementById("auth-strip-label");
+      const signinBtn = document.querySelector(".signin-btn");
+      const signinNote = document.querySelector(".signin-note");
+      const emailInput = document.querySelector('.signin-card input[type="email"]');
+      const passwordField = document.querySelector('.signin-card input[type="password"]');
+
+      demoStrip.hidden = true;
+      if (passwordField) {
+        passwordField.closest("label").hidden = true;
+      }
+      signinBtn.textContent = "Email me a sign-in link";
+      signinNote.textContent = "No password needed — we'll email you a one-tap sign-in link.";
+
+      signinBtn.addEventListener("click", () => {
+        const email = (emailInput.value || "").trim();
+        if (!email) {
+          signinNote.textContent = "Enter your email first.";
+          return;
+        }
+        signinBtn.disabled = true;
+        FonsecaAuth.signInWithEmail(email).then((result) => {
+          signinBtn.disabled = false;
+          signinNote.textContent = result.ok
+            ? "Check your email — your sign-in link is on the way."
+            : "Could not send the link: " + result.error;
+        });
+      });
+
+      document.getElementById("auth-signout").addEventListener("click", () => {
+        FonsecaAuth.signOut();
+      });
+
+      FonsecaAuth.init({
+        onSignedIn: (profile) => {
+          authStrip.hidden = false;
+          authLabel.textContent = "Signed in as " + (profile.full_name || "member") +
+            (profile.role === "coach" ? " · Coach" : "");
+          setPersona(profile.role === "coach" ? "coach" : "client");
+        },
+        onSignedOut: () => {
+          authStrip.hidden = true;
+          setPersona("guest");
+        }
+      });
+    }
   </script>
 </body>
 </html>
