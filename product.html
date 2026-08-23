@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fonseca Fitness shop demo — BPC-157 product detail preview. Sample product and pricing only.">
+  <title>BPC-157 — Fonseca Fitness Shop</title>
+  <link rel="icon" type="image/png" href="dist/fonseca-fitness-logo-assets/fonseca-fitness-favicon.png">
+  <style>
+    :root {
+      --navy: #0f2740;
+      --red: #b3262d;
+      --paper: #f5f3ee;
+      --white: #ffffff;
+      --ink: #1d242c;
+      --muted: #5d6670;
+      --line: #ded8cc;
+      --gold: #bd8a3d;
+      --green: #2f6e4f;
+      --surface: #ffffff;
+      --surface-soft: #f5f3ee;
+      --panel: #eceff2;
+      --topbar-bg: rgba(245, 243, 238, 0.96);
+      --soft-shadow: rgba(15, 39, 64, 0.08);
+      --shadow: 0 18px 50px rgba(15, 39, 64, 0.13);
+      --radius: 8px;
+      --max: 1120px;
+    }
+
+    body[data-theme="dark"] {
+      --paper: #071727;
+      --white: #10263a;
+      --ink: #edf2f6;
+      --muted: #b7c3ce;
+      --line: rgba(245, 243, 238, 0.18);
+      --surface: #10263a;
+      --surface-soft: #071727;
+      --panel: #0c1e30;
+      --topbar-bg: rgba(7, 23, 39, 0.94);
+      --soft-shadow: rgba(0, 0, 0, 0.28);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, Avenir Next, Segoe UI, Arial, sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    img,
+    svg {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* ---------- top bar ---------- */
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--topbar-bg);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      text-decoration: none;
+    }
+
+    .brand-lockup {
+      display: block;
+      width: min(52vw, 260px);
+      height: 44px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 9px 10px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-link.is-current {
+      color: var(--red);
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      min-height: 44px;
+      padding: 9px 12px;
+      background: var(--surface);
+      color: var(--navy);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 4px 16px var(--soft-shadow);
+    }
+
+    body[data-theme="dark"] .theme-toggle {
+      color: var(--ink);
+    }
+
+    .cart-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--navy);
+      text-decoration: none;
+      box-shadow: 0 4px 16px var(--soft-shadow);
+    }
+
+    body[data-theme="dark"] .cart-button {
+      color: var(--ink);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: var(--red);
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      line-height: 18px;
+      text-align: center;
+    }
+
+    .cart-count[hidden] {
+      display: none;
+    }
+
+    /* ---------- demo strip ---------- */
+
+    .demo-strip {
+      background: var(--navy);
+      color: #edf2f6;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 8px 16px;
+    }
+
+    .demo-strip strong {
+      color: var(--gold);
+    }
+
+    /* ---------- page shell ---------- */
+
+    main {
+      flex: 1 1 auto;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .crumbs {
+      padding: 18px 0 4px;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .crumbs a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .crumbs strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: start;
+      padding: 16px 0 48px;
+    }
+
+    /* ---------- gallery ---------- */
+
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .gallery-main {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 40px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-main svg {
+      width: 110px;
+      height: auto;
+    }
+
+    .thumbs {
+      display: flex;
+      gap: 12px;
+    }
+
+    .thumb {
+      width: 76px;
+      height: 76px;
+      flex: 0 0 auto;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .thumb.is-active {
+      border: 2px solid var(--navy);
+    }
+
+    body[data-theme="dark"] .thumb.is-active {
+      border-color: var(--ink);
+    }
+
+    /* ---------- detail column ---------- */
+
+    .detail {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .detail-head {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .detail h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(1.9rem, 8vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      overflow-wrap: anywhere;
+    }
+
+    body[data-theme="dark"] .detail h1 {
+      color: var(--ink);
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .price {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .stock-pill {
+      background: var(--green);
+      color: #ffffff;
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .description {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .field-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .size-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .size-pill {
+      min-height: 48px;
+      padding: 12px 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .size-pill[aria-pressed="true"] {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    body[data-theme="dark"] .size-pill[aria-pressed="true"] {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .buy-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .stepper {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      flex: 0 0 auto;
+    }
+
+    .step-btn {
+      width: 48px;
+      min-height: 52px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .step-value {
+      min-width: 40px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .add-btn {
+      flex: 1 1 200px;
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: var(--radius);
+      background: var(--red);
+      color: #ffffff;
+      font: inherit;
+      font-size: 1.02rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 26px var(--soft-shadow);
+    }
+
+    .add-note {
+      margin: 0;
+      min-height: 1.2em;
+      color: var(--green);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    body[data-theme="dark"] .add-note {
+      color: var(--ink);
+    }
+
+    /* ---------- lab report card ---------- */
+
+    .lab-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      box-shadow: 0 10px 30px var(--soft-shadow);
+    }
+
+    .lab-card svg {
+      flex: 0 0 auto;
+      color: var(--green);
+    }
+
+    body[data-theme="dark"] .lab-card svg {
+      color: var(--ink);
+    }
+
+    .lab-card strong {
+      display: block;
+      color: var(--navy);
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    body[data-theme="dark"] .lab-card strong {
+      color: var(--ink);
+    }
+
+    .lab-card p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .lab-card a {
+      color: var(--red);
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      min-height: 24px;
+    }
+
+    /* ---------- accordions ---------- */
+
+    .accordions {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--line);
+    }
+
+    .accordions details {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .accordions summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 48px;
+      padding: 14px 4px;
+      color: var(--navy);
+      font-size: 0.97rem;
+      font-weight: 800;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    body[data-theme="dark"] .accordions summary {
+      color: var(--ink);
+    }
+
+    .accordions summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordions summary::after {
+      content: "+";
+      color: var(--muted);
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .accordions details[open] summary::after {
+      content: "\2212";
+    }
+
+    .accordions details p {
+      margin: 0 0 16px;
+      padding: 0 4px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* ---------- footer ---------- */
+
+    .site-footer {
+      background: #071727;
+      padding: 22px 0;
+      margin-top: auto;
+    }
+
+    .site-footer p {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 16px;
+      color: #8fa0ae;
+      font-size: 0.78rem;
+      line-height: 1.6;
+    }
+
+    /* ---------- desktop ---------- */
+
+    @media (min-width: 860px) {
+      .wrap {
+        padding: 0 24px;
+      }
+
+      .crumbs {
+        padding: 32px 0 4px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 48px;
+        padding: 16px 0 64px;
+      }
+
+      .gallery-main {
+        padding: 64px;
+      }
+
+      .gallery-main svg {
+        width: 140px;
+      }
+
+      .thumb {
+        width: 88px;
+        height: 88px;
+      }
+
+      .detail h1 {
+        font-size: 2.35rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-strip"><strong>Demo storefront:</strong> sample products and prices — nothing can be purchased yet.</div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Fonseca Fitness home">
+        <img class="brand-lockup" src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline.png" data-light-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline.png" data-dark-src="dist/fonseca-fitness-logo-assets/fonseca-fitness-horizontal-header-no-tagline-dark-safe.png" alt="Fonseca Fitness">
+      </a>
+
+      <div class="topbar-actions">
+        <a class="nav-link is-current" href="shop.html">Shop</a>
+        <a class="nav-link" href="portal.html">Portal</a>
+        <a class="cart-button" href="cart.html" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.5a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.2L21.5 8H6"></path></svg>
+          <span class="cart-count" id="cart-count" hidden>0</span>
+        </a>
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="shop.html">Shop</a> / Recovery / <strong>BPC-157</strong>
+      </nav>
+
+      <div class="product-grid">
+
+        <div class="gallery">
+          <div class="gallery-main">
+            <svg width="140" height="212" viewBox="0 0 64 96" fill="none" role="img" aria-label="Illustration of a BPC-157 vial"><rect x="24" y="4" width="16" height="10" rx="2" fill="#0f2740"></rect><rect x="20" y="14" width="24" height="6" rx="2" fill="#bd8a3d"></rect><rect x="14" y="22" width="36" height="66" rx="6" fill="#ffffff" stroke="#0f2740" stroke-width="2"></rect><rect x="18" y="46" width="28" height="30" rx="3" fill="#f5f3ee" stroke="#ded8cc"></rect><rect x="21" y="51" width="22" height="4" rx="1" fill="#0f2740"></rect><rect x="21" y="59" width="16" height="3" rx="1" fill="#b3262d"></rect></svg>
+          </div>
+          <div class="thumbs">
+            <button class="thumb is-active" type="button" aria-label="View 1" aria-pressed="true"></button>
+            <button class="thumb" type="button" aria-label="View 2" aria-pressed="false"></button>
+            <button class="thumb" type="button" aria-label="View 3" aria-pressed="false"></button>
+          </div>
+        </div>
+
+        <div class="detail">
+          <div class="detail-head">
+            <p class="eyebrow">Recovery</p>
+            <h1>BPC-157</h1>
+            <div class="price-row">
+              <span class="price" id="price">$54.00</span>
+              <span class="stock-pill">In stock</span>
+            </div>
+          </div>
+
+          <p class="description">[Product description — what it is, who it's for, and how it fits a training plan. Written in Pete and Lisa's plain-language voice, reviewed before launch.]</p>
+
+          <div>
+            <span class="field-label" id="size-label">Size</span>
+            <div class="size-pills" role="group" aria-labelledby="size-label">
+              <button class="size-pill" type="button" data-size="5mg" data-price="54.00" aria-pressed="true">5mg</button>
+              <button class="size-pill" type="button" data-size="10mg" data-price="89.00" aria-pressed="false">10mg</button>
+            </div>
+          </div>
+
+          <div class="buy-row">
+            <div class="stepper">
+              <button class="step-btn" type="button" id="qty-minus" aria-label="Decrease quantity">&minus;</button>
+              <span class="step-value" id="qty" aria-live="polite">1</span>
+              <button class="step-btn" type="button" id="qty-plus" aria-label="Increase quantity">+</button>
+            </div>
+            <button class="add-btn" type="button" id="add-to-cart">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.5a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.2L21.5 8H6"></path></svg>
+              Add to cart
+            </button>
+          </div>
+
+          <p class="add-note" id="add-note" role="status"></p>
+
+          <div class="lab-card">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5.5v5.6c0 4.9 3.4 9 8 10.4 4.6-1.4 8-5.5 8-10.4V5.5Z"></path><path d="m8.8 12 2.2 2.2 4.2-4.7"></path></svg>
+            <div>
+              <strong>Batch lab report included</strong>
+              <p>Every order ships with the certificate of analysis for its batch. <a href="#">View sample report (PDF)</a></p>
+            </div>
+          </div>
+
+          <div class="accordions">
+            <details>
+              <summary>How it ships &amp; storage</summary>
+              <p>[Shipping method, packaging, and storage instructions — plain-language copy to be written and reviewed before launch.]</p>
+            </details>
+            <details>
+              <summary>Questions? Ask your coach</summary>
+              <p>[How clients reach Pete or Lisa with product questions, and the agreed response window — copy to be confirmed.]</p>
+            </details>
+            <details>
+              <summary>Returns &amp; policies</summary>
+              <p>[Return window, exceptions, and policy links — review with legal before launch.]</p>
+            </details>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>[Required regulatory / disclaimer copy for peptide products — review with legal before launch] &middot; &copy; Fonseca Fitness</p>
+  </footer>
+
+  <script>
+    var CART_KEY = "fonseca-cart-demo";
+    var THEME_KEY = "fonseca-theme";
+
+    function readStore(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function writeStore(key, value) {
+      try {
+        localStorage.setItem(key, value);
+      } catch (error) {
+        /* storage unavailable — demo continues without persistence */
+      }
+    }
+
+    function readCartCount() {
+      var raw = parseInt(readStore(CART_KEY), 10);
+      return isNaN(raw) || raw < 0 ? 0 : raw;
+    }
+
+    var cartCount = document.getElementById("cart-count");
+
+    function paintCartCount() {
+      var count = readCartCount();
+      cartCount.textContent = String(count);
+      cartCount.hidden = count === 0;
+    }
+
+    /* ---------- theme ---------- */
+
+    var themeToggle = document.getElementById("theme-toggle");
+
+    function applyTheme(theme) {
+      document.body.dataset.theme = theme;
+      var isDark = theme === "dark";
+      themeToggle.textContent = isDark ? "Light" : "Dark";
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      document.querySelectorAll("[data-light-src][data-dark-src]").forEach(function (image) {
+        image.src = isDark ? image.dataset.darkSrc : image.dataset.lightSrc;
+      });
+      writeStore(THEME_KEY, theme);
+    }
+
+    themeToggle.addEventListener("click", function () {
+      applyTheme(document.body.dataset.theme === "dark" ? "light" : "dark");
+    });
+
+    applyTheme(readStore(THEME_KEY) || "light");
+    paintCartCount();
+
+    /* ---------- gallery thumbs ---------- */
+
+    var thumbs = Array.prototype.slice.call(document.querySelectorAll(".thumb"));
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener("click", function () {
+        thumbs.forEach(function (other) {
+          other.classList.toggle("is-active", other === thumb);
+          other.setAttribute("aria-pressed", String(other === thumb));
+        });
+      });
+    });
+
+    /* ---------- size + price ---------- */
+
+    var priceEl = document.getElementById("price");
+    var sizePills = Array.prototype.slice.call(document.querySelectorAll(".size-pill"));
+
+    sizePills.forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        sizePills.forEach(function (other) {
+          other.setAttribute("aria-pressed", String(other === pill));
+        });
+        priceEl.textContent = "$" + pill.dataset.price;
+      });
+    });
+
+    /* ---------- quantity ---------- */
+
+    var qtyEl = document.getElementById("qty");
+    var qty = 1;
+
+    function paintQty() {
+      qtyEl.textContent = String(qty);
+    }
+
+    document.getElementById("qty-minus").addEventListener("click", function () {
+      qty = Math.max(1, qty - 1);
+      paintQty();
+    });
+
+    document.getElementById("qty-plus").addEventListener("click", function () {
+      qty = qty + 1;
+      paintQty();
+    });
+
+    /* ---------- add to cart ---------- */
+
+    var addNote = document.getElementById("add-note");
+
+    document.getElementById("add-to-cart").addEventListener("click", function () {
+      var next = readCartCount() + qty;
+      writeStore(CART_KEY, String(next));
+      paintCartCount();
+      addNote.textContent = "Added " + qty + (qty === 1 ? " item" : " items") + " to your cart (demo).";
+    });
+  </script>
+</body>
+</html>
