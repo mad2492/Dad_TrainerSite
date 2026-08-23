@@ -139,7 +139,7 @@ set local request.jwt.claims =
 do $client_a$
 declare
   visible_count integer;
-  current_role text;
+  v_current_role text;
 begin
   select count(*) into visible_count
   from public.packages
@@ -189,14 +189,19 @@ begin
   exception when others then
     if sqlerrm = 'UNEXPECTED_SUCCESS_ROLE' then
       raise exception 'FAIL: client A changed their own role';
+    elsif sqlerrm = 'Only a coach can change roles.' then
+      raise notice 'PASS: client A cannot change their own role';
+    else
+      -- Some other error blocked the update; surface it instead of
+      -- claiming the role guard fired.
+      raise;
     end if;
-    raise notice 'PASS: client A cannot change their own role';
   end;
 
-  select role into current_role
+  select role into v_current_role
   from public.profiles
   where id = 'f0a00000-0000-4000-8000-000000000001';
-  if current_role <> 'client' then
+  if v_current_role <> 'client' then
     raise exception 'FAIL: client A role changed despite the guard';
   end if;
 
@@ -204,33 +209,42 @@ begin
     insert into public.packages (client_id, name, total_sessions)
     values ('f0a00000-0000-4000-8000-000000000001', 'Forbidden package', 1);
     raise exception 'UNEXPECTED_SUCCESS_PACKAGE';
-  exception when others then
-    if sqlerrm = 'UNEXPECTED_SUCCESS_PACKAGE' then
-      raise exception 'FAIL: client A inserted a package';
-    end if;
-    raise notice 'PASS: client A cannot insert packages';
+  exception
+    when insufficient_privilege then
+      raise notice 'PASS: client A cannot insert packages';
+    when others then
+      if sqlerrm = 'UNEXPECTED_SUCCESS_PACKAGE' then
+        raise exception 'FAIL: client A inserted a package';
+      end if;
+      raise;
   end;
 
   begin
     insert into public.invoices (client_id, amount_cents, memo)
     values ('f0a00000-0000-4000-8000-000000000001', 100, 'Forbidden invoice');
     raise exception 'UNEXPECTED_SUCCESS_INVOICE';
-  exception when others then
-    if sqlerrm = 'UNEXPECTED_SUCCESS_INVOICE' then
-      raise exception 'FAIL: client A inserted an invoice';
-    end if;
-    raise notice 'PASS: client A cannot insert invoices';
+  exception
+    when insufficient_privilege then
+      raise notice 'PASS: client A cannot insert invoices';
+    when others then
+      if sqlerrm = 'UNEXPECTED_SUCCESS_INVOICE' then
+        raise exception 'FAIL: client A inserted an invoice';
+      end if;
+      raise;
   end;
 
   begin
     insert into public.session_log (package_id, note)
     values ('f0a10000-0000-4000-8000-000000000101', 'Forbidden session');
     raise exception 'UNEXPECTED_SUCCESS_SESSION';
-  exception when others then
-    if sqlerrm = 'UNEXPECTED_SUCCESS_SESSION' then
-      raise exception 'FAIL: client A inserted a session log';
-    end if;
-    raise notice 'PASS: client A cannot insert session logs';
+  exception
+    when insufficient_privilege then
+      raise notice 'PASS: client A cannot insert session logs';
+    when others then
+      if sqlerrm = 'UNEXPECTED_SUCCESS_SESSION' then
+        raise exception 'FAIL: client A inserted a session log';
+      end if;
+      raise;
   end;
 end;
 $client_a$;
@@ -284,27 +298,33 @@ declare
   visible_count integer;
   updated_status text;
 begin
-  select count(*) into visible_count from public.packages;
+  -- Counts are scoped to the fixture clients so the checks stay correct on a
+  -- project that already holds real data.
+  select count(*) into visible_count from public.packages
+  where client_id in ('f0a00000-0000-4000-8000-000000000001', 'f0b00000-0000-4000-8000-000000000002');
   if visible_count <> 2 then
-    raise exception 'FAIL: coach could not read all packages';
+    raise exception 'FAIL: coach could not read all fixture packages';
   end if;
   raise notice 'PASS: coach can read all packages';
 
-  select count(*) into visible_count from public.invoices;
+  select count(*) into visible_count from public.invoices
+  where client_id in ('f0a00000-0000-4000-8000-000000000001', 'f0b00000-0000-4000-8000-000000000002');
   if visible_count <> 2 then
-    raise exception 'FAIL: coach could not read all invoices';
+    raise exception 'FAIL: coach could not read all fixture invoices';
   end if;
   raise notice 'PASS: coach can read all invoices';
 
-  select count(*) into visible_count from public.session_log;
+  select count(*) into visible_count from public.session_log
+  where id = 'f0b20000-0000-4000-8000-000000000201';
   if visible_count <> 1 then
-    raise exception 'FAIL: coach could not read all session logs';
+    raise exception 'FAIL: coach could not read all fixture session logs';
   end if;
   raise notice 'PASS: coach can read all session logs';
 
-  select count(*) into visible_count from public.package_remaining;
+  select count(*) into visible_count from public.package_remaining
+  where client_id in ('f0a00000-0000-4000-8000-000000000001', 'f0b00000-0000-4000-8000-000000000002');
   if visible_count <> 2 then
-    raise exception 'FAIL: coach could not read all package_remaining rows';
+    raise exception 'FAIL: coach could not read all fixture package_remaining rows';
   end if;
   raise notice 'PASS: coach can read all package_remaining rows';
 
