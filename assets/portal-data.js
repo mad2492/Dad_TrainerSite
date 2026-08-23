@@ -7,7 +7,7 @@
   const enabled = Boolean(window.FonsecaAuth && window.FonsecaAuth.enabled);
   let client = null;
   let activeProfile = null;
-  let coachState = { profiles: [], packages: [], invoices: [] };
+  let coachState = { profiles: [], packages: [], invoices: [], orders: [] };
 
   const hook = (name) => document.querySelector('[data-hook="' + name + '"]');
   const make = (tag, className, text) => {
@@ -76,7 +76,7 @@
     return row;
   };
 
-  const renderClient = (profile, packages, invoices) => {
+  const renderClient = (profile, packages, invoices, orders) => {
     setText("client-title", "Welcome back, " + (profile.full_name || "client"));
     setText("client-plan-title", "This week's training · Sample plan");
 
@@ -119,6 +119,32 @@
             status,
             invoice.status === "paid" ? "cp-shipped" : "cp-delivered",
             invoice.status === "sent" ? safePayLink(invoice.pay_link_url) : null
+          ));
+        });
+    }
+
+    const orderCard = hook("client-orders-card");
+    const orderList = hook("client-orders");
+    if (orderCard) orderCard.hidden = false;
+    clear(orderList);
+    if (!orders.length) {
+      showMessage(orderList, "No store orders are attached to this account yet.");
+    } else {
+      orders
+        .slice()
+        .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))
+        .slice(0, 5)
+        .forEach((order) => {
+          const status = label(order.status);
+          const shortId = String(order.id || "").slice(0, 8).toUpperCase();
+          const created = order.created_at
+            ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(order.created_at))
+            : "Date unavailable";
+          orderList.appendChild(orderRow(
+            "Store order",
+            "Order " + shortId + " · " + created,
+            status,
+            order.status === "shipped" ? "cp-shipped" : "cp-delivered"
           ));
         });
     }
@@ -183,19 +209,26 @@
     return item;
   };
 
-  const attentionRow = (message, strongText) => {
+  const attentionRow = (message, strongText, action) => {
     const item = make("div", "co-attn");
     const text = make("p", "", message);
     if (strongText) text.appendChild(make("b", "", strongText));
     item.appendChild(text);
+    if (action) {
+      const button = make("button", "co-review", action.label);
+      button.type = "button";
+      button.dataset.coachAction = action.name;
+      item.appendChild(button);
+    }
     return item;
   };
 
-  const renderCoach = (profiles, packages, invoices, sessions) => {
-    coachState = { profiles: profiles, packages: packages, invoices: invoices };
+  const renderCoach = (profiles, packages, invoices, sessions, orders) => {
+    coachState = { profiles: profiles, packages: packages, invoices: invoices, orders: orders };
     const unpaid = invoices.filter((invoice) => invoice.status === "sent");
     const unpaidTotal = unpaid.reduce((sum, invoice) => sum + (Number(invoice.amount_cents) || 0), 0);
     const lowPackages = packages.filter((item) => (Number(item.sessions_remaining) || 0) <= 3);
+    const ordersToPack = orders.filter((order) => order.status === "pending" || order.status === "paid");
 
     setText("coach-tag", "Live data");
     setText("coach-tagline", "Account data is loaded from Supabase.");
@@ -214,6 +247,14 @@
       }
       if (lowPackages.length) {
         attention.appendChild(attentionRow(lowPackages.length + " packages have 3 or fewer sessions left"));
+        attentionCount += 1;
+      }
+      if (ordersToPack.length) {
+        attention.appendChild(attentionRow(
+          ordersToPack.length + (ordersToPack.length === 1 ? " store order to pack" : " store orders to pack"),
+          "",
+          { name: "mark-shipped", label: "Mark shipped →" }
+        ));
         attentionCount += 1;
       }
       if (!attentionCount) attention.appendChild(attentionRow("Nothing needs attention right now."));
@@ -365,6 +406,31 @@
     }
   };
 
+  const buildMarkShipped = () => {
+    const fields = dialogFields();
+    const orders = coachState.orders.filter((order) => order.status === "pending" || order.status === "paid");
+    if (!orders.length) {
+      fields.appendChild(make("p", "signin-note", "There are no store orders waiting to ship."));
+      dialogSubmit().disabled = true;
+      return;
+    }
+    const orderLabel = (order) => {
+      const profile = profileById(order.client_id);
+      return "Order " + String(order.id || "").slice(0, 8).toUpperCase() +
+        " · " + ((profile && profile.full_name) || "Client") +
+        " · " + label(order.status);
+    };
+    if (orders.length === 1) {
+      fields.appendChild(hiddenInput("order_id", orders[0].id));
+      fields.appendChild(make("p", "signin-note", orderLabel(orders[0])));
+    } else {
+      fields.appendChild(formLabel("Order", selectInput("order_id", orders.map((order) => ({
+        value: order.id,
+        label: orderLabel(order)
+      })))));
+    }
+  };
+
   const openCoachDialog = (action, requestedClientId) => {
     if (!enabled || !activeProfile || activeProfile.role !== "coach") return;
     const actionDialog = dialog();
@@ -394,6 +460,10 @@
       setText("coach-dialog-title", "Mark invoice paid");
       setText("coach-dialog-intro", "Confirm the manual payment before updating the invoice.");
       buildMarkPaid(requestedClientId);
+    } else if (action === "mark-shipped") {
+      setText("coach-dialog-title", "Mark store order shipped");
+      setText("coach-dialog-intro", "Confirm that this order has been packed and handed off for delivery.");
+      buildMarkShipped();
     }
     actionDialog.showModal();
   };
@@ -446,6 +516,15 @@
           return "Invoice marked paid.";
         });
     }
+    if (dialogAction === "mark-shipped") {
+      return client.from("orders")
+        .update({ status: "shipped" })
+        .eq("id", formData.get("order_id"))
+        .then((result) => {
+          actionResult(result, "Could not mark the store order shipped");
+          return "Store order marked shipped.";
+        });
+    }
     return Promise.reject(new Error("Choose a coach action and try again."));
   };
 
@@ -495,16 +574,17 @@
   const setClientState = (message) => {
     setText("client-title", message);
     setText("client-plan-title", "This week's training · Sample plan");
-    ["client-packages-card", "client-invoices-card"].forEach((name) => {
+    ["client-packages-card", "client-invoices-card", "client-orders-card"].forEach((name) => {
       const card = hook(name);
       if (card) card.hidden = false;
     });
     showMessage(hook("client-packages"), message);
     showMessage(hook("client-invoices"), message);
+    showMessage(hook("client-orders"), message);
   };
 
   const setCoachState = (message) => {
-    coachState = { profiles: [], packages: [], invoices: [] };
+    coachState = { profiles: [], packages: [], invoices: [], orders: [] };
     setText("coach-tag", "Live data");
     setText("coach-tagline", message);
     ["coach-active-clients", "coach-sessions-week", "coach-unpaid-invoices", "coach-low-packages"]
@@ -527,12 +607,14 @@
     setCoachState("Coach access is required to view this data.");
     return Promise.all([
       client.from("package_remaining").select("package_id, client_id, name, total_sessions, sessions_used, sessions_remaining"),
-      client.from("invoices").select("id, client_id, amount_cents, memo, status, method, pay_link_url, created_at")
+      client.from("invoices").select("id, client_id, amount_cents, memo, status, method, pay_link_url, created_at"),
+      client.from("orders").select("id, client_id, status, created_at")
     ]).then((results) => {
       renderClient(
         profile,
         rows(results[0], "Could not load session packages"),
-        rows(results[1], "Could not load invoices")
+        rows(results[1], "Could not load invoices"),
+        rows(results[2], "Could not load store orders")
       );
     });
   };
@@ -547,13 +629,15 @@
       client.from("profiles").select("id, full_name, role, client_type").eq("role", "client"),
       client.from("package_remaining").select("package_id, client_id, name, total_sessions, sessions_used, sessions_remaining"),
       client.from("invoices").select("id, client_id, amount_cents, memo, status, method, pay_link_url, sent_at, created_at").eq("status", "sent"),
-      client.from("session_log").select("id, occurred_at").gte("occurred_at", weekStart.toISOString())
+      client.from("session_log").select("id, occurred_at").gte("occurred_at", weekStart.toISOString()),
+      client.from("orders").select("id, client_id, status, created_at").in("status", ["pending", "paid"])
     ]).then((results) => {
       renderCoach(
         rows(results[0], "Could not load clients"),
         rows(results[1], "Could not load session packages"),
         rows(results[2], "Could not load invoices"),
-        rows(results[3], "Could not load this week's sessions")
+        rows(results[3], "Could not load this week's sessions"),
+        rows(results[4], "Could not load store orders")
       );
     });
   };
