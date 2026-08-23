@@ -1980,7 +1980,7 @@
         }
       });
 
-      if (updateHash) {
+      if (updateHash && !(authLive && window.FonsecaAuth.handlingRedirect)) {
         history.replaceState(null, "", "#" + name);
       }
 
@@ -2021,19 +2021,26 @@
           return;
         }
         signinBtn.disabled = true;
-        FonsecaAuth.signInWithEmail(email).then((result) => {
-          signinBtn.disabled = false;
-          signinNote.textContent = result.ok
-            ? "Check your email — your sign-in link is on the way."
-            : "Could not send the link: " + result.error;
-        });
+        Promise.resolve()
+          .then(() => window.FonsecaAuth.signInWithEmail(email))
+          .then((result) => {
+            signinNote.textContent = result.ok
+              ? "Check your email — your sign-in link is on the way."
+              : "Could not send the link: " + result.error;
+          })
+          .catch(() => {
+            signinNote.textContent = "Could not reach the sign-in service. Please try again.";
+          })
+          .finally(() => {
+            signinBtn.disabled = false;
+          });
       });
 
       document.getElementById("auth-signout").addEventListener("click", () => {
-        FonsecaAuth.signOut();
+        window.FonsecaAuth.signOut();
       });
 
-      FonsecaAuth.init({
+      window.FonsecaAuth.init({
         onSignedIn: (profile) => {
           authStrip.hidden = false;
           authLabel.textContent = "Signed in as " + (profile.full_name || "member") +
