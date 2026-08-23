@@ -6,6 +6,9 @@
   <meta name="description" content="Fonseca Fitness shop demo — BPC-157 product detail preview. Sample product and pricing only.">
   <title>BPC-157 — Fonseca Fitness Shop</title>
   <link rel="icon" type="image/png" href="dist/fonseca-fitness-logo-assets/fonseca-fitness-favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
   <style>
     :root {
       --navy: #0f2740;
@@ -15,16 +18,26 @@
       --ink: #1d242c;
       --muted: #5d6670;
       --line: #ded8cc;
-      --gold: #bd8a3d;
+      --gold: #bd8a3d;        /* on navy only */
+      --gold-ink: #8a5d1e;    /* on paper / white */
       --green: #2f6e4f;
+      --green-ink: #2f6e4f;
+      --red-ink: #b3262d;
       --surface: #ffffff;
-      --surface-soft: #f5f3ee;
-      --panel: #eceff2;
-      --topbar-bg: rgba(245, 243, 238, 0.96);
-      --soft-shadow: rgba(15, 39, 64, 0.08);
-      --shadow: 0 18px 50px rgba(15, 39, 64, 0.13);
-      --radius: 8px;
+      --surface-soft: #fcfbf9;
+      --topbar-bg: rgba(252, 251, 249, 0.97);
+      --radius: 3px;
       --max: 1120px;
+
+      /* Fixed-contrast tokens: the product illustrations are drawn in the
+         light palette, so their stage stays light in both themes. */
+      --media-bg: #eceff2;
+      --on-solid: #ffffff;
+      --footer-bg: #071727;
+      --footer-ink: #a9b8c4;
+
+      --display: "Archivo", "Segoe UI", Arial, sans-serif;
+      --text: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
     }
 
     body[data-theme="dark"] {
@@ -32,13 +45,14 @@
       --white: #10263a;
       --ink: #edf2f6;
       --muted: #b7c3ce;
-      --line: rgba(245, 243, 238, 0.18);
-      --surface: #10263a;
-      --surface-soft: #071727;
-      --panel: #0c1e30;
-      --topbar-bg: rgba(7, 23, 39, 0.94);
-      --soft-shadow: rgba(0, 0, 0, 0.28);
-      --shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
+      --line: rgba(245, 243, 238, 0.22);
+      --gold-ink: #d8ab60;
+      --green-ink: #7fc4a0;
+      --red-ink: #f08d92;
+      --surface: #0d2033;
+      --surface-soft: #0a1b2c;
+      --topbar-bg: rgba(7, 23, 39, 0.96);
+      --footer-bg: #04101c;
     }
 
     * {
@@ -49,12 +63,14 @@
       margin: 0;
       background: var(--paper);
       color: var(--ink);
-      font-family: Inter, Avenir Next, Segoe UI, Arial, sans-serif;
-      line-height: 1.55;
+      font-family: var(--text);
+      font-size: 16px;
+      line-height: 1.65;
       overflow-x: hidden;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
     img,
@@ -65,6 +81,32 @@
 
     a {
       color: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--red-ink);
+      outline-offset: 2px;
+    }
+
+    /* ---------- demo strip ---------- */
+
+    .demo-strip {
+      background: var(--navy);
+      color: #e7edf3;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      text-align: center;
+      padding: 10px 16px;
+      border-bottom: 4px solid var(--red);
+    }
+
+    .demo-strip strong {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
     }
 
     /* ---------- top bar ---------- */
@@ -82,12 +124,12 @@
       width: 100%;
       max-width: var(--max);
       margin: 0 auto;
-      padding: 12px 16px;
+      padding: 10px 16px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
     }
 
     .brand {
@@ -99,7 +141,7 @@
 
     .brand-lockup {
       display: block;
-      width: min(52vw, 260px);
+      width: min(44vw, 240px);
       height: 44px;
       object-fit: contain;
       object-position: left center;
@@ -108,7 +150,7 @@
     .topbar-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
@@ -119,28 +161,34 @@
       min-height: 44px;
       padding: 9px 10px;
       color: var(--muted);
-      font-size: 0.85rem;
-      font-weight: 700;
+      font-family: var(--display);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       text-decoration: none;
       white-space: nowrap;
+      border-bottom: 2px solid transparent;
     }
 
     .nav-link.is-current {
-      color: var(--red);
+      color: var(--red-ink);
+      border-bottom-color: var(--red);
     }
 
     .theme-toggle {
       border: 1px solid var(--line);
-      border-radius: 999px;
+      border-radius: var(--radius);
       min-height: 44px;
-      padding: 9px 12px;
+      padding: 9px 14px;
       background: var(--surface);
       color: var(--navy);
-      font: inherit;
-      font-size: 0.78rem;
-      font-weight: 900;
+      font-family: var(--display);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       cursor: pointer;
-      box-shadow: 0 4px 16px var(--soft-shadow);
     }
 
     body[data-theme="dark"] .theme-toggle {
@@ -159,7 +207,6 @@
       background: var(--surface);
       color: var(--navy);
       text-decoration: none;
-      box-shadow: 0 4px 16px var(--soft-shadow);
     }
 
     body[data-theme="dark"] .cart-button {
@@ -168,36 +215,23 @@
 
     .cart-count {
       position: absolute;
-      top: -6px;
-      right: -6px;
-      min-width: 18px;
-      height: 18px;
+      top: -7px;
+      right: -7px;
+      min-width: 20px;
+      height: 20px;
       padding: 0 5px;
-      border-radius: 999px;
+      border-radius: 2px;
       background: var(--red);
-      color: #ffffff;
-      font-size: 0.68rem;
+      color: var(--on-solid);
+      font-family: var(--display);
+      font-size: 0.66rem;
       font-weight: 800;
-      line-height: 18px;
+      line-height: 20px;
       text-align: center;
     }
 
     .cart-count[hidden] {
       display: none;
-    }
-
-    /* ---------- demo strip ---------- */
-
-    .demo-strip {
-      background: var(--navy);
-      color: #edf2f6;
-      font-size: 0.8rem;
-      text-align: center;
-      padding: 8px 16px;
-    }
-
-    .demo-strip strong {
-      color: var(--gold);
     }
 
     /* ---------- page shell ---------- */
@@ -214,28 +248,36 @@
     }
 
     .crumbs {
-      padding: 18px 0 4px;
-      font-size: 0.84rem;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
       color: var(--muted);
+      font-family: var(--display);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
     .crumbs a {
       color: var(--muted);
       text-decoration: none;
-      font-weight: 600;
+    }
+
+    .crumbs a:hover {
+      color: var(--red-ink);
     }
 
     .crumbs strong {
       color: var(--ink);
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .product-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 24px;
+      gap: 26px;
       align-items: start;
-      padding: 16px 0 48px;
+      padding: 22px 0 44px;
     }
 
     /* ---------- gallery ---------- */
@@ -243,36 +285,36 @@
     .gallery {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .gallery-main {
-      background: var(--panel);
+      background: var(--media-bg);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 40px 24px;
+      border-radius: 0;
+      padding: 42px 24px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .gallery-main svg {
-      width: 110px;
+      width: 118px;
       height: auto;
     }
 
     .thumbs {
       display: flex;
-      gap: 12px;
+      gap: 10px;
     }
 
     .thumb {
       width: 76px;
       height: 76px;
       flex: 0 0 auto;
-      background: var(--panel);
+      background: var(--media-bg);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: 0;
       padding: 0;
       cursor: pointer;
     }
@@ -290,31 +332,38 @@
     .detail {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
+      min-width: 0;
     }
 
     .detail-head {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
     }
 
     .eyebrow {
       margin: 0;
-      color: var(--gold);
-      font-size: 0.75rem;
+      color: var(--gold-ink);
+      font-family: var(--display);
+      font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
-      line-height: 1.3;
+      line-height: 1.4;
     }
 
     .detail h1 {
       margin: 0;
       color: var(--navy);
-      font-size: clamp(1.9rem, 8vw, 2.4rem);
+      font-family: var(--display);
+      font-size: clamp(1.9rem, 9vw, 2.7rem);
       font-weight: 800;
-      line-height: 1.1;
+      letter-spacing: -0.015em;
+      line-height: 1.02;
+      text-transform: uppercase;
       overflow-wrap: anywhere;
     }
 
@@ -327,76 +376,92 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 14px;
+      margin-top: 4px;
     }
 
     .price {
-      font-size: 1.6rem;
+      font-family: var(--display);
+      font-size: 1.7rem;
       font-weight: 800;
+      letter-spacing: -0.02em;
       color: var(--ink);
     }
 
     .stock-pill {
       background: var(--green);
-      color: #ffffff;
-      font-size: 0.74rem;
+      color: var(--on-solid);
+      font-family: var(--display);
+      font-size: 0.64rem;
       font-weight: 800;
-      padding: 5px 12px;
-      border-radius: 999px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 0;
       white-space: nowrap;
+    }
+
+    .stock-pill.is-out {
+      background: #5d6670;
     }
 
     .description {
       margin: 0;
       color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.6;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      max-width: 58ch;
     }
 
     .field-label {
       display: block;
       color: var(--muted);
-      font-size: 0.76rem;
+      font-family: var(--display);
+      font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .size-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
 
     .size-pill {
       min-height: 48px;
-      padding: 12px 24px;
+      min-width: 62px;
+      padding: 12px 20px;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: 0;
       background: var(--surface);
       color: var(--ink);
-      font: inherit;
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-family: var(--display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       cursor: pointer;
     }
 
     .size-pill[aria-pressed="true"] {
       background: var(--navy);
       border-color: var(--navy);
-      color: #ffffff;
+      color: var(--on-solid);
       font-weight: 800;
     }
 
     body[data-theme="dark"] .size-pill[aria-pressed="true"] {
       background: var(--red);
       border-color: var(--red);
+      color: var(--on-solid);
     }
 
     .buy-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
       align-items: stretch;
     }
 
@@ -404,7 +469,7 @@
       display: flex;
       align-items: center;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: 0;
       background: var(--surface);
       flex: 0 0 auto;
     }
@@ -414,16 +479,18 @@
       min-height: 52px;
       border: 0;
       background: transparent;
-      color: var(--muted);
-      font: inherit;
-      font-size: 1.25rem;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 700;
       line-height: 1;
       cursor: pointer;
     }
 
     .step-value {
-      min-width: 40px;
+      min-width: 44px;
       text-align: center;
+      font-family: var(--display);
       font-size: 1rem;
       font-weight: 800;
       color: var(--ink);
@@ -437,39 +504,47 @@
       justify-content: center;
       gap: 10px;
       border: 0;
-      border-radius: var(--radius);
+      border-radius: 0;
       background: var(--red);
-      color: #ffffff;
-      font: inherit;
-      font-size: 1.02rem;
+      color: var(--on-solid);
+      font-family: var(--display);
+      font-size: 0.82rem;
       font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       cursor: pointer;
-      box-shadow: 0 10px 26px var(--soft-shadow);
+    }
+
+    .add-btn:hover:not(:disabled) {
+      background: #971f25;
+    }
+
+    .add-btn:disabled {
+      background: #5d6670;
+      cursor: not-allowed;
     }
 
     .add-note {
       margin: 0;
       min-height: 1.2em;
-      color: var(--green);
-      font-size: 0.84rem;
+      color: var(--green-ink);
+      font-family: var(--display);
+      font-size: 0.78rem;
       font-weight: 700;
-    }
-
-    body[data-theme="dark"] .add-note {
-      color: var(--ink);
+      letter-spacing: 0.06em;
     }
 
     /* ---------- lab report card ---------- */
 
     .lab-card {
-      background: var(--surface);
+      background: var(--surface-soft);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-left: 3px solid var(--gold-ink);
+      border-radius: 0;
       padding: 16px 18px;
       display: flex;
       align-items: flex-start;
       gap: 14px;
-      box-shadow: 0 10px 30px var(--soft-shadow);
     }
 
     .lab-card[hidden] {
@@ -478,18 +553,18 @@
 
     .lab-card svg {
       flex: 0 0 auto;
-      color: var(--green);
-    }
-
-    body[data-theme="dark"] .lab-card svg {
-      color: var(--ink);
+      color: var(--green-ink);
+      margin-top: 2px;
     }
 
     .lab-card strong {
       display: block;
       color: var(--navy);
-      font-size: 0.95rem;
+      font-family: var(--display);
+      font-size: 0.78rem;
       font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
     body[data-theme="dark"] .lab-card strong {
@@ -497,15 +572,15 @@
     }
 
     .lab-card p {
-      margin: 2px 0 0;
+      margin: 5px 0 0;
       color: var(--muted);
       font-size: 0.86rem;
-      line-height: 1.55;
+      line-height: 1.6;
     }
 
     .lab-card a {
-      color: var(--red);
-      font-weight: 700;
+      color: var(--red-ink);
+      font-weight: 600;
       text-decoration: none;
       display: inline-block;
       min-height: 24px;
@@ -526,13 +601,15 @@
     .accordions summary {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 12px;
-      min-height: 48px;
-      padding: 14px 4px;
+      min-height: 52px;
+      padding: 14px 2px;
       color: var(--navy);
-      font-size: 0.97rem;
+      font-family: var(--display);
+      font-size: 0.82rem;
       font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       cursor: pointer;
       list-style: none;
     }
@@ -545,8 +622,22 @@
       display: none;
     }
 
+    .acc-num {
+      flex: 0 0 auto;
+      color: var(--gold-ink);
+      font-family: var(--display);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+    }
+
+    .acc-text {
+      min-width: 0;
+    }
+
     .accordions summary::after {
       content: "+";
+      margin-left: auto;
       color: var(--muted);
       font-size: 1.15rem;
       font-weight: 700;
@@ -558,18 +649,19 @@
     }
 
     .accordions details p {
-      margin: 0 0 16px;
-      padding: 0 4px;
+      margin: 0 0 18px;
+      padding: 0 2px 0 34px;
       color: var(--muted);
       font-size: 0.9rem;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     /* ---------- footer ---------- */
 
     .site-footer {
-      background: #071727;
-      padding: 22px 0;
+      background: var(--footer-bg);
+      border-top: 4px solid var(--red);
+      padding: 24px 0;
       margin-top: auto;
     }
 
@@ -578,9 +670,9 @@
       max-width: var(--max);
       margin: 0 auto;
       padding: 0 16px;
-      color: #8fa0ae;
+      color: var(--footer-ink);
       font-size: 0.78rem;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     /* ---------- desktop ---------- */
@@ -591,13 +683,13 @@
       }
 
       .crumbs {
-        padding: 32px 0 4px;
+        padding: 22px 0;
       }
 
       .product-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 48px;
-        padding: 16px 0 64px;
+        padding: 32px 0 64px;
       }
 
       .gallery-main {
@@ -605,7 +697,7 @@
       }
 
       .gallery-main svg {
-        width: 140px;
+        width: 150px;
       }
 
       .thumb {
@@ -613,14 +705,14 @@
         height: 88px;
       }
 
-      .detail h1 {
-        font-size: 2.35rem;
+      .site-footer p {
+        padding: 0 24px;
       }
     }
   </style>
 </head>
 <body data-storefront-page="product">
-  <div class="demo-strip" data-hook="storefront-demo-strip"><strong>Sample product page:</strong> choose an option and add it to the connected preview cart. Nothing here can be purchased.</div>
+  <div class="demo-strip" data-hook="storefront-demo-strip"><strong>Sample product page</strong> &mdash; choose an option and add it to the connected preview cart. Nothing here can be purchased.</div>
 
   <header class="topbar">
     <div class="topbar-inner">
@@ -698,15 +790,15 @@
 
           <div class="accordions">
             <details>
-              <summary>How it ships &amp; storage</summary>
+              <summary><span class="acc-num">01</span><span class="acc-text">How it ships &amp; storage</span></summary>
               <p>Final shipping, packaging, and storage guidance would be written and reviewed before any product is offered.</p>
             </details>
             <details>
-              <summary>Questions? Ask your coach</summary>
+              <summary><span class="acc-num">02</span><span class="acc-text">Questions? Ask your coach</span></summary>
               <p>A future version could let coaching clients bring general storefront questions into their regular check-in. Product decisions would still require appropriate professional guidance.</p>
             </details>
             <details>
-              <summary>Returns &amp; policies</summary>
+              <summary><span class="acc-num">03</span><span class="acc-text">Returns &amp; policies</span></summary>
               <p>Return terms, exceptions, and customer policies have not been set for this preview and would be reviewed before launch.</p>
             </details>
           </div>
